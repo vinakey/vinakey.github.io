@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<head>
+    <title>Avime</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        @media screen and (max-width: 768px) {
+            .navbar.is-right .navbar-menu {
+                display: none;
+            }
+            .navbar.is-right .navbar-burger {
+                display: block;
+            }
+            .navbar.is-right .navbar-burger .navbar-burger-icon {
+                background-color: #333;
+            }
+            .navbar.is-right .navbar-burger .navbar-burger-icon::before,
+            .navbar.is-right .navbar-burger .navbar-burger-icon::after {
+                background-color: #333;
+            }
+            .navbar.is-right .navbar-burger.is-active .navbar-burger-icon {
+                background-color: #333;
+            }
+            .navbar.is-right .navbar-burger.is-active .navbar-burger-icon::before,
+            .navbar.is-right .navbar-burger.is-active .navbar-burger-icon::after {
+                background-color: #333;
+            }
+            .navbar.is-right .navbar-menu.is-active {
+                display: block;
+            }
+            
+            .section {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar is-right">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <span class="icon">
+                    <i class="fas fa-code"></i>
+                </span>
+                <span>Avime</span>
+            </a>
+    
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+        
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="#gioithieu">Giới thiệu</a>
+                <a class="navbar-item" href="#donate">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Avime</h1>
+            <p id="sentence" class="subtitle">Gõ tiếng việt</p>
+            <input id="inputField" class="input" type="text" placeholder="Nhập văn bản của bạn...">
+            <p id="result"></p>
+        </div>
+    </section>
+
+    <script>
+        const sentenceElement = document.getElementById('sentence');
+        const inputField = document.getElementById('inputField');
+        const resultElement = document.getElementById('result');
+
+        inputField.addEventListener('input', () => {
+            if (inputField.value === sentenceElement.textContent) {
+                resultElement.textContent = 'Correct!';
+                resultElement.style.color = 'green';
+            } else {
+                resultElement.textContent = 'Keep typing...';
+                resultElement.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
+</html>
