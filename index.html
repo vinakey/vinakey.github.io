@@ -46,28 +46,55 @@
     </main>
 
     <script src="js/navbar.js"></script>
-    <script type="text/javascript" src="js/avim.js"></script>
 
     <!-- AVIM control -->
-    <!-- <script type="text/javascript" src="js/avim_control.js"></script>
-    <div class="container">
-        <form id="avim-form">
-            <div class="avim-control">
-                <label><input type="radio" name="AVIMMethod" value="0" checked>Tự động</label>
-                <label><input type="radio" name="AVIMMethod" value="1">TELEX</label>
-                <label><input type="radio" name="AVIMMethod" value="2">VNI</label>
-                <label><input type="radio" name="AVIMMethod" value="3">VIQR</label>
-                <label><input type="radio" name="AVIMMethod" value="4">VIQR*</label>
-                <label><input type="radio" name="AVIMMethod" value="-1">Tắt</label>
+    <div id="AVIMControl" class="box">
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Method:</label>
             </div>
-            <div class="avim-control">
-                <label><input type="checkbox" id="avim_ckspell">Chính tả</label>
-                <label><input type="checkbox" id="avim_daucu">Kiểu cũ</label>
+            <div class="field-body">
+                <div class="field is-narrow">
+                    <div class="control">
+                        <label class="radio">
+                            <input id="avim_auto" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(0);" /> Tự động
+                        </label>
+                        <label class="radio">
+                            <input id="avim_telex" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(1);" /> TELEX
+                        </label>
+                        <label class="radio">
+                            <input id="avim_vni" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(2);" /> VNI
+                        </label>
+                        <label class="radio">
+                            <input id="avim_viqr" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(3);" /> VIQR
+                        </label>
+                        <label class="radio">
+                            <input id="avim_viqr2" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(4);" /> VIQR*
+                        </label>
+                        <label class="radio">
+                            <input id="avim_off" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(-1);" /> Tắt
+                        </label>
+                    </div>
+                </div>
             </div>
-            <button id="hide-avim" style="float: right; position: relative; top: 3px;">[Ẩn AVIM - F12]</button>
-        </form>
-    </div> -->
-     <!-- Add your footer content here -->
-    </footer>
+        </div>
+        <div class="field">
+            <div class="control">
+                <label class="checkbox">
+                    <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính tả
+                </label>
+                <label class="checkbox">
+                    <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
+                </label>
+            </div>
+        </div>
+        <!-- <div class="field">
+            <div class="control">
+                <a class="button is-small is-outlined" onclick="document.getElementById('AVIMControl').style.display='none';">Ẩn AVIM - F12</a>
+            </div>
+        </div> -->
+    </div>
+    <script type="text/javascript" src="js/avim.js"></script>
+   
 </body>
 </html>

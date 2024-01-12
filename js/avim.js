@@ -17,7 +17,7 @@ var AVIMGlobalConfig = {
 	oldAccent: 1, //0: New way (oa`, oe`, uy`), 1: The good old day (o`a, o`e, u`y)
 	useCookie: 1, //Cookies: 0=Off, 1=On
 	exclude: ["email"], //IDs of the fields you DON'T want to let users type Vietnamese in
-	showControl: 1, //Show control panel: 0=Off, 1=On. If you turn this off, you must write your own control panel.
+	showControl: 0, //Show control panel: 0=Off, 1=On. If you turn this off, you must write your own control panel.
 	controlCSS: "avim.css" //Path to avim.css
 };
 
@@ -89,11 +89,11 @@ function AVIM()	{
 	}
 	
 	if(AVIMGlobalConfig.showControl) {
-		this.css = document.createElement('link');
-		this.css.rel = 'stylesheet';
-		this.css.type = 'text/css';
-		this.css.href = AVIMGlobalConfig.controlCSS;
-		document.getElementsByTagName('head')[0].appendChild(this.css);
+		// this.css = document.createElement('link');
+		// this.css.rel = 'stylesheet';
+		// this.css.type = 'text/css';
+		// this.css.href = AVIMGlobalConfig.controlCSS;
+		// document.getElementsByTagName('head')[0].appendChild(this.css);
 		document.write('<span id="AVIMControl">');
 		document.write('<p class="AVIMControl"><input id="avim_auto" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(0);" />Tự động');
 		document.write('<input id="avim_telex" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(1);" />TELEX');
@@ -388,7 +388,9 @@ function AVIM()	{
 		this.setCookie();
 	}
 	
+	//changed here
 	if(this.is_ie || (this.ver >= 1.3) || this.is_opera || this.isKHTML) {
+		console.log("AVIM: supported")
 		this.getCookie();
 		if(AVIMGlobalConfig.onOff == 0) this.setMethod(-1);
 		else this.setMethod(AVIMGlobalConfig.method);
