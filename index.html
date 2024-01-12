@@ -39,15 +39,31 @@
         </nav>
     </header>
 
+    <script src="js/navbar.js"></script>
+
     <section class="section">
         <div class="container">
             <!-- Add your blog content here -->
-            <textarea class="textarea is-primary column is-12" rows="10" placeholder="Nhập văn bản của bạn ở đây..."></textarea>
+            <textarea class="textarea is-primary column is-12" rows="10"
+                placeholder="Nhập văn bản của bạn ở đây..."></textarea>
         </div>
+        <div class="field is-grouped mt-2">
+            <p class="control">
+                <button class="button is-info is-small custom" onclick="selectAll()">Select All</button>
+            </p>
+            <p class="control">
+                <button class="button is-primary is-small custom" onclick="copyText()">Copy</button>
+            </p>
+            <p class="control">
+                <button class="button is-danger is-small custom" onclick="clearText()">Clear</button>
+            </p>
+        </div>
+    </div>
+<script src="js/text_area_manipulate.js"></script>
     </section>
 
-    <script src="js/navbar.js"></script>
 
+    <div class="columns">
     <!-- AVIM control -->
     <div class="column is-narrow">
         <div id="AVIMControl" class="box">
@@ -104,6 +120,7 @@
         </div>
     </div>
     <script type="text/javascript" src="js/avim.js"></script>
+
 
 </body>
 

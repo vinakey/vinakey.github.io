@@ -8,3 +8,6 @@ body {
     display: inline-block;
   }
 }
+.button.is-small.custom {
+  border-radius: 5px;
+}
