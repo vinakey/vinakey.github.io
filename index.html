@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <title>Responsive Blog</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Gõ Tiếng Việt</title>
 </head>
 
 <body>
@@ -13,10 +14,12 @@
         <nav class="navbar is is-mobile" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="#">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                    <img src="images/logo.png" style="margin-right: 8px;">
+                    Gõ Tiếng Việt
                 </a>
 
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-items">
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbar-items">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
@@ -36,65 +39,72 @@
         </nav>
     </header>
 
-    <main>
-        <section class="section">
-            <div class="container">
-                <!-- Add your blog content here -->
-                <textarea class="textarea column is-12" rows="10"  placeholder="Nhập văn bản của bạn ở đây..."></textarea>
-            </div>
-        </section>
-    </main>
+    <section class="section">
+        <div class="container">
+            <!-- Add your blog content here -->
+            <textarea class="textarea is-primary column is-12" rows="10" placeholder="Nhập văn bản của bạn ở đây..."></textarea>
+        </div>
+    </section>
 
     <script src="js/navbar.js"></script>
 
     <!-- AVIM control -->
-    <div id="AVIMControl" class="box">
-        <div class="field is-horizontal">
-            <div class="field-label is-normal">
-                <label class="label">Method:</label>
-            </div>
-            <div class="field-body">
-                <div class="field is-narrow">
-                    <div class="control">
-                        <label class="radio">
-                            <input id="avim_auto" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(0);" /> Tự động
-                        </label>
-                        <label class="radio">
-                            <input id="avim_telex" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(1);" /> TELEX
-                        </label>
-                        <label class="radio">
-                            <input id="avim_vni" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(2);" /> VNI
-                        </label>
-                        <label class="radio">
-                            <input id="avim_viqr" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(3);" /> VIQR
-                        </label>
-                        <label class="radio">
-                            <input id="avim_viqr2" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(4);" /> VIQR*
-                        </label>
-                        <label class="radio">
-                            <input id="avim_off" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(-1);" /> Tắt
-                        </label>
+    <div class="column is-narrow">
+        <div id="AVIMControl" class="box">
+            <div class="field">
+                <div class="label">
+                    <label class="label">Kiểu gõ:</label>
+                </div>
+                <div class="control">
+                    <div class="field is-narrow">
+                        <div class="control">
+                            <label class="radio">
+                                <input id="avim_auto" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(0);" />
+                                Tự động
+                            </label>
+                            <label class="radio">
+                                <input id="avim_telex" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(1);" />
+                                TELEX
+                            </label>
+                            <label class="radio">
+                                <input id="avim_vni" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(2);" />
+                                VNI
+                            </label>
+                            <label class="radio">
+                                <input id="avim_viqr" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(3);" />
+                                VIQR
+                            </label>
+                            <label class="radio">
+                                <input id="avim_viqr2" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(4);" />
+                                VIQR*
+                            </label>
+                            <label class="radio">
+                                <input id="avim_off" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(-1);" />
+                                Tắt
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="field">
-            <div class="control">
-                <label class="checkbox">
-                    <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính tả
-                </label>
-                <label class="checkbox">
-                    <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
-                </label>
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                        <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính tả
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
+                    </label>
+                </div>
             </div>
-        </div>
-        <!-- <div class="field">
+            <!-- <div class="field">
             <div class="control">
                 <a class="button is-small is-outlined" onclick="document.getElementById('AVIMControl').style.display='none';">Ẩn AVIM - F12</a>
             </div>
         </div> -->
+        </div>
     </div>
     <script type="text/javascript" src="js/avim.js"></script>
-   
+
 </body>
+
 </html>
