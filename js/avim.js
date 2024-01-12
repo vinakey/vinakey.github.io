@@ -17,7 +17,7 @@ var AVIMGlobalConfig = {
 	oldAccent: 1, //0: New way (oa`, oe`, uy`), 1: The good old day (o`a, o`e, u`y)
 	useCookie: 1, //Cookies: 0=Off, 1=On
 	exclude: ["email"], //IDs of the fields you DON'T want to let users type Vietnamese in
-	showControl: 0, //Show control panel: 0=Off, 1=On. If you turn this off, you must write your own control panel.
+	showControl: 1, //Show control panel: 0=Off, 1=On. If you turn this off, you must write your own control panel.
 	controlCSS: "avim.css" //Path to avim.css
 };
 
