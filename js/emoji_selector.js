@@ -2,6 +2,10 @@ const pickerOptions = {
     onEmojiSelect: function(emoji) {
         document.getElementById('main-textarea').value += emoji.native;
     },
+    theme: 'light',
+    // emojiButtonSize: 24,
+    // emojiSize: 16,
+    perLine: 8,
 }
 const picker = new EmojiMart.Picker(pickerOptions)
 
