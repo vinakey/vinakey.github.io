@@ -68,80 +68,77 @@
                         <p class="control mr-2"> <button class="button is-danger is-light is-small custom"
                                 onclick="clearText()">Clear</button>
                         </p>
+                        <p class="control mr-2">
+                            <button class="button is-warning is-small custom" onclick="copyText()">
+                                <i class="fa-solid fa-gear"></i>
+                            </button>
+                        </p>
 
                         <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
                         <script src="js/emoji_selector.js"></script>
                     </div>
                 </div>
 
-                <div class="column is-flex is-justify-content-flex-end">
-                    <p class="control mt-2">
-                        <button class="button is-warning is-small custom" onclick="copyText()">
-                            <i class="fa-solid fa-gear"></i>
-                        </button>
-                    </p>
+                <!-- AVIM control -->
+                <div class="column is-narrow">
+                    <div id="AVIMControl" class="box">
+                        <div class="field">
+                            <div class="control">
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <label class="radio">
+                                            <input id="avim_auto" type="radio" name="AVIMMethod"
+                                                onclick="AVIMObj.setMethod(0);" />
+                                            AUTO
+                                        </label>
+                                        <label class="radio">
+                                            <input id="avim_telex" type="radio" name="AVIMMethod"
+                                                onclick="AVIMObj.setMethod(1);" />
+                                            TELEX
+                                        </label>
+                                        <label class="radio">
+                                            <input id="avim_vni" type="radio" name="AVIMMethod"
+                                                onclick="AVIMObj.setMethod(2);" />
+                                            VNI
+                                        </label>
+                                        <label class="radio">
+                                            <input id="avim_viqr" type="radio" name="AVIMMethod"
+                                                onclick="AVIMObj.setMethod(3);" />
+                                            VIQR
+                                        </label>
+                                        <!-- <label class="radio">
+                                <input id="avim_viqr2" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(4);" />
+                                VIQR*
+                            </label> -->
+                                        <label class="radio">
+                                            <input id="avim_off" type="radio" name="AVIMMethod"
+                                                onclick="AVIMObj.setMethod(-1);" />
+                                            OFF
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính
+                                    tả
+                                </label>
+                                <label class="checkbox">
+                                    <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <script src="js/text_area_manipulate.js"></script>
+        </div>
+        <script src="js/text_area_manipulate.js"></script>
     </section>
 
     <div class="section custom-section">
         <div class="columns">
-            <!-- AVIM control -->
-            <div class="column is-narrow">
-                <div id="AVIMControl" class="box">
-                    <div class="field">
-                        <div class="label">
-                            <label class="label">Kiểu gõ:</label>
-                        </div>
-                        <div class="control">
-                            <div class="field is-narrow">
-                                <div class="control">
-                                    <label class="radio">
-                                        <input id="avim_auto" type="radio" name="AVIMMethod"
-                                            onclick="AVIMObj.setMethod(0);" />
-                                        Tự động
-                                    </label>
-                                    <label class="radio">
-                                        <input id="avim_telex" type="radio" name="AVIMMethod"
-                                            onclick="AVIMObj.setMethod(1);" />
-                                        TELEX
-                                    </label>
-                                    <label class="radio">
-                                        <input id="avim_vni" type="radio" name="AVIMMethod"
-                                            onclick="AVIMObj.setMethod(2);" />
-                                        VNI
-                                    </label>
-                                    <label class="radio">
-                                        <input id="avim_viqr" type="radio" name="AVIMMethod"
-                                            onclick="AVIMObj.setMethod(3);" />
-                                        VIQR
-                                    </label>
-                                    <!-- <label class="radio">
-                                <input id="avim_viqr2" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(4);" />
-                                VIQR*
-                            </label> -->
-                                    <label class="radio">
-                                        <input id="avim_off" type="radio" name="AVIMMethod"
-                                            onclick="AVIMObj.setMethod(-1);" />
-                                        Tắt
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính tả
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="column is-narrow">
                 <div class="box table-box">
                     <table class="table is-hoverable">
