@@ -31,10 +31,10 @@ section.custom-section {
 
 #emoji-modal {
   /* transform: scale(0.7); Adjust as needed */
-  scale: 0.7;
+  scale: 0.8;
   position: absolute;
-  bottom: -1rem; 
-  right: -3rem;
+  bottom: 0.5rem; 
+  right: -2rem;
   display: none;
   z-index: 1000; /* Add this line */
 }

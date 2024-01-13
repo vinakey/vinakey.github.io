@@ -1,7 +1,7 @@
 const pickerOptions = { 
     onEmojiSelect: function(emoji) {
         document.getElementById('main-textarea').value += emoji.native;
-    }
+    },
 }
 const picker = new EmojiMart.Picker(pickerOptions)
 
@@ -12,4 +12,11 @@ document.getElementById('modal-content').appendChild(picker)
 document.getElementById('emoji-selector').addEventListener('click', function() {
     const modal = document.getElementById('emoji-modal');
     modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+})
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('emoji-modal');
+    if (!modal.contains(event.target) && event.target.id !== 'emoji-selector' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+    }
 })
