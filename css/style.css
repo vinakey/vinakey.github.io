@@ -39,3 +39,10 @@ section.custom-section {
     width: 0;
     height: 0;
 }
+
+/* align avim-control to the left on mobile devices */
+@media screen and (max-width: 600px) {
+  #AVIMControl {
+      justify-content: flex-start !important;
+  }
+}
