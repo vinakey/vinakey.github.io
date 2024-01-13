@@ -1,32 +1,20 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Load saved selection from localStorage
-    const savedMethod = localStorage.getItem('AVIMMethod');
-    const savedCkspell = localStorage.getItem('avim_ckspell');
-    const savedDaucu = localStorage.getItem('avim_daucu');
+// Get all the radio buttons
+const radioButtons = document.querySelectorAll('.btn-group-toggle .btn input[type="radio"]');
 
-    if (savedMethod) {
-        document.querySelector(`input[name="AVIMMethod"][value="${savedMethod}"]`).checked = true;
-    }
-    if (savedCkspell) {
-        document.querySelector('#avim_ckspell').checked = savedCkspell === 'true';
-    }
-    if (savedDaucu) {
-        document.querySelector('#avim_daucu').checked = savedDaucu === 'true';
-    }
+// Add a change event listener to each radio button
+radioButtons.forEach(radioButton => {
+    radioButton.addEventListener('change', function() {
+        // Remove the 'active' class from all buttons
+        const buttons = document.querySelectorAll('.btn-group-toggle .btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
 
-    document.querySelector('#avim-form').addEventListener('change', (event) => {
-        if (event.target.name === 'AVIMMethod') {
-            AVIMObj.setMethod(event.target.value);
-            // Save selection to localStorage
-            localStorage.setItem('AVIMMethod', event.target.value);
-        } else if (event.target.id === 'avim_ckspell' || event.target.id === 'avim_daucu') {
-            AVIMObj[event.target.id === 'avim_ckspell' ? 'setSpell' : 'setDauCu'](event.target.checked);
-            localStorage.setItem(event.target.id, event.target.checked);
-        }
-    });
-
-    document.querySelector('#hide-avim').addEventListener('click', (event) => {
-        event.preventDefault();
-        document.querySelector('#avim-form').style.display = 'none';
+        // Add the 'active' class to the parent button of the changed radio button
+        this.parentElement.classList.add('active');
     });
 });
+
+// Manually trigger the change event for the checked radio button
+const checkedRadioButton = document.querySelector('.btn-group-toggle .btn input[type="radio"]:checked');
+if (checkedRadioButton) {
+    checkedRadioButton.dispatchEvent(new Event('change'));
+}

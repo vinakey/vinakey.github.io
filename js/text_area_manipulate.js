@@ -16,6 +16,5 @@ function clearText() {
 
 function searchText(url) {
     var query = document.getElementById('main-textarea').value;
-    console.log(query)
     window.open(url + encodeURIComponent(query), '_blank');
 }

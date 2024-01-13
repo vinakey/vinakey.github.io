@@ -341,6 +341,7 @@ function AVIM()	{
 	}
 	
 	this.setMethod = function(m) {
+		console.log("AVIM: setMethod")
 		if(m == -1) {
 			AVIMGlobalConfig.onOff = 0;
 			if(this.getEL(this.radioID[5])) {
