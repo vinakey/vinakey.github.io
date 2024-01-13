@@ -5,9 +5,9 @@
 body {
   font-family: "Lora", "Montserrat", sans-serif;
   scroll-behavior: smooth;
-  .box {
+  /* .box {
     display: inline-block;
-  }
+  } */
 }
 .button.is-small.custom {
   border-radius: 5px;
@@ -23,4 +23,18 @@ body {
 
 section.custom-section {
   padding: 2rem 1.5rem !important; 
+}
+
+.table-box {
+  padding: 0.4rem;
+}
+
+#emoji-modal {
+  /* transform: scale(0.7); Adjust as needed */
+  scale: 0.7;
+  position: absolute;
+  bottom: -1rem; 
+  right: -3rem;
+  display: none;
+  z-index: 1000; /* Add this line */
 }
