@@ -50,59 +50,26 @@
         </div>
         <div class="container">
             <div class="columns">
-                <div class="column is-narrow">
+                <div class="column is-flex is-justify-content-flex-end">
                     <div class="field is-grouped mt-2">
                         <p class="control mr-2">
-                            <button class="button is-info is-light is-small custom" onclick="selectAll()">Select
-                                All</button>
+                            <button class="button is-warning is-light is-small custom" onclick="selectAll()">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
                         </p>
-                        <p class="control mr-2">
-                            <button class="button is-primary is-light is-small custom"
-                                onclick="copyText()">Copy</button>
-                        </p>
-                        <p class="control mr-2">
-                            <button class="button is-danger is-light is-small custom"
-                                onclick="clearText()">Clear</button>
-                        </p>
-                        <!-- <p class="control mr-2"> -->
-                        <div class="dropdown is-hoverable custom-dropdown">
-                            <div class="dropdown-trigger">
-                                <button class="button is-warning is-light is-small custom" aria-haspopup="true"
-                                    aria-controls="dropdown-menu">
-                                    <span>Search</span>
-                                    <span class="icon is-small">
-                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content custom">
-                                    <a href="#"
-                                        onclick="searchText('https://www.google.com/search?num=100&amp;newwindow=1&amp;safe=off&amp;source=hp&amp;q=')"
-                                        class="dropdown-item">
-                                        Google
-                                    </a>
-                                    <a href="#" onclick="searchText('https://www.bing.com/search?q=')"
-                                        class="dropdown-item">
-                                        Bing
-                                    </a>
-                                    <a href="#"
-                                        onclick="searchText('https://search.yahoo.com/search?fr=yfp-t&amp;fp=1&amp;toggle=1&amp;cop=mss&amp;ei=UTF-8&amp;p=')"
-                                        class="dropdown-item">
-                                        Yahoo
-                                    </a>
-                                    <a href="#" onclick="searchText('https://duckduckgo.com/?t=hf&amp;ia=web&amp;q=')"
-                                        class="dropdown-item">
-                                        DuckDuckGo
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- </p> -->
                     </div>
-                </div>
-                <div class="column is-flex is-justify-content-flex-end">
-                    <!-- Your content here -->
+                    <p class="control mr-2 mt-2">
+                        <button class="button is-danger is-light is-small custom"
+                            onclick="clearText()">Clear</button>
+                    </p>
+                    <p class="control mr-2 mt-2">
+                        <button class="button is-primary is-light is-small custom"
+                            onclick="copyText()">Copy</button>
+                    </p>
+                    <p class="control mr-2 mt-2">
+                        <button class="button is-info is-light is-small custom" onclick="selectAll()">Select
+                            All</button>
+                    </p>
                     <button class="button mt-2 is-small is-success is-light custom" id="emoji-selector">😊</button>
 
                     <div id="emoji-modal" style="display: none; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);">
@@ -111,6 +78,8 @@
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
                 <script src="js/emoji_selector.js"></script>
+
+
             </div>
             <script src="js/text_area_manipulate.js"></script>
     </section>
