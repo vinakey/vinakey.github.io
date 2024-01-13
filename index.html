@@ -12,10 +12,10 @@
 <body>
     <header>
         <nav class="navbar is is-mobile" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
+            <div class="navbar-brand is-size-5">
                 <a class="navbar-item" href="#">
                     <img src="images/logo.png" style="margin-right: 8px;">
-                    Gõ Tiếng Việt
+                    <strong>Gõ Tiếng Việt</strong>
                 </a>
 
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -48,80 +48,84 @@
                 placeholder="Nhập văn bản của bạn ở đây..."></textarea>
         </div>
         <div class="field is-grouped mt-2">
-            <p class="control">
+            <p class="control mr-2">
                 <button class="button is-info is-small custom" onclick="selectAll()">Select All</button>
             </p>
-            <p class="control">
+            <p class="control mr-2">
                 <button class="button is-primary is-small custom" onclick="copyText()">Copy</button>
             </p>
-            <p class="control">
+            <p class="control mr-2">
                 <button class="button is-danger is-small custom" onclick="clearText()">Clear</button>
             </p>
         </div>
-    </div>
-<script src="js/text_area_manipulate.js"></script>
+        <script src="js/text_area_manipulate.js"></script>
     </section>
 
-
-    <div class="columns">
-    <!-- AVIM control -->
-    <div class="column is-narrow">
-        <div id="AVIMControl" class="box">
-            <div class="field">
-                <div class="label">
-                    <label class="label">Kiểu gõ:</label>
-                </div>
-                <div class="control">
-                    <div class="field is-narrow">
+    <div class="container">
+        <div class="columns">
+            <!-- AVIM control -->
+            <div class="column is-narrow">
+                <div id="AVIMControl" class="box">
+                    <div class="field">
+                        <div class="label">
+                            <label class="label">Kiểu gõ:</label>
+                        </div>
                         <div class="control">
-                            <label class="radio">
-                                <input id="avim_auto" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(0);" />
-                                Tự động
-                            </label>
-                            <label class="radio">
-                                <input id="avim_telex" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(1);" />
-                                TELEX
-                            </label>
-                            <label class="radio">
-                                <input id="avim_vni" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(2);" />
-                                VNI
-                            </label>
-                            <label class="radio">
-                                <input id="avim_viqr" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(3);" />
-                                VIQR
-                            </label>
-                            <!-- <label class="radio">
+                            <div class="field is-narrow">
+                                <div class="control">
+                                    <label class="radio">
+                                        <input id="avim_auto" type="radio" name="AVIMMethod"
+                                            onclick="AVIMObj.setMethod(0);" />
+                                        Tự động
+                                    </label>
+                                    <label class="radio">
+                                        <input id="avim_telex" type="radio" name="AVIMMethod"
+                                            onclick="AVIMObj.setMethod(1);" />
+                                        TELEX
+                                    </label>
+                                    <label class="radio">
+                                        <input id="avim_vni" type="radio" name="AVIMMethod"
+                                            onclick="AVIMObj.setMethod(2);" />
+                                        VNI
+                                    </label>
+                                    <label class="radio">
+                                        <input id="avim_viqr" type="radio" name="AVIMMethod"
+                                            onclick="AVIMObj.setMethod(3);" />
+                                        VIQR
+                                    </label>
+                                    <!-- <label class="radio">
                                 <input id="avim_viqr2" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(4);" />
                                 VIQR*
                             </label> -->
-                            <label class="radio">
-                                <input id="avim_off" type="radio" name="AVIMMethod" onclick="AVIMObj.setMethod(-1);" />
-                                Tắt
+                                    <label class="radio">
+                                        <input id="avim_off" type="radio" name="AVIMMethod"
+                                            onclick="AVIMObj.setMethod(-1);" />
+                                        Tắt
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính tả
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
                             </label>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <label class="checkbox">
-                        <input type="checkbox" id="avim_ckspell" onclick="AVIMObj.setSpell(this);" /> Chính tả
-                    </label>
-                    <label class="checkbox">
-                        <input type="checkbox" id="avim_daucu" onclick="AVIMObj.setDauCu(this);" /> Kiểu cũ
-                    </label>
-                </div>
-            </div>
-            <!-- <div class="field">
+                    <!-- <div class="field">
             <div class="control">
                 <a class="button is-small is-outlined" onclick="document.getElementById('AVIMControl').style.display='none';">Ẩn AVIM - F12</a>
             </div>
         </div> -->
+                </div>
+            </div>
+            <script type="text/javascript" src="js/avim.js"></script>
         </div>
     </div>
-    <script type="text/javascript" src="js/avim.js"></script>
-
-
 </body>
 
 </html>
