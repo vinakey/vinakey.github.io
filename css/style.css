@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
 body {
   font-family: "Lora", "Montserrat", sans-serif;
@@ -13,9 +14,13 @@ body {
 }
 
 .dropdown-content.custom {
-  width: max-content;
+  width: max-content
 }
 
 .dropdown-content.custom a.dropdown-item {
   padding: 0.25em 0.5em;
+}
+
+section.custom-section {
+  padding: 2rem 1.5rem !important; 
 }

@@ -42,13 +42,14 @@
 
     <script src="js/navbar.js"></script>
 
-    <section class="section">
+    <section class="section custom-section">
         <div class="container">
             <!-- Add your blog content here -->
             <textarea class="textarea is-primary column is-12" id="main-textarea" rows="10"
                 placeholder="Nhập văn bản của bạn ở đây..."></textarea>
         </div>
-        <div class="field is-grouped mt-2">
+        <div class="container">
+            <div class="field is-grouped mt-2">
             <p class="control mr-2">
                 <button class="button is-info is-small custom" onclick="selectAll()">Select All</button>
             </p>
@@ -59,34 +60,41 @@
                 <button class="button is-danger is-small custom" onclick="clearText()">Clear</button>
             </p>
             <!-- <p class="control mr-2"> -->
-                <div class="dropdown is-hoverable custom-dropdown">
-                    <div class="dropdown-trigger">
-                        <button class="button is-warning is-small custom" aria-haspopup="true" aria-controls="dropdown-menu">
-                            <span>Search</span>
-                            <span class="icon is-small">
-                                <i class="fas fa-angle-down" aria-hidden="true"></i>
-                            </span>
-                        </button>
-                    </div>
-                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                        <div class="dropdown-content custom">
-                            <a href="#" onclick="searchText('https://www.google.com/search?num=100&amp;newwindow=1&amp;safe=off&amp;source=hp&amp;q=')" class="dropdown-item">
-                                Google
-                            </a>
-                            <a href="#" onclick="searchText('https://www.bing.com/search?q=')" class="dropdown-item">
-                                Bing
-                            </a>
-                            <a href="#" onclick="searchText('https://search.yahoo.com/search?fr=yfp-t&amp;fp=1&amp;toggle=1&amp;cop=mss&amp;ei=UTF-8&amp;p=')" class="dropdown-item">
-                                Yahoo
-                            </a>
-                            <a href="#" onclick="searchText('https://duckduckgo.com/?t=hf&amp;ia=web&amp;q=')" class="dropdown-item">
-                                DuckDuckGo
-                            </a>
-                        </div>
+            <div class="dropdown is-hoverable custom-dropdown">
+                <div class="dropdown-trigger">
+                    <button class="button is-warning is-small custom" aria-haspopup="true"
+                        aria-controls="dropdown-menu">
+                        <span>Search</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content custom">
+                        <a href="#"
+                            onclick="searchText('https://www.google.com/search?num=100&amp;newwindow=1&amp;safe=off&amp;source=hp&amp;q=')"
+                            class="dropdown-item">
+                            Google
+                        </a>
+                        <a href="#" onclick="searchText('https://www.bing.com/search?q=')" class="dropdown-item">
+                            Bing
+                        </a>
+                        <a href="#"
+                            onclick="searchText('https://search.yahoo.com/search?fr=yfp-t&amp;fp=1&amp;toggle=1&amp;cop=mss&amp;ei=UTF-8&amp;p=')"
+                            class="dropdown-item">
+                            Yahoo
+                        </a>
+                        <a href="#" onclick="searchText('https://duckduckgo.com/?t=hf&amp;ia=web&amp;q=')"
+                            class="dropdown-item">
+                            DuckDuckGo
+                        </a>
                     </div>
                 </div>
+            </div>
             <!-- </p> -->
         </div>
+    </div>
         <script src="js/text_area_manipulate.js"></script>
     </section>
 
@@ -145,11 +153,62 @@
                             </label>
                         </div>
                     </div>
-                    <!-- <div class="field">
-            <div class="control">
-                <a class="button is-small is-outlined" onclick="document.getElementById('AVIMControl').style.display='none';">Ẩn AVIM - F12</a>
+                </div>
             </div>
-        </div> -->
+            <div class="column">
+                <div class="box">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Kiểu đánh</th>
+                                <th>sắc</th>
+                                <th>huyền</th>
+                                <th>hỏi</th>
+                                <th>ngã</th>
+                                <th>nặng</th>
+                                <th>mũ</th>
+                                <th>móc</th>
+                                <th>trăng</th>
+                                <th>đ</th>
+                            </tr>
+                            <tr class="is-selected">
+                                <td>TELEX</td>
+                                <td>s</td>
+                                <td>f</td>
+                                <td>r</td>
+                                <td>x</td>
+                                <td>j</td>
+                                <td>aa</td>
+                                <td>ow</td>
+                                <td>aw</td>
+                                <td>dd</td>
+                            </tr>
+                            <tr class="">
+                                <td>VIQR</td>
+                                <td>'</td>
+                                <td>`</td>
+                                <td>?</td>
+                                <td>~</td>
+                                <td>.</td>
+                                <td>^</td>
+                                <td>*</td>
+                                <td>(</td>
+                                <td>dd</td>
+                            </tr>
+                            <tr class="">
+                                <td>VNI</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <script type="text/javascript" src="js/avim.js"></script>
