@@ -1,5 +1,5 @@
 function toggleTables(checkbox) {
-    var tables = document.querySelectorAll(".table-box");
+    var tables = document.querySelectorAll(".instruction");
     for (var i = 0; i < tables.length; i++) {
         tables[i].style.display = checkbox.checked ? "block" : "none";
     }
