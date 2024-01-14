@@ -37,7 +37,8 @@ section.custom-section {
 }
 
 .table-box {
-  padding: 0.4rem;
+  padding: 0.0rem;
+  border-radius: 0px;
 }
 
 #emoji-modal {
@@ -73,12 +74,12 @@ section.custom-section {
 .modal-card {
   border-radius: 10px;
 }
-  
-/* .modal-card-title.is-small {
-  font-size: 0.9rem;
-} */
 
-/* .modal-card-head.is-small .delete {
-  height: 20px;
-  width: 20px;
-} */
+#setting-modal .modal-card {
+  width: auto;
+  height: auto;
+}
+
+.table tbody tr.is-selected {
+  background-color: #696969 !important;
+} 
