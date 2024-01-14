@@ -6,10 +6,10 @@ radioButtons.forEach(radioButton => {
     radioButton.addEventListener('change', function() {
         // Remove the 'active' class from all buttons
         const buttons = document.querySelectorAll('.btn-group .avim-control-btn');
-        buttons.forEach(btn => btn.classList.remove('is-active'));
+        buttons.forEach(btn => btn.classList.remove('is-dark'));
 
         // Add the 'active' class to the parent button of the changed radio button
-        this.parentElement.classList.add('is-active');
+        this.parentElement.classList.add('is-dark');
     });
 });
 

@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="images/logo.png">
+    <title>Gõ Tiếng Việt</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bulma CSS framework -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
@@ -10,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
-    <link rel="icon" href="images/logo.png">
-    <title>Gõ Tiếng Việt</title>
+    <!-- More Toggle CSS-->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JNKKKK/MoreToggles.css@1.0.0/output/moretoggles.min.css"> -->
 </head>
 
 <body>
@@ -56,10 +58,10 @@
         </div>
         <div class="container">
             <div class="columns">
-                <div class="column is-narrow">
+                <div class="column is-flex is-justify-content-flex-start">
                     <div class="field is-grouped mt-2">
                         <!-- Emoji selector button -->
-                        <button class="button mr-1 is-small is-success is-light custom" id="emoji-selector">
+                        <button class="button mr-1 is-small is-warning  custom" id="emoji-selector">
                             <i class="fa-regular fa-face-smile-wink"></i>
                         </button>
                         <!-- Emoji modal -->
@@ -69,21 +71,22 @@
 
                         <!-- Select All button -->
                         <p class="control mr-1">
-                            <button class="button is-info is-light is-small custom" onclick="selectAll()">Select
+                            <button class="button is-info  is-small custom" onclick="selectAll()">Select
                                 All</button>
                         </p>
                         <!-- Copy button -->
                         <p class="control mr-1">
-                            <button class="button is-primary is-light is-small custom"
+                            <button class="button is-primary  is-small custom"
                                 onclick="copyText()">Copy</button>
                         </p>
                         <!-- Clear button -->
-                        <p class="control mr-1"> <button class="button is-danger is-light is-small custom"
+                        <p class="control mr-1"> <button class="button is-danger  is-small custom"
                                 onclick="clearText()">Clear</button>
                         </p>
                         <!-- Settings button -->
                         <p class="control mr-1">
-                            <button class="button is-warning is-small custom" onclick="copyText()">
+                            <button class="button is-dark is-small custom" id="setting-modal-trigger"
+                                data-target="setting-modal">
                                 <i class="fa-solid fa-gear"></i>
                             </button>
                         </p>
@@ -95,42 +98,43 @@
                 </div>
 
                 <!-- AVIM control -->
-
-                <div class="column is-flex is-justify-content-flex-end" id="AVIMControl">
+                <div class="column is-flex is-justify-content-flex-end small-gap" id="AVIMControl">
                     <div class="field is-grouped btn-group mt-2" data-toggle="buttons">
                         <!-- AVIM method buttons -->
-                        <label class="button is-light is-small avim-control-btn">
-                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_auto" onclick="AVIMObj.setMethod(0);">
+                        <label id="avim-auto-btn" class="button is-small avim-control-btn">
+                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_auto"
+                                onclick="AVIMObj.setMethod(0);">
                             AUTO
                         </label>
-                        <label class="button is-light is-small avim-control-btn">
-                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_telex" onclick="AVIMObj.setMethod(1);">
+                        <label class="button is-small avim-control-btn">
+                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_telex"
+                                onclick="AVIMObj.setMethod(1);">
                             TELEX
                         </label>
-                        <label class="button is-light is-small avim-control-btn">
-                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_vni" onclick="AVIMObj.setMethod(2);"> VNI
+                        <label class="button is-small avim-control-btn">
+                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_vni"
+                                onclick="AVIMObj.setMethod(2);"> VNI
                         </label>
-                        <label class="button is-light is-small avim-control-btn">
-                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_viqr" onclick="AVIMObj.setMethod(3);">
+                        <label class="button is-small avim-control-btn">
+                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_viqr"
+                                onclick="AVIMObj.setMethod(3);">
                             VIQR
                         </label>
-                        <label class="button is-light is-small avim-control-btn">
-                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_off" onclick="AVIMObj.setMethod(-1);">
+                        <label id="avim-off-btn" class="button is-small avim-control-btn">
+                            <input class="hidden" type="radio" name="AVIMMethod" id="avim_off"
+                                onclick="AVIMObj.setMethod(-1);">
                             OFF
                         </label>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="js/text_area_manipulate.js"></script>
-        <script type="text/javascript" src="js/avim.js"></script>
-        <script type="text/javascript" src="js/avim_control.js"></script>
     </section>
 
-    <div class="section custom-section " style="display: none;">
+    <div class="section custom-section " style="display: block;">
         <div class="columns">
             <div class="column is-narrow">
-                <div class="box table-box">
+                <div class="box table-box" style="overflow-x: auto;">
                     <!-- Table for AVIM typing methods -->
                     <table class="table is-hoverable">
                         <tbody>
@@ -187,7 +191,7 @@
                 </div>
             </div>
             <div class="column is-narrow">
-                <div class="box table-box">
+                <div class="box table-box" style="overflow-x: auto;">
                     <!-- Table for AVIM typing examples -->
                     <table class="table is-hoverable">
                         <tbody>
@@ -213,6 +217,47 @@
             </div>
         </div>
     </div>
+
+    <!-- setting modal -->
+    <div id="setting-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head is-small">
+                <p class="modal-card-title is-small" style="text-align: center;">Setting</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="control" id="avim-additional-setting">
+                    <div class="field">
+                        <div>
+                            <input type="checkbox" id="avim_ckspell" name="avim_ckspell_switch"
+                                onclick="AVIMObj.setSpell(this);" />
+                            <label for="avim_ckspell"> Spell check </label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" id="avim_daucu" name="avim_daucu_switch"
+                                onclick="AVIMObj.setDauCu(this);" />
+                            <label for="avim_daucu"> Old accents (òa, úy instead of oà, uý)</label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div>
+                            <input type="checkbox" id="toggleTablesCheckbox" name="toggleTablesCheckbox" onclick="toggleTables(this);" />
+                            <label for="toggleTablesCheckbox"> Show/Hide Tables </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/text_area_manipulate.js"></script>
+    <script src="js/toggle-tables.js"></script>
+    <script type="text/javascript" src="js/avim.js"></script>
+    <script type="text/javascript" src="js/avim_control.js"></script>
+    <script src="js/avim_setting_modal.js"></script>
 </body>
 
 </html>

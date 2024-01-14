@@ -14,7 +14,7 @@ var AVIMGlobalConfig = {
 	method: 0, //Default input method: 0=AUTO, 1=TELEX, 2=VNI, 3=VIQR, 4=VIQR*
 	onOff: 1, //Starting status: 0=Off, 1=On
 	ckSpell: 1, //Spell Check: 0=Off, 1=On
-	oldAccent: 1, //0: New way (oa`, oe`, uy`), 1: The good old day (o`a, o`e, u`y)
+	oldAccent: 0, //0: New way (oa`, oe`, uy`), 1: The good old day (o`a, o`e, u`y)
 	useCookie: 1, //Cookies: 0=Off, 1=On
 	exclude: ["email"], //IDs of the fields you DON'T want to let users type Vietnamese in
 	showControl: 0, //Show control panel: 0=Off, 1=On. If you turn this off, you must write your own control panel.
@@ -341,7 +341,6 @@ function AVIM()	{
 	}
 	
 	this.setMethod = function(m) {
-		console.log("AVIM: setMethod")
 		if(m == -1) {
 			AVIMGlobalConfig.onOff = 0;
 			if(this.getEL(this.radioID[5])) {

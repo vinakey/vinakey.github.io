@@ -10,6 +10,20 @@ body {
   border-radius: 5px;
 }
 
+.avim-control-btn {
+  border-radius: 0px;
+}
+
+#avim-auto-btn{
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
+
+#avim-off-btn{
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+}
+
 .dropdown-content.custom {
   width: max-content;
 }
@@ -41,8 +55,30 @@ section.custom-section {
 }
 
 /* align avim-control to the left on mobile devices */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   #AVIMControl {
       justify-content: flex-start !important;
   }
 }
+@media screen and (max-width: 768px) {
+  .column.small-gap {
+    padding-top: 0rem !important;
+  }
+}
+
+.modal-card-head.is-small {
+  padding: 10px;
+}
+
+.modal-card {
+  border-radius: 10px;
+}
+  
+/* .modal-card-title.is-small {
+  font-size: 0.9rem;
+} */
+
+/* .modal-card-head.is-small .delete {
+  height: 20px;
+  width: 20px;
+} */
