@@ -33,7 +33,7 @@ body {
 }
 
 section.custom-section {
-  padding: 2rem 1.5rem !important; 
+  padding: 0.5rem 1.5rem !important; 
 }
 
 .table-box {
@@ -81,5 +81,5 @@ section.custom-section {
 }
 
 .table tbody tr.is-selected {
-  background-color: #696969 !important;
+  background-color: #808080!important;
 } 

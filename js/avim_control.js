@@ -4,7 +4,6 @@ const radioButtons = document.querySelectorAll('.btn-group .avim-control-btn inp
 function highlightRows() {
     var method = document.querySelector('input[name="AVIMMethod"]:checked').id;
     var rows = document.querySelectorAll('tr[class^="row"]');
-    console.log(method);
     for (var i = 0; i < rows.length; i++) {
         rows[i].classList.remove('is-selected');
     }
