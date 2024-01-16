@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Lora&display=swap"); */
 
 body {
-  font-family: "Lora", "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -14,12 +14,12 @@ body {
   border-radius: 0px;
 }
 
-#avim-auto-btn{
+#avim-auto-btn {
   border-top-left-radius: 5px !important;
   border-bottom-left-radius: 5px !important;
 }
 
-#avim-off-btn{
+#avim-off-btn {
   border-top-right-radius: 5px !important;
   border-bottom-right-radius: 5px !important;
 }
@@ -33,32 +33,32 @@ body {
 }
 
 section.custom-section {
-  padding: 0.5rem 1.5rem !important; 
+  padding: 0.5rem 1.5rem !important;
 }
 
 .table-box {
-  padding: 0.0rem;
+  padding: 0rem;
   border-radius: 0px;
 }
 
 #emoji-modal {
   position: absolute;
-  top: 3.5rem; 
+  top: 3.5rem;
   left: 0rem;
   display: none;
   z-index: 1000;
 }
 
 .avim-control-btn input[type="radio"] {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 /* align avim-control to the left on mobile devices */
 @media screen and (max-width: 768px) {
   #AVIMControl {
-      justify-content: flex-start !important;
+    justify-content: flex-start !important;
   }
 }
 @media screen and (max-width: 768px) {
@@ -81,5 +81,5 @@ section.custom-section {
 }
 
 .table tbody tr.is-selected {
-  background-color: #808080!important;
-} 
+  background-color: #808080 !important;
+}
