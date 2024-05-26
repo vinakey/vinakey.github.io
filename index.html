@@ -97,33 +97,25 @@
               </div>
 
               <!-- Select All button -->
-              <p class="control">
-                <button class="button is-info is-small" onclick="selectAll()">
-                  Select All
-                </button>
-              </p>
+              <button class="button is-info is-small" onclick="selectAll()">
+                Select All
+              </button>
               <!-- Copy button -->
-              <p class="control">
-                <button class="button is-primary is-small" onclick="copyText()">
-                  Copy
-                </button>
-              </p>
+              <button class="button is-primary is-small" onclick="copyText()">
+                Copy
+              </button>
               <!-- Clear button -->
-              <p class="control">
-                <button class="button is-danger is-small" onclick="clearText()">
-                  Clear
-                </button>
-              </p>
+              <button class="button is-danger is-small" onclick="clearText()">
+                Clear
+              </button>
               <!-- Settings button -->
-              <p class="control">
-                <button
-                  class="button is-dark is-small"
-                  id="setting-modal-trigger"
-                  data-target="setting-modal"
-                >
-                  <i class="fa-solid fa-gear" style="font-size: 1rem"></i>
-                </button>
-              </p>
+              <button
+                class="button is-dark is-small"
+                id="setting-modal-trigger"
+                data-target="setting-modal"
+              >
+                <i class="fa-solid fa-gear"></i>
+              </button>
 
               <!-- Emoji Mart library -->
               <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
@@ -136,7 +128,11 @@
             class="column is-flex is-justify-content-flex-end small-gap"
             id="AVIMControl"
           >
-            <div class="field is-grouped btn-group mt-2" data-toggle="buttons">
+            <div
+              class="field is-grouped btn-group mt-2"
+              data-toggle="buttons"
+              style="gap: 0.5rem"
+            >
               <!-- AVIM method buttons -->
               <label
                 id="avim-auto-btn"
@@ -204,7 +200,7 @@
             <strong class="">Quy tắc gõ Tiếng Việt có dấu</strong>
             <div class="box table-box mt-2" style="overflow-x: auto">
               <!-- Table for AVIM typing methods -->
-              <table class="table is-bordered is-hoverable">
+              <table class="table is-bordered is-hoverable is-narrow">
                 <tbody>
                   <tr>
                     <th>Kiểu đánh</th>
@@ -262,7 +258,7 @@
             <strong>Ví dụ: Có công mài sắt, có ngày nên kim</strong>
             <div class="box table-box mt-2" style="overflow-x: auto">
               <!-- Table for AVIM typing examples -->
-              <table class="table is-bordered is-hoverable">
+              <table class="table is-bordered is-hoverable is-narrow">
                 <tbody>
                   <tr>
                     <th>Kiểu đánh</th>
