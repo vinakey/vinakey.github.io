@@ -7,23 +7,23 @@ function highlightRows() {
     var method = document.querySelector('input[name="AVIMMethod"]:checked').id;
     var rows = document.querySelectorAll('tr[class^="row"]');
     for (var i = 0; i < rows.length; i++) {
-        rows[i].classList.remove("is-selected");
+        rows[i].classList.remove("is-primary");
     }
     if (method === "avim_auto") {
         document.querySelectorAll(".row1, .row2").forEach(function(row) {
-            row.classList.add("is-selected");
+            row.classList.add("is-primary");
         });
     } else if (method === "avim_telex") {
         document.querySelectorAll(".row1").forEach(function(row) {
-            row.classList.add("is-selected");
+            row.classList.add("is-primary");
         });
     } else if (method === "avim_vni") {
         document.querySelectorAll(".row2").forEach(function(row) {
-            row.classList.add("is-selected");
+            row.classList.add("is-primary");
         });
     } else if (method === "avim_viqr") {
         document.querySelectorAll(".row3").forEach(function(element) {
-            element.classList.add("is-selected");
+            element.classList.add("is-primary");
         });
     }
 }
