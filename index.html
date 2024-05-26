@@ -27,6 +27,17 @@
     />
     <!-- More Toggle CSS-->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JNKKKK/MoreToggles.css@1.0.0/output/moretoggles.min.css"> -->
+
+    <script>
+      // Set theme before DOMContentLoaded
+      const userPreferredTheme = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches
+        ? "dark"
+        : "light";
+      const savedTheme = localStorage.getItem("theme") || userPreferredTheme;
+      document.documentElement.setAttribute("data-theme", savedTheme);
+    </script>
   </head>
 
   <body>
@@ -58,6 +69,12 @@
 
         <div id="navbar-items" class="navbar-menu">
           <div class="navbar-end">
+            <a class="navbar-item">
+              <div id="theme-switcher">
+                <i class="fa-solid fa-moon"></i>
+              </div>
+            </a>
+
             <a class="navbar-item" href="#"> About </a>
 
             <a class="navbar-item" href="#"> Other tools </a>
@@ -350,6 +367,7 @@
       </div>
     </div>
 
+    <script src="js/theme_switcher.js"></script>
     <script src="js/text_area_manipulate.js"></script>
     <script src="js/toggle-tables.js"></script>
     <script type="text/javascript" src="js/avim.js"></script>
