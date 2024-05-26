@@ -81,12 +81,8 @@
       <div class="container">
         <div class="columns">
           <div class="column is-flex is-justify-content-flex-start">
-            <div class="field is-grouped mt-2">
-              <!-- Emoji selector button -->
-              <button
-                class="button mr-1 is-small is-warning custom"
-                id="emoji-selector"
-              >
+            <div class="field is-grouped mt-2" style="gap: 0.5rem">
+              <button class="button is-small is-warning" id="emoji-selector">
                 <i class="fa-regular fa-face-smile-wink"></i>
               </button>
               <!-- Emoji modal -->
@@ -101,40 +97,31 @@
               </div>
 
               <!-- Select All button -->
-              <p class="control mr-1">
-                <button
-                  class="button is-info is-small custom"
-                  onclick="selectAll()"
-                >
+              <p class="control">
+                <button class="button is-info is-small" onclick="selectAll()">
                   Select All
                 </button>
               </p>
               <!-- Copy button -->
-              <p class="control mr-1">
-                <button
-                  class="button is-primary is-small custom"
-                  onclick="copyText()"
-                >
+              <p class="control">
+                <button class="button is-primary is-small" onclick="copyText()">
                   Copy
                 </button>
               </p>
               <!-- Clear button -->
-              <p class="control mr-1">
-                <button
-                  class="button is-danger is-small custom"
-                  onclick="clearText()"
-                >
+              <p class="control">
+                <button class="button is-danger is-small" onclick="clearText()">
                   Clear
                 </button>
               </p>
               <!-- Settings button -->
-              <p class="control mr-1">
+              <p class="control">
                 <button
-                  class="button is-dark is-small custom"
+                  class="button is-dark is-small"
                   id="setting-modal-trigger"
                   data-target="setting-modal"
                 >
-                  <i class="fa-solid fa-gear"></i>
+                  <i class="fa-solid fa-gear" style="font-size: 1rem"></i>
                 </button>
               </p>
 

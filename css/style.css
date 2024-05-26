@@ -1,36 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 /* @import url("https://fonts.googleapis.com/css2?family=Lora&display=swap"); */
 
-body {
+/* body {
   font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
-}
+} */
 
-.button.is-small.custom {
+/* .button.is-small.custom {
   border-radius: 5px;
-}
+} */
 
-.avim-control-btn {
+/* .avim-control-btn {
   border-radius: 0px;
-}
+} */
 
-#avim-auto-btn {
+/* #avim-auto-btn {
   border-top-left-radius: 5px !important;
   border-bottom-left-radius: 5px !important;
-}
+} */
 
-#avim-off-btn {
+/* #avim-off-btn {
   border-top-right-radius: 5px !important;
   border-bottom-right-radius: 5px !important;
-}
+} */
 
-.dropdown-content.custom {
+/* .dropdown-content.custom {
   width: max-content;
-}
+} */
 
-.dropdown-content.custom a.dropdown-item {
+/* .dropdown-content.custom a.dropdown-item {
   padding: 0.25em 0.5em;
-}
+} */
 
 section.custom-section {
   padding: 0.5rem 1.5rem !important;
@@ -80,6 +80,6 @@ section.custom-section {
   height: auto;
 }
 
-.table tbody tr.is-selected {
+/* .table tbody tr.is-selected {
   background-color: #808080 !important;
-}
+} */
