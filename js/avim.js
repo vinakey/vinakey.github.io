@@ -793,65 +793,76 @@ function AVIM()	{
 	
 	this.replaceChar = function(o, pos, c) {
 		var bb = false;
-		if(!this.nan(c)) {
+		if (!this.nan(c)) {
 			var replaceBy = this.fcc(c), wfix = this.up(this.unV(this.fcc(c)));
 			this.changed = true;
 		} else {
 			var replaceBy = c;
-			if((this.up(c) == "O") && this.whit) {
-				bb=true;
+			if ((this.up(c) == "O") && this.whit) {
+				bb = true;
 			}
 		}
-		if(!o.data) {
+		if (!o.data) {
 			var savePos = o.selectionStart, sst = o.scrollTop;
 			if ((this.up(o.value.substr(pos - 1, 1)) == 'U') && (pos < savePos - 1) && (this.up(o.value.substr(pos - 2, 1)) != 'Q')) {
-				if((wfix == "Ơ") || bb) {
-					if (o.value.substr(pos-1,1) == 'u') {
+				if ((wfix == "Ơ") || bb) {
+					if (o.value.substr(pos - 1, 1) == 'u') {
 						var r = this.fcc(432);
 					} else {
 						var r = this.fcc(431);
 					}
 				}
-				if(bb) {
+				if (bb) {
 					this.changed = true;
-					if(c == "o") {
+					if (c == "o") {
 						replaceBy = "ơ";
 					} else {
 						replaceBy = "Ơ";
 					}
 				}
 			}
-			o.value = o.value.substr(0, pos) + replaceBy + o.value.substr(pos + 1);
-			if(r) o.value = o.value.substr(0, pos - 1) + r + o.value.substr(pos);
+			// Adjust to transform 'uo' to 'ươ'
+			if ((o.value.substr(pos - 1, 1) == 'u') && (o.value.substr(pos, 1) == 'o') && (replaceBy == 'ơ')) {
+				o.value = o.value.substr(0, pos - 1) + 'ươ' + o.value.substr(pos + 1);
+			} else {
+				o.value = o.value.substr(0, pos) + replaceBy + o.value.substr(pos + 1);
+			}
+			if (r) o.value = o.value.substr(0, pos - 1) + r + o.value.substr(pos);
 			o.setSelectionRange(savePos, savePos);
 			o.scrollTop = sst;
 		} else {
 			if ((this.up(o.data.substr(pos - 1, 1)) == 'U') && (pos < o.pos - 1)) {
-				if((wfix == "Ơ") || bb) {
+				if ((wfix == "Ơ") || bb) {
 					if (o.data.substr(pos - 1, 1) == 'u') {
 						var r = this.fcc(432);
 					} else {
 						var r = this.fcc(431);
 					}
 				}
-				if(bb) {
+				if (bb) {
 					this.changed = true;
-					if(c == "o") {
+					if (c == "o") {
 						replaceBy = "ơ";
 					} else {
 						replaceBy = "Ơ";
 					}
 				}
 			}
-			o.deleteData(pos, 1);
-			o.insertData(pos, replaceBy);
-			if(r) {
-				o.deleteData(pos - 1, 1);
-				o.insertData(pos - 1, r);
+			// Adjust to transform 'uo' to 'ươ'
+			if ((o.data.substr(pos - 1, 1) == 'u') && (o.data.substr(pos, 1) == 'o') && (replaceBy == 'ơ')) {
+				o.deleteData(pos - 1, 2);
+				o.insertData(pos - 1, 'ươ');
+			} else {
+				o.deleteData(pos, 1);
+				o.insertData(pos, replaceBy);
+				if (r) {
+					o.deleteData(pos - 1, 1);
+					o.insertData(pos - 1, r);
+				}
 			}
 		}
-		if(this.whit) {
-			this.whit=false;
+		if (this.whit) {
+			this.whit = false;
 		}
 	}
 	
