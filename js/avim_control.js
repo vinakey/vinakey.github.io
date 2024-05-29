@@ -37,7 +37,7 @@ radioButtons.forEach((radioButton) => {
 
         // Add the 'active' class to the parent button of the changed radio button
         this.parentElement.classList.add("is-dark");
-        highlightRows();
+        // highlightRows();
     });
 });
 
