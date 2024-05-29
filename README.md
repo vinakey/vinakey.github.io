@@ -17,10 +17,11 @@ visit https://gotiengviet.github.io or https://vn.bigfat.baby
 
 ## TODO
 
+- [x] Responsive design
+- [x] Fix some bugs of `avim.js`
 - [x] Migrate to Bulma 1.0
 - [ ] Spell check
 - [ ] Typing suggestion
-- [ ] Fix some bugs of `avim.js`
 
 ## Deployment
 
