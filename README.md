@@ -7,14 +7,14 @@ This project is a web-based Vietnamese Input Method editor that utilizes `avim.j
 ## Features
 
 - Automatic selection of input method based on typing.
-- Multiple input methods: AUTO, TELEX, VNI, VIQR, VIQR*.
+- Multiple input methods: AUTO, TELEX, VNI, VIQR, VIQR\*.
 - Emoji support.
 - Option to use the old accent style.
 - Responsive UI that works well on both desktop and mobile devices.
 
 ## Usage
 
-visit https://gotiengviet.github.io or https://vn.bigfat.baby
+visit https://gotiengviet.github.io
 
 ## TODO
 
@@ -31,4 +31,3 @@ The project is set up to be automatically deployed to GitHub Pages on push to th
 ## License
 
 This project is licensed under the GNU General Public License. See the [LICENSE](LICENSE) file for details.
-
