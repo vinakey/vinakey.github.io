@@ -1,12 +1,9 @@
-const userPreferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-const savedTheme = localStorage.getItem('theme') || userPreferredTheme;
-
 const pickerOptions = { 
     onEmojiSelect: function(emoji) {
         document.getElementById('main-textarea').value += emoji.native;
     },
-    
-    theme: savedTheme,
+    // theme: 'auto',
+    theme: localStorage.getItem('theme') || 'auto',
     // emojiButtonSize: 24,
     // emojiSize: 16,
     perLine: 8,
