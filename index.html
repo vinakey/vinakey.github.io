@@ -91,18 +91,17 @@
         <!-- Textarea for user input -->
         <!-- Contenteditable div for user input -->
         <div
-          class="contenteditable-container"
-          id="main-contenteditable"
+          class="textarea column is-12"
+          id="main-textarea"
           contenteditable="true"
           placeholder="Nhập văn bản của bạn ở đây..."
         ></div>
 
-        <textarea
-          class="textarea column is-12"
+        <!-- <textarea class="textarea column is-12"
           id="main-textarea"
           rows="12"
           placeholder="Nhập văn bản của bạn ở đây..."
-        ></textarea>
+        ></textarea> -->
       </div>
       <div class="container">
         <div class="columns">
@@ -398,9 +397,7 @@
       async function initSpellChecker() {
         const viDictionary = await loadDictionary("vi");
         const enDictionary = await loadDictionary("en");
-        const contentEditableDiv = document.getElementById(
-          "main-contenteditable"
-        );
+        const contentEditableDiv = document.getElementById("main-textarea");
 
         contentEditableDiv.addEventListener("input", () => {
           const text = contentEditableDiv.innerText;
