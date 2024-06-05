@@ -369,17 +369,17 @@
       async function loadDictionary(lang) {
         let aff, dic;
         if (lang === "vi") {
-          aff = await fetch("dictionaries/vi/index.aff").then((response) =>
+          aff = await fetch("dict/vi/index.aff").then((response) =>
             response.text()
           );
-          dic = await fetch("dictionaries/vi/index.dic").then((response) =>
+          dic = await fetch("dict/vi/index.dic").then((response) =>
             response.text()
           );
         } else {
-          aff = await fetch("dictionaries/en/index.aff").then((response) =>
+          aff = await fetch("dict/en/index.aff").then((response) =>
             response.text()
           );
-          dic = await fetch("dictionaries/vi/index.dic").then((response) =>
+          dic = await fetch("dict/vi/index.dic").then((response) =>
             response.text()
           );
         }
