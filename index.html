@@ -361,5 +361,101 @@
     <script type="text/javascript" src="js/avim.js"></script>
     <script type="text/javascript" src="js/avim_control.js"></script>
     <script src="js/avim_setting_modal.js"></script>
+
+    <!-- Spell check integration -->
+    <script>
+      // Function to load dictionary files
+      console.log("Loading dictionaries...");
+      async function loadDictionary(lang) {
+        let aff, dic;
+        if (lang === "vi") {
+          aff = await fetch("dictionaries/dictionaries/vi/index.aff").then(
+            (response) => response.text()
+          );
+          dic = await fetch("dictionaries/dictionaries/vi/index.dic").then(
+            (response) => response.text()
+          );
+        } else {
+          aff = await fetch("dictionaries/dictionaries/en/index.aff").then(
+            (response) => response.text()
+          );
+          dic = await fetch("dictionaries/dictionaries/vi/index.dic").then(
+            (response) => response.text()
+          );
+        }
+        return new Typo(lang, aff, dic);
+      }
+
+      // Initialize spell check for both languages
+      async function initSpellChecker() {
+        console.log("Initializing spell checker...");
+        const viDictionary = await loadDictionary("vi");
+        const enDictionary = await loadDictionary("en");
+        const textArea = document.getElementById("main-textarea");
+        const languageSelection = document.getElementById("language-selection");
+        console.log("Dictionaries loaded!");
+        console.log(languageSelection, textArea);
+
+        textArea.addEventListener("input", () => {
+          checkSpelling(
+            textArea,
+            viDictionary,
+            enDictionary,
+            languageSelection.value
+          );
+        });
+
+        languageSelection.addEventListener("change", () => {
+          checkSpelling(
+            textArea,
+            viDictionary,
+            enDictionary,
+            languageSelection.value
+          );
+        });
+      }
+
+      function checkSpelling(
+        textArea,
+        viDictionary,
+        enDictionary,
+        languageMode
+      ) {
+        const text = textArea.value;
+        const words = text.split(/\s+/);
+        const misspelledWords = new Set();
+
+        words.forEach((word) => {
+          if (
+            (languageMode === "both" &&
+              !viDictionary.check(word) &&
+              !enDictionary.check(word)) ||
+            (languageMode === "vi" && !viDictionary.check(word)) ||
+            (languageMode === "en" && !enDictionary.check(word))
+          ) {
+            misspelledWords.add(word);
+          }
+        });
+
+        console.log("Misspelled words:", Array.from(misspelledWords));
+        highlightMisspelledWords(textArea, Array.from(misspelledWords));
+      }
+
+      function highlightMisspelledWords(textArea, misspelledWords) {
+        const highlightedText = textArea.value
+          .split(/\s+/)
+          .map((word) => {
+            return misspelledWords.includes(word)
+              ? `<span style="color:red;">${word}</span>`
+              : word;
+          })
+          .join(" ");
+
+        const highlightedDiv = document.getElementById("highlightedText");
+        highlightedDiv.innerHTML = highlightedText;
+      }
+
+      window.onload = initSpellChecker;
+    </script>
   </body>
 </html>
