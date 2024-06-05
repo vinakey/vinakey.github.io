@@ -84,33 +84,33 @@
   background-color: #808080 !important;
 } */
 
-.misspelled {
-  text-decoration: underline;
-  text-decoration-color: red;
-  text-decoration-style: wavy;
-}
-.textarea-container {
-  position: relative;
-}
-.textarea {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  resize: none;
-  background: transparent;
-  color: transparent;
-  caret-color: black; /* or desired caret color */
-}
-.highlighted-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Make the overlay non-interactive */
-  white-space: pre-wrap;
-  word-wrap: break-word;
-} */
+/* .misspelled { */
+/*   text-decoration: underline; */
+/*   text-decoration-color: red; */
+/*   text-decoration-style: wavy; */
+/* } */
+/* .textarea-container { */
+/*   position: relative; */
+/* } */
+/* .textarea { */
+/*   position: absolute; */
+/*   top: 0; */
+/*   left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   border: none; */
+/*   resize: none; */
+/*   background: transparent; */
+/*   color: transparent; */
+/*   caret-color: black; /* or desired caret color */ */
+/* } */
+/* .highlighted-text { */
+/*   position: absolute; */
+/*   top: 0; */
+/*   left: 0; */
+/*   width: 100%; */
+/*   height: 100%; */
+/*   pointer-events: none; /* Make the overlay non-interactive */ */
+/*   white-space: pre-wrap; */
+/*   word-wrap: break-word; */
+/* } */ */
