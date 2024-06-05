@@ -37,6 +37,7 @@ textarea.addEventListener("input", () => {
     }
     });
 
+    console.log("Misspelled words: ", misspelledWords);
     highlightMisspelledWords(text, Array.from(misspelledWords));
 });
 }
