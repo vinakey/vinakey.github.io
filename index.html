@@ -88,21 +88,13 @@
 
     <section class="section custom-section">
       <div class="container">
-        <!-- Contenteditable div for user input -->
-        <div
-          class="contenteditable-container"
-          id="main-contenteditable"
-          contenteditable="true"
-          placeholder="Nhập văn bản của bạn ở đây..."
-        ></div>
-
-        <!-- Textarea for user input
+        <!-- Textarea for user input -->
         <textarea
           class="textarea column is-12"
           id="main-textarea"
           rows="12"
           placeholder="Nhập văn bản của bạn ở đây..."
-        ></textarea> -->
+        ></textarea>
       </div>
       <div class="container">
         <div class="columns">
@@ -398,12 +390,10 @@
       async function initSpellChecker() {
         const viDictionary = await loadDictionary("vi");
         const enDictionary = await loadDictionary("en");
-        const contentEditableDiv = document.getElementById(
-          "main-contenteditable"
-        );
+        const textArea = document.getElementById("main-textarea");
 
-        contentEditableDiv.addEventListener("input", () => {
-          const text = contentEditableDiv.innerText;
+        textArea.addEventListener("input", () => {
+          const text = textArea.value;
           const words = text.split(/\s+/);
           const misspelledWords = new Set();
 
@@ -413,25 +403,23 @@
             }
           });
 
-          highlightMisspelledWords(
-            contentEditableDiv,
-            Array.from(misspelledWords)
-          );
+          console.log("Misspelled words:", Array.from(misspelledWords));
+          highlightMisspelledWords(textArea, Array.from(misspelledWords));
         });
       }
 
-      function highlightMisspelledWords(contentEditableDiv, misspelledWords) {
-        const text = contentEditableDiv.innerText;
-        const highlightedText = text
+      function highlightMisspelledWords(textArea, misspelledWords) {
+        const highlightedText = textArea.value
           .split(/\s+/)
           .map((word) => {
             return misspelledWords.includes(word)
-              ? `<span class="misspelled">${word}</span>`
+              ? `<span style="color:red;">${word}</span>`
               : word;
           })
           .join(" ");
 
-        contentEditableDiv.innerHTML = highlightedText;
+        const highlightedDiv = document.getElementById("highlightedText");
+        highlightedDiv.innerHTML = highlightedText;
       }
 
       window.onload = initSpellChecker;
