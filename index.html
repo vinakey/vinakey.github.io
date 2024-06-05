@@ -391,9 +391,6 @@
         const viDictionary = await loadDictionary("vi");
         const enDictionary = await loadDictionary("en");
         const textArea = document.getElementById("main-textarea");
-        console.log("viDictionary", viDictionary);
-        console.log("enDictionary", enDictionary);
-        console.log("textArea", textArea);
 
         textArea.addEventListener("input", () => {
           const text = textArea.value;
