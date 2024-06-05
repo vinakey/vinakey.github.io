@@ -83,3 +83,16 @@ section.custom-section {
 /* .table tbody tr.is-selected {
   background-color: #808080 !important;
 } */
+
+.misspelled {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-decoration-style: wavy;
+}
+.contenteditable-container {
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  padding: 0.75rem;
+  min-height: 300px;
+  outline: none;
+}
