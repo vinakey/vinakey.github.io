@@ -24,10 +24,6 @@ visit https://gotiengviet.github.io
 - [ ] Spell check
 - [ ] Typing suggestion
 
-## Deployment
-
-The project is set up to be automatically deployed to GitHub Pages on push to the main branch. The workflow is defined in `.github/workflows/static.yml`.
-
 ## License
 
 This project is licensed under the GNU General Public License. See the [LICENSE](LICENSE) file for details.
