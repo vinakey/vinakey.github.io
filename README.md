@@ -14,7 +14,8 @@ This project is a web-based Vietnamese Input Method editor that utilizes `avim.j
 
 ## Usage
 
-visit https://vinakey.github.io
+- Visit https://vinakey.github.io and start typing.
+- Browser extension: [link](https://github.com/vinakey/vinakey-chrome).
 
 ## TODO
 
