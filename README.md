@@ -14,7 +14,7 @@ This project is a web-based Vietnamese Input Method editor that utilizes `avim.j
 
 ## Usage
 
-visit https://gotiengviet.github.io
+visit https://vinakey.github.io
 
 ## TODO
 
