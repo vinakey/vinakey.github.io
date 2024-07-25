@@ -464,5 +464,9 @@
   "categories": [
     "productivity",
     "utilities"
-  ]
+  ],
+    "edge_side_panel": {
+      "preferred_width": 376
+  },
+
 }
