@@ -8,7 +8,7 @@
   "scope": "/",
   "short_name": "vinakey",
   "start_url": "/",
-  "theme_color": "#ffffff",
+  "theme_color": "#a300c4",
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
