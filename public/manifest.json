@@ -1,5 +1,4 @@
 {
-  "background_color": "#ffffff",
   "description": "VinaKey is a web-based Vietnamese Input Method editor that utilizes avim.js to provide Vietnamese typing capabilities on the web",
   "dir": "auto",
   "display": "minimal-ui",
@@ -9,6 +8,16 @@
   "short_name": "vinakey",
   "start_url": "/",
   "theme_color": "#a300c4",
+  "background_color": "#ffffff",
+  "id": "github.vinakey",
+  "lang": "en",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+    "edge_side_panel": {
+      "preferred_width": 376
+  },
   "icons": [
     {
       "src": "windows11/SmallTile.scale-100.png",
@@ -458,15 +467,6 @@
       "src": "ios/1024.png",
       "sizes": "1024x1024"
     }
-  ],
-  "id": "github.vinakey",
-  "lang": "en",
-  "categories": [
-    "productivity",
-    "utilities"
-  ],
-    "edge_side_panel": {
-      "preferred_width": 376
-  },
+  ]
 
 }
