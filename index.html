@@ -113,10 +113,7 @@
         <div class="columns">
           <div class="column is-flex is-justify-content-flex-start">
             <div class="field is-grouped mt-2" style="gap: 0.5rem">
-              <button
-                class="button is-small is-warning is-outlined"
-                id="emoji-selector"
-              >
+              <button class="button is-small" id="emoji-selector">
                 <i class="fa-regular fa-face-smile-wink"></i>
               </button>
               <!-- Emoji modal -->
@@ -131,29 +128,18 @@
               </div>
 
               <!-- Select All button -->
-              <button
-                class="button is-link is-small is-outlined"
-                onclick="selectAll()"
-              >
+              <button class="button is-small" onclick="selectAll()">
                 Select All
               </button>
               <!-- Copy button -->
-              <button
-                class="button is-info is-small is-outlined"
-                onclick="copyText()"
-              >
-                Copy
-              </button>
+              <button class="button is-small" onclick="copyText()">Copy</button>
               <!-- Clear button -->
-              <button
-                class="button is-danger is-small is-outlined"
-                onclick="clearText()"
-              >
+              <button class="button is-small" onclick="clearText()">
                 Clear
               </button>
               <!-- Settings button -->
               <button
-                class="button is-primary is-small is-outlined"
+                class="button is-small"
                 id="setting-modal-trigger"
                 data-target="setting-modal"
               >
@@ -239,85 +225,97 @@
     <div class="section custom-section" style="display: hide">
       <div class="container">
         <div class="columns">
-          <div class="column is-narrow instruction">
-            <strong class="">Quy tắc gõ Tiếng Việt có dấu</strong>
+          <div class="column is-narrow instruction has-text-grey">
+            <strong class="has-text-grey">Quy tắc gõ Tiếng Việt có dấu</strong>
             <div class="box table-box mt-2" style="overflow-x: auto">
               <!-- Table for AVIM typing methods -->
-              <table class="table is-bordered is-hoverable is-narrow">
+              <table
+                class="table is-bordered is-hoverable is-narrow has-text-grey"
+              >
                 <tbody>
                   <tr>
-                    <th>Kiểu đánh</th>
-                    <th>sắc</th>
-                    <th>huyền</th>
-                    <th>hỏi</th>
-                    <th>ngã</th>
-                    <th>nặng</th>
-                    <th>mũ</th>
-                    <th>móc</th>
-                    <th>trăng</th>
-                    <th>đ</th>
+                    <th class="has-text-grey">Kiểu đánh</th>
+                    <th class="has-text-grey">sắc</th>
+                    <th class="has-text-grey">huyền</th>
+                    <th class="has-text-grey">hỏi</th>
+                    <th class="has-text-grey">ngã</th>
+                    <th class="has-text-grey">nặng</th>
+                    <th class="has-text-grey">mũ</th>
+                    <th class="has-text-grey">móc</th>
+                    <th class="has-text-grey">trăng</th>
+                    <th class="has-text-grey">đ</th>
                   </tr>
                   <tr class="row1">
-                    <td>TELEX</td>
-                    <td>s</td>
-                    <td>f</td>
-                    <td>r</td>
-                    <td>x</td>
-                    <td>j</td>
-                    <td>aa</td>
-                    <td>ow</td>
-                    <td>aw</td>
-                    <td>dd</td>
+                    <td class="has-text-grey" class="has-text-grey">TELEX</td>
+                    <td class="has-text-grey" class="has-text-grey">s</td>
+                    <td class="has-text-grey" class="has-text-grey">f</td>
+                    <td class="has-text-grey" class="has-text-grey">r</td>
+                    <td class="has-text-grey" class="has-text-grey">x</td>
+                    <td class="has-text-grey" class="has-text-grey">j</td>
+                    <td class="has-text-grey" class="has-text-grey">aa</td>
+                    <td class="has-text-grey" class="has-text-grey">ow</td>
+                    <td class="has-text-grey" class="has-text-grey">aw</td>
+                    <td class="has-text-grey" class="has-text-grey">dd</td>
                   </tr>
                   <tr class="row2">
-                    <td>VNI</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
-                    <td>8</td>
-                    <td>9</td>
+                    <td class="has-text-grey" class="has-text-grey">VNI</td>
+                    <td class="has-text-grey" class="has-text-grey">1</td>
+                    <td class="has-text-grey" class="has-text-grey">2</td>
+                    <td class="has-text-grey" class="has-text-grey">3</td>
+                    <td class="has-text-grey" class="has-text-grey">4</td>
+                    <td class="has-text-grey" class="has-text-grey">5</td>
+                    <td class="has-text-grey" class="has-text-grey">6</td>
+                    <td class="has-text-grey" class="has-text-grey">7</td>
+                    <td class="has-text-grey" class="has-text-grey">8</td>
+                    <td class="has-text-grey" class="has-text-grey">9</td>
                   </tr>
                   <tr class="row3">
-                    <td>VIQR</td>
-                    <td>'</td>
-                    <td>`</td>
-                    <td>?</td>
-                    <td>~</td>
-                    <td>.</td>
-                    <td>^</td>
-                    <td>*</td>
-                    <td>(</td>
-                    <td>dd</td>
+                    <td class="has-text-grey" class="has-text-grey">VIQR</td>
+                    <td class="has-text-grey" class="has-text-grey">'</td>
+                    <td class="has-text-grey" class="has-text-grey">`</td>
+                    <td class="has-text-grey" class="has-text-grey">?</td>
+                    <td class="has-text-grey" class="has-text-grey">~</td>
+                    <td class="has-text-grey" class="has-text-grey">.</td>
+                    <td class="has-text-grey" class="has-text-grey">^</td>
+                    <td class="has-text-grey" class="has-text-grey">*</td>
+                    <td class="has-text-grey" class="has-text-grey">(</td>
+                    <td class="has-text-grey" class="has-text-grey">dd</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <div class="column is-narrow instruction">
-            <strong>Ví dụ: Có công mài sắt, có ngày nên kim</strong>
+            <strong class="has-text-grey"
+              >Ví dụ: Có công mài sắt, có ngày nên kim</strong
+            >
             <div class="box table-box mt-2" style="overflow-x: auto">
               <!-- Table for AVIM typing examples -->
               <table class="table is-bordered is-hoverable is-narrow">
                 <tbody>
                   <tr>
-                    <th>Kiểu đánh</th>
-                    <th>Có công mài sắt, có ngày nên kim</th>
+                    <th class="has-text-grey">Kiểu đánh</th>
+                    <th class="has-text-grey">
+                      Có công mài sắt, có ngày nên kim
+                    </th>
                   </tr>
                   <tr class="row1">
-                    <td>TELEX</td>
-                    <td>Cos coong mafi satws, cos ngayf nene kim</td>
+                    <td class="has-text-grey" class="has-text-grey">TELEX</td>
+                    <td class="has-text-grey" class="has-text-grey">
+                      Cos coong mafi satws, cos ngayf nene kim
+                    </td>
                   </tr>
                   <tr class="row2">
-                    <td>VNI</td>
-                    <td>Co1 co6ng ma2i sa81t, co1 nga2y ne6n kim</td>
+                    <td class="has-text-grey" class="has-text-grey">VNI</td>
+                    <td class="has-text-grey" class="has-text-grey">
+                      Co1 co6ng ma2i sa81t, co1 nga2y ne6n kim
+                    </td>
                   </tr>
                   <tr class="row3">
-                    <td>VIQR</td>
-                    <td>Co' co^ng ma`i sa('t, co' nga`y ne^n kim</td>
+                    <td class="has-text-grey" class="has-text-grey">VIQR</td>
+                    <td class="has-text-grey" class="has-text-grey">
+                      Co' co^ng ma`i sa('t, co' nga`y ne^n kim
+                    </td>
                   </tr>
                 </tbody>
               </table>
