@@ -113,7 +113,10 @@
         <div class="columns">
           <div class="column is-flex is-justify-content-flex-start">
             <div class="field is-grouped mt-2" style="gap: 0.5rem">
-              <button class="button is-small is-warning" id="emoji-selector">
+              <button
+                class="button is-small is-warning is-outlined"
+                id="emoji-selector"
+              >
                 <i class="fa-regular fa-face-smile-wink"></i>
               </button>
               <!-- Emoji modal -->
@@ -128,20 +131,29 @@
               </div>
 
               <!-- Select All button -->
-              <button class="button is-link is-small" onclick="selectAll()">
+              <button
+                class="button is-link is-small is-outlined"
+                onclick="selectAll()"
+              >
                 Select All
               </button>
               <!-- Copy button -->
-              <button class="button is-info is-small" onclick="copyText()">
+              <button
+                class="button is-info is-small is-outlined"
+                onclick="copyText()"
+              >
                 Copy
               </button>
               <!-- Clear button -->
-              <button class="button is-danger is-small" onclick="clearText()">
+              <button
+                class="button is-danger is-small is-outlined"
+                onclick="clearText()"
+              >
                 Clear
               </button>
               <!-- Settings button -->
               <button
-                class="button is-primary is-small"
+                class="button is-primary is-small is-outlined"
                 id="setting-modal-trigger"
                 data-target="setting-modal"
               >
