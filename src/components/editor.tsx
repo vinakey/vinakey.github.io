@@ -39,6 +39,11 @@ export default function Editor({
   
   // Check if user is visiting for the first time
   const isFirstVisit = !localStorage.getItem("vinakey2-visited");
+  
+  // Debug: Track theme state
+  useEffect(() => {
+    console.log(`Current HeroUI theme: ${theme}`);
+  }, [theme]);
 
   // Modern and elegant custom theme configuration
   const customTheme = {
@@ -159,11 +164,22 @@ export default function Editor({
   // Handle theme changes for OverType editor
   useEffect(() => {
     if (window.OverType && editorInstance) {
-      const OverTypeClass = (window.OverType as any).default || window.OverType;
-      // Use static method to change theme globally
-      OverTypeClass.setTheme(customTheme);
+      try {
+        // Update the editor instance with new theme
+        editorInstance.setTheme(customTheme);
+        console.log(`✓ OverType theme updated to: ${theme}`);
+      } catch (error) {
+        console.error("Error updating OverType theme:", error);
+        // Fallback: try to use global theme method
+        try {
+          const OverTypeClass = (window.OverType as any).default || window.OverType;
+          OverTypeClass.setTheme(customTheme);
+        } catch (fallbackError) {
+          console.error("Error with global theme method:", fallbackError);
+        }
+      }
     }
-  }, [theme, editorInstance]);
+  }, [theme, editorInstance, customTheme]);
 
   const handleMethodChange = (method: InputMethod) => {
     setInputMethod(method);
