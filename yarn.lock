@@ -607,6 +607,26 @@
     "@react-types/menu" "3.10.3"
     "@react-types/shared" "3.31.0"
 
+"@heroui/modal@^2.2.21":
+  version "2.2.21"
+  resolved "https://registry.yarnpkg.com/@heroui/modal/-/modal-2.2.21.tgz#a4871a286f4a684d31c52ccfcf43ac143dc66830"
+  integrity sha512-VZDwDS+UnYrpCYvqkGTIlm9ADy7s8vvQo1ueLts7WCSYpMxWu6YDnJpkHnth2AyhEzdXGIskbMm96TZW5jwdAQ==
+  dependencies:
+    "@heroui/dom-animation" "2.1.10"
+    "@heroui/framer-utils" "2.1.20"
+    "@heroui/react-utils" "2.1.12"
+    "@heroui/shared-icons" "2.1.10"
+    "@heroui/shared-utils" "2.1.10"
+    "@heroui/use-aria-button" "2.2.18"
+    "@heroui/use-aria-modal-overlay" "2.2.17"
+    "@heroui/use-disclosure" "2.2.15"
+    "@heroui/use-draggable" "2.1.16"
+    "@heroui/use-viewport-size" "2.0.1"
+    "@react-aria/dialog" "3.5.28"
+    "@react-aria/focus" "3.21.0"
+    "@react-aria/overlays" "3.28.0"
+    "@react-stately/overlays" "3.6.18"
+
 "@heroui/navbar@^2.2.22":
   version "2.2.22"
   resolved "https://registry.yarnpkg.com/@heroui/navbar/-/navbar-2.2.22.tgz#6c632964ea1219a0115355b6f875a795d07f98c6"
@@ -814,6 +834,16 @@
     "@react-types/link" "3.6.3"
     "@react-types/shared" "3.31.0"
 
+"@heroui/use-aria-modal-overlay@2.2.17":
+  version "2.2.17"
+  resolved "https://registry.yarnpkg.com/@heroui/use-aria-modal-overlay/-/use-aria-modal-overlay-2.2.17.tgz#389b85f5e489571ec7bab0d4320355da70b95647"
+  integrity sha512-exLtnPX31BUJ7Iq6IH7d/Z8MfoCm9GpQ03B332KBLRbHMM+pye3P1h74lNtdQzIf0OHFSMstJ4gLSs4jx3t6KQ==
+  dependencies:
+    "@heroui/use-aria-overlay" "2.0.2"
+    "@react-aria/overlays" "3.28.0"
+    "@react-aria/utils" "3.30.0"
+    "@react-stately/overlays" "3.6.18"
+
 "@heroui/use-aria-overlay@2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@heroui/use-aria-overlay/-/use-aria-overlay-2.0.2.tgz#1d244d943dcbde1f8bafe5fe3351eac01c297054"
@@ -835,6 +865,22 @@
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/@heroui/use-clipboard/-/use-clipboard-2.1.9.tgz#09654698b929560f8dd68d2d87cfaa37ffa0ea55"
   integrity sha512-lkBq5RpXHiPvk1BXKJG8gMM0f7jRMIGnxAXDjAUzZyXKBuWLoM+XlaUWmZHtmkkjVFMX1L4vzA+vxi9rZbenEQ==
+
+"@heroui/use-disclosure@2.2.15":
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/@heroui/use-disclosure/-/use-disclosure-2.2.15.tgz#c49c97d47c5d277eeab302b010655cf0a1a83b0e"
+  integrity sha512-a29HObRfjb6pQ7lvv/WZbvXhGv4BLI4fDrEnVnybfFdC3pCmwyoZxOuqraiDT8IXvVFIiuIcX6719ezruo64kQ==
+  dependencies:
+    "@heroui/use-callback-ref" "2.1.8"
+    "@react-aria/utils" "3.30.0"
+    "@react-stately/utils" "3.10.8"
+
+"@heroui/use-draggable@2.1.16":
+  version "2.1.16"
+  resolved "https://registry.yarnpkg.com/@heroui/use-draggable/-/use-draggable-2.1.16.tgz#1c9f6355e06ca45b2fdc34536da7351dd561744f"
+  integrity sha512-IcpdnMLmcIDeo7EG41VHSE2jBbYP5dEyNThFirReNh8fMZ6rW2hAd0lf0M0/R5kgTSKUxdNhecY6csDedP+8gA==
+  dependencies:
+    "@react-aria/interactions" "3.25.4"
 
 "@heroui/use-is-mobile@2.2.12":
   version "2.2.12"
@@ -867,6 +913,11 @@
   version "2.1.10"
   resolved "https://registry.yarnpkg.com/@heroui/use-theme/-/use-theme-2.1.10.tgz#1bbb763437dbcda69c222cdc8c6b710e03fe7727"
   integrity sha512-JM9Y56bzHMU0rEz1K86Tnli2oRqQY3/NYNOHXbVXQtP+ZB2eabm9Cbl15bPZzSskpEsD5oKnbccFV4dCYhenmw==
+
+"@heroui/use-viewport-size@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@heroui/use-viewport-size/-/use-viewport-size-2.0.1.tgz#3a2a5029b33b11bf6f4c7eb96b7580996f08b860"
+  integrity sha512-blv8BEB/QdLePLWODPRzRS2eELJ2eyHbdOIADbL0KcfLzOUEg9EiuVk90hcSUDAFqYiJ3YZ5Z0up8sdPcR8Y7g==
 
 "@humanfs/core@^0.19.1":
   version "0.19.1"
