@@ -1,5 +1,6 @@
-import { title, subtitle } from "@/components/primitives";
 import { Link } from "@heroui/link";
+
+import { title, subtitle } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 
 export default function AboutPage() {
@@ -17,9 +18,10 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold mb-4">Giới thiệu</h2>
             <p className="text-lg leading-relaxed">
-              VinaKey 2 là phiên bản hiện đại của công cụ gõ tiếng Việt trực tuyến, 
-              kết hợp với markdown editor mạnh mẽ. Được xây dựng với công nghệ web hiện đại, 
-              VinaKey 2 cung cấp trải nghiệm gõ tiếng Việt mượt mà và các tính năng soạn thảo văn bản tiên tiến.
+              VinaKey 2 là phiên bản hiện đại của công cụ gõ tiếng Việt trực
+              tuyến, kết hợp với markdown editor mạnh mẽ. Được xây dựng với công
+              nghệ web hiện đại, VinaKey 2 cung cấp trải nghiệm gõ tiếng Việt
+              mượt mà và các tính năng soạn thảo văn bản tiên tiến.
             </p>
           </div>
 
@@ -36,7 +38,9 @@ export default function AboutPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">📝 Markdown Editor</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  📝 Markdown Editor
+                </h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>WYSIWYG editing với overtype</li>
                   <li>Toolbar tiện lợi</li>
@@ -71,38 +75,86 @@ export default function AboutPage() {
               <table className="w-full border-collapse border border-gray-300 dark:border-gray-600 text-sm">
                 <thead>
                   <tr className="bg-gray-100 dark:bg-gray-800">
-                    <th className="border border-gray-300 dark:border-gray-600 p-2">Kiểu gõ</th>
-                    <th className="border border-gray-300 dark:border-gray-600 p-2">Sắc</th>
-                    <th className="border border-gray-300 dark:border-gray-600 p-2">Huyền</th>
-                    <th className="border border-gray-300 dark:border-gray-600 p-2">Hỏi</th>
-                    <th className="border border-gray-300 dark:border-gray-600 p-2">Ngã</th>
-                    <th className="border border-gray-300 dark:border-gray-600 p-2">Nặng</th>
+                    <th className="border border-gray-300 dark:border-gray-600 p-2">
+                      Kiểu gõ
+                    </th>
+                    <th className="border border-gray-300 dark:border-gray-600 p-2">
+                      Sắc
+                    </th>
+                    <th className="border border-gray-300 dark:border-gray-600 p-2">
+                      Huyền
+                    </th>
+                    <th className="border border-gray-300 dark:border-gray-600 p-2">
+                      Hỏi
+                    </th>
+                    <th className="border border-gray-300 dark:border-gray-600 p-2">
+                      Ngã
+                    </th>
+                    <th className="border border-gray-300 dark:border-gray-600 p-2">
+                      Nặng
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold">TELEX</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">s</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">f</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">r</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">x</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">j</td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold">
+                      TELEX
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      s
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      f
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      r
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      x
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      j
+                    </td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold">VNI</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">1</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">2</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">3</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">4</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">5</td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold">
+                      VNI
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      1
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      2
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      3
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      4
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      5
+                    </td>
                   </tr>
                   <tr>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold">VIQR</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">'</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">`</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">?</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">~</td>
-                    <td className="border border-gray-300 dark:border-gray-600 p-2">.</td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2 font-semibold">
+                      VIQR
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      &apos;
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      `
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      ?
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      ~
+                    </td>
+                    <td className="border border-gray-300 dark:border-gray-600 p-2">
+                      .
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -110,10 +162,10 @@ export default function AboutPage() {
           </div>
 
           <div className="text-center">
-            <Link 
-              href="https://github.com/vinakey/vinakey2" 
+            <Link
               isExternal
               className="text-primary hover:underline"
+              href="https://github.com/vinakey/vinakey2"
             >
               📖 Xem source code trên GitHub
             </Link>
