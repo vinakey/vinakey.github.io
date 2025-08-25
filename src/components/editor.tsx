@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@heroui/button";
+import { Card, CardBody } from "@heroui/card";
 import { useTheme } from "@heroui/use-theme";
 
 import { vietnameseInput, InputMethod } from "@/utils/vietnamese-input";
@@ -31,6 +32,32 @@ export default function Editor({
   const [editorInstance, setEditorInstance] = useState<any>(null);
   const [content, setContent] = useState(initialContent);
   const { theme } = useTheme();
+  
+  // Check if user is visiting for the first time
+  const isFirstVisit = !localStorage.getItem("vinakey2-visited");
+
+  // Modern and elegant custom theme configuration
+  const customTheme = {
+    name: 'vinakey-modern',
+    colors: {
+      bgPrimary: theme === 'dark' ? '#0f0f23' : '#fefefe',
+      bgSecondary: theme === 'dark' ? '#1a1a2e' : '#f8fafc',
+      text: theme === 'dark' ? '#e2e8f0' : '#1e293b',
+      h1: theme === 'dark' ? '#f97316' : '#f97316', // Orange primary for both themes
+      h2: theme === 'dark' ? '#fb923c' : '#ea580c', // Orange variants
+      h3: theme === 'dark' ? '#fdba74' : '#c2410c', 
+      strong: theme === 'dark' ? '#fb923c' : '#ea580c',
+      em: theme === 'dark' ? '#f97316' : '#f97316',
+      link: theme === 'dark' ? '#60a5fa' : '#2563eb', // Modern blue
+      code: theme === 'dark' ? '#a78bfa' : '#7c3aed', // Modern purple
+      codeBg: theme === 'dark' ? 'rgba(167, 139, 250, 0.1)' : 'rgba(249, 115, 22, 0.1)',
+      blockquote: theme === 'dark' ? '#64748b' : '#475569', // Modern gray
+      hr: theme === 'dark' ? '#374151' : '#d1d5db',
+      syntaxMarker: theme === 'dark' ? 'rgba(226, 232, 240, 0.4)' : 'rgba(30, 41, 59, 0.4)',
+      cursor: '#f97316', // Orange cursor for both themes
+      selection: theme === 'dark' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(249, 115, 22, 0.2)'
+    }
+  };
 
   useEffect(() => {
     const initializeEditor = () => {
@@ -39,15 +66,26 @@ export default function Editor({
           // Initialize OverType editor using the default export
           const OverTypeClass =
             (window.OverType as any).default || window.OverType;
+          const sampleContent = `# Chào mừng đến với VinKey!
+
+## Hướng dẫn sử dụng
+
+1. **Chọn kiểu gõ**: OFF, AUTO, TELEX, VNI, hoặc VIQR
+2. **Bắt đầu gõ**: Thử gõ "xin chao" hoặc "cam on ban"  
+3. **Sử dụng markdown**: **in đậm**, *in nghiêng*, [liên kết](https://example.com)
+4. **Xóa nội dung này** và bắt đầu viết!
+
+> **Ví dụ**: Hãy thử gõ "Toi yeu Viet Nam" với TELEX!`;
+
           const instances = new OverTypeClass(editorRef.current, {
-            value: initialContent,
+            value: isFirstVisit ? sampleContent : initialContent,
             placeholder: "Bắt đầu viết markdown với tiếng Việt...",
             toolbar: true,
-            theme: theme === "dark" ? "cave" : "solar",
+            theme: customTheme,
             fontSize: "16px",
-            padding: "20px",
+            padding: "24px",
             autoResize: true,
-            minHeight: "400px",
+            minHeight: "500px",
             onChange: (value: string) => {
               setContent(value);
               onContentChange?.(value);
@@ -56,8 +94,13 @@ export default function Editor({
 
           if (instances && instances.length > 0) {
             const instance = instances[0];
-
             setEditorInstance(instance);
+
+            // Mark user as visited and set initial content
+            if (isFirstVisit) {
+              localStorage.setItem("vinakey2-visited", "true");
+              setContent(sampleContent);
+            }
 
             // Get the textarea element from OverType and attach Vietnamese input
             setTimeout(() => {
@@ -71,7 +114,7 @@ export default function Editor({
                   "❌ No textarea found after OverType initialization",
                 );
               }
-            }, 500); // Increased timeout
+            }, 500);
 
             return () => {
               const textarea = editorRef.current?.querySelector("textarea");
@@ -111,20 +154,20 @@ export default function Editor({
 
   // Handle theme changes for OverType editor
   useEffect(() => {
-    if (window.OverType) {
-      const overtypeTheme = theme === "dark" ? "cave" : "solar";
+    if (window.OverType && editorInstance) {
       const OverTypeClass = (window.OverType as any).default || window.OverType;
       // Use static method to change theme globally
-      OverTypeClass.setTheme(overtypeTheme);
+      OverTypeClass.setTheme(customTheme);
     }
-  }, [theme]);
+  }, [theme, editorInstance]);
 
   const handleMethodChange = (method: InputMethod) => {
     setInputMethod(method);
   };
 
-  const handleToggleVietnamese = () => {
-    setIsVietnameseEnabled(!isVietnameseEnabled);
+  const handleOffClick = () => {
+    setIsVietnameseEnabled(false);
+    setInputMethod("AUTO"); // Reset to AUTO when turning off
   };
 
   const handleClear = () => {
@@ -134,48 +177,6 @@ export default function Editor({
     }
   };
 
-  const handleSampleText = () => {
-    const sampleText = `# Chào mừng đến với VinaKey 2
-
-## Tính năng chính
-
-- **Gõ tiếng Việt**: Hỗ trợ các kiểu gõ phổ biến (AUTO, TELEX, VNI, VIQR)
-- **Markdown Editor**: Soạn thảo markdown với giao diện WYSIWYG
-- **Toolbar**: Các công cụ định dạng tiện lợi
-- **Responsive**: Tương thích với mobile và desktop
-
-## Hướng dẫn sử dụng
-
-1. Chọn kiểu gõ tiếng Việt từ các nút bên trên
-2. Bắt đầu viết nội dung markdown
-3. Sử dụng toolbar để định dạng nhanh
-4. Bấm nút "Copy" để sao chép nội dung
-
-### Ví dụ văn bản
-
-> "Có công mài sắt có ngày nên kim"
-
-**Danh sách công việc:**
-- [x] Tích hợp Vietnamese input
-- [x] Tích hợp Overtype editor  
-- [ ] Thêm tính năng export
-- [ ] Thêm themes
-
-\`\`\`javascript
-// Code example
-const vietnameseText = "Xin chào thế giới!";
-console.log(vietnameseText);
-\`\`\`
-
----
-
-*Tạo bởi [VinaKey](https://github.com/vinakey/vinakey2) - công cụ gõ tiếng Việt hiện đại.*`;
-
-    if (editorInstance) {
-      editorInstance.setValue(sampleText);
-      setContent(sampleText);
-    }
-  };
 
   const handleCopy = async () => {
     if (content) {
@@ -190,104 +191,73 @@ console.log(vietnameseText);
   };
 
   return (
-    <div className="w-full bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg">
-      <div className="flex flex-col gap-4 p-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              VinaKey 2 Editor
-            </h2>
-            <p className="text-sm text-gray-500 mt-1">
-              Vietnamese typing with markdown support
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3">
+    <div className="w-full max-w-4xl mx-auto">
+      {/* Consolidated card with controls and editor */}
+      <div className="mb-8">
+        <Card>
+          {/* Control bar at the top */}
+          <CardBody className="!flex !flex-row !flex-nowrap !items-center !justify-start !gap-2 !overflow-x-auto !p-3 !border-b !border-divider">
             <Button
-              color="success"
+              color={!isVietnameseEnabled ? "danger" : "default"}
               size="sm"
-              variant="flat"
-              onClick={handleSampleText}
+              variant={!isVietnameseEnabled ? "solid" : "bordered"}
+              onClick={handleOffClick}
+              className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
             >
-              Load Sample
+              OFF
             </Button>
-
-            <Button
-              color="primary"
-              disabled={!content}
-              size="sm"
-              variant="flat"
-              onClick={handleCopy}
-            >
-              Copy Text
-            </Button>
-
-            <Button
-              color="warning"
-              size="sm"
-              variant="flat"
-              onClick={handleClear}
-            >
-              Clear
-            </Button>
-          </div>
-        </div>
-
-        <hr className="border-gray-200 dark:border-gray-700" />
-
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Vietnamese Input:
-            </span>
-            <Button
-              color={isVietnameseEnabled ? "success" : "default"}
-              size="sm"
-              variant={isVietnameseEnabled ? "solid" : "flat"}
-              onClick={handleToggleVietnamese}
-            >
-              {isVietnameseEnabled ? "ON" : "OFF"}
-            </Button>
-          </div>
-
-          <div className="flex gap-1">
             {(["AUTO", "TELEX", "VNI", "VIQR"] as InputMethod[]).map(
               (method) => (
                 <Button
                   key={method}
-                  color={inputMethod === method ? "primary" : "default"}
-                  disabled={!isVietnameseEnabled}
+                  color={inputMethod === method && isVietnameseEnabled ? "primary" : "default"}
                   size="sm"
-                  variant={inputMethod === method ? "solid" : "flat"}
-                  onClick={() => handleMethodChange(method)}
+                  variant={inputMethod === method && isVietnameseEnabled ? "solid" : "bordered"}
+                  onClick={() => {
+                    handleMethodChange(method);
+                    if (!isVietnameseEnabled) {
+                      setIsVietnameseEnabled(true);
+                    }
+                  }}
+                  className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 >
                   {method}
                 </Button>
               ),
             )}
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6 pt-0">
-        <div
-          ref={editorRef}
-          className="min-h-[400px] w-full border-2 border-gray-200 dark:border-gray-700 rounded-lg focus-within:border-blue-500 transition-colors"
-          data-testid="editor-container"
-          style={{ height: "auto" }}
-        />
-
-        {content && (
-          <div className="mt-4 text-sm text-gray-500 flex justify-between">
-            <span>
-              Characters: {content.length} | Words:{" "}
-              {content.split(/\s+/).filter(Boolean).length}
-            </span>
-            <span>
-              Method: {inputMethod} {isVietnameseEnabled ? "✓" : "✗"}
-            </span>
-          </div>
-        )}
+            
+            {/* Spacer to push action buttons to the right */}
+            <div className="!flex-grow"></div>
+            
+            <Button
+              color="primary"
+              disabled={!content}
+              size="sm"
+              variant="bordered"
+              onClick={handleCopy}
+              className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+            >
+              Copy
+            </Button>
+            <Button
+              color="warning"
+              size="sm"
+              variant="bordered"
+              onClick={handleClear}
+              className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+            >
+              Clear
+            </Button>
+          </CardBody>
+          
+          {/* Editor container */}
+          <div
+            ref={editorRef}
+            className="min-h-[500px] w-full"
+            data-testid="editor-container"
+            style={{ height: "auto" }}
+          />
+        </Card>
       </div>
     </div>
   );
