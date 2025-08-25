@@ -6,7 +6,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center gap-6 py-8 pt-20">
+      <section className="flex flex-col items-center gap-6 py-8">
         {/* Main editor component */}
         <div className="w-full">
           <Editor
