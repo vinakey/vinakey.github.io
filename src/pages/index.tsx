@@ -14,28 +14,31 @@ export default function IndexPage() {
             Modern Vietnamese Input & Markdown Editor
           </span>
           <div className={subtitle({ class: "mt-4" })}>
-            Gõ tiếng Việt và soạn thảo markdown dễ dàng, nhanh chóng - hoàn toàn miễn phí
+            Gõ tiếng Việt và soạn thảo markdown dễ dàng, nhanh chóng - hoàn toàn
+            miễn phí
           </div>
         </div>
 
         <div className="w-full max-w-6xl">
-          <Editor 
+          <Editor
             initialContent=""
             onContentChange={(content) => {
               // Save to localStorage or handle content changes
-              localStorage.setItem('vinakey2-content', content);
+              localStorage.setItem("vinakey2-content", content);
             }}
           />
         </div>
 
         <div className="text-center text-sm text-default-500 max-w-2xl">
           <p>
-            <strong>Tính năng chính:</strong> Hỗ trợ các kiểu gõ phổ biến (AUTO, TELEX, VNI, VIQR), 
-            editor markdown với WYSIWYG, toolbar tiện lợi, và tương thích hoàn toàn với mobile.
+            <strong>Tính năng chính:</strong> Hỗ trợ các kiểu gõ phổ biến (AUTO,
+            TELEX, VNI, VIQR), editor markdown với WYSIWYG, toolbar tiện lợi, và
+            tương thích hoàn toàn với mobile.
           </p>
           <p className="mt-2">
-            <strong>Hướng dẫn:</strong> Chọn kiểu gõ từ thanh công cụ, bắt đầu viết nội dung, 
-            sử dụng toolbar để định dạng, và sao chép kết quả khi hoàn thành.
+            <strong>Hướng dẫn:</strong> Chọn kiểu gõ từ thanh công cụ, bắt đầu
+            viết nội dung, sử dụng toolbar để định dạng, và sao chép kết quả khi
+            hoàn thành.
           </p>
         </div>
       </section>
