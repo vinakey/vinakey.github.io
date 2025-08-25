@@ -1,25 +1,25 @@
-import { title, subtitle } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import Editor from "@/components/editor";
+import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
 
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center gap-8 py-8 md:py-10">
-        <div className="inline-block max-w-4xl text-center">
-          <span className={title()}>VinaKey&nbsp;</span>
-          <span className={title({ color: "violet" })}>2&nbsp;</span>
-          <br />
-          <span className={title()}>
-            Modern Vietnamese Input & Markdown Editor
-          </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            Gõ tiếng Việt và soạn thảo markdown dễ dàng, nhanh chóng - hoàn toàn
-            miễn phí
-          </div>
+      <section className="flex flex-col items-center gap-6 py-8">
+        {/* Simplified minimal title */}
+        <div className="text-center mb-2">
+          <h1 className="text-4xl font-bold text-foreground">
+            <span className="text-primary">Vin</span>
+            <span className="text-secondary">Key</span>
+          </h1>
+          <p className="text-sm text-default-500 mt-1">
+            Vietnamese markdown editor
+          </p>
         </div>
 
-        <div className="w-full max-w-6xl">
+        {/* Main editor component */}
+        <div className="w-full">
           <Editor
             initialContent=""
             onContentChange={(content) => {
@@ -29,17 +29,87 @@ export default function IndexPage() {
           />
         </div>
 
-        <div className="text-center text-sm text-default-500 max-w-2xl">
-          <p>
-            <strong>Tính năng chính:</strong> Hỗ trợ các kiểu gõ phổ biến (AUTO,
-            TELEX, VNI, VIQR), editor markdown với WYSIWYG, toolbar tiện lợi, và
-            tương thích hoàn toàn với mobile.
-          </p>
-          <p className="mt-2">
-            <strong>Hướng dẫn:</strong> Chọn kiểu gõ từ thanh công cụ, bắt đầu
-            viết nội dung, sử dụng toolbar để định dạng, và sao chép kết quả khi
-            hoàn thành.
-          </p>
+        {/* Input method reference tables */}
+        <div className="w-full max-w-4xl mt-12 space-y-6">
+          {/* Tone marks reference table */}
+          <Card>
+            <CardHeader>
+              <h3 className="text-xl font-semibold text-primary">Bảng dấu thanh</h3>
+            </CardHeader>
+            <CardBody>
+              <Table 
+                aria-label="Bảng dấu thanh tiếng Việt"
+                className="min-w-full"
+              >
+                <TableHeader>
+                  <TableColumn>KIỂU GÕ</TableColumn>
+                  <TableColumn>Sắc</TableColumn>
+                  <TableColumn>Huyền</TableColumn>
+                  <TableColumn>Hỏi</TableColumn>
+                  <TableColumn>Ngã</TableColumn>
+                  <TableColumn>Nặng</TableColumn>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-semibold text-primary">TELEX</TableCell>
+                    <TableCell className="font-mono text-lg">s</TableCell>
+                    <TableCell className="font-mono text-lg">f</TableCell>
+                    <TableCell className="font-mono text-lg">r</TableCell>
+                    <TableCell className="font-mono text-lg">x</TableCell>
+                    <TableCell className="font-mono text-lg">j</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-semibold text-primary">VNI</TableCell>
+                    <TableCell className="font-mono text-lg">1</TableCell>
+                    <TableCell className="font-mono text-lg">2</TableCell>
+                    <TableCell className="font-mono text-lg">3</TableCell>
+                    <TableCell className="font-mono text-lg">4</TableCell>
+                    <TableCell className="font-mono text-lg">5</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-semibold text-primary">VIQR</TableCell>
+                    <TableCell className="font-mono text-lg">&apos;</TableCell>
+                    <TableCell className="font-mono text-lg">`</TableCell>
+                    <TableCell className="font-mono text-lg">?</TableCell>
+                    <TableCell className="font-mono text-lg">~</TableCell>
+                    <TableCell className="font-mono text-lg">.</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardBody>
+          </Card>
+
+          {/* Sentence example table */}
+          <Card>
+            <CardHeader>
+              <h3 className="text-xl font-semibold text-primary">Câu ví dụ: <span className="text-foreground">Học gõ tiếng Việt thật dễ dàng</span></h3>
+            </CardHeader>
+            <CardBody>
+              <Table 
+                aria-label="Ví dụ gõ câu tiếng Việt"
+                className="min-w-full"
+              >
+                <TableHeader>
+                  <TableColumn className="w-24">KIỂU GÕ</TableColumn>
+                  <TableColumn>CÁCH GÕ</TableColumn>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-semibold text-primary">TELEX</TableCell>
+                    <TableCell className="font-mono text-sm">Hocj gox tieesng Vieetj thaatj deer daafng</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-semibold text-primary">VIQR</TableCell>
+                    <TableCell className="font-mono text-sm">Ho.c go~ tie^'ng Vie^.t tha^.t de^~ da~ng</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-semibold text-primary">VNI</TableCell>
+                    <TableCell className="font-mono text-sm">Ho5c go6 tie61ng Vie65t tha65t de65 da4ng</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardBody>
+          </Card>
         </div>
       </section>
     </DefaultLayout>
