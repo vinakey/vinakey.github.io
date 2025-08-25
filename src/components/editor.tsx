@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/modal";
+import { Input } from "@heroui/input";
 import { useTheme } from "@heroui/use-theme";
 
 import { vietnameseInput, InputMethod } from "@/utils/vietnamese-input";
@@ -31,7 +33,9 @@ export default function Editor({
   const [isVietnameseEnabled, setIsVietnameseEnabled] = useState(true);
   const [editorInstance, setEditorInstance] = useState<any>(null);
   const [content, setContent] = useState(initialContent);
+  const [filename, setFilename] = useState("vinakey-document");
   const { theme } = useTheme();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   
   // Check if user is visiting for the first time
   const isFirstVisit = !localStorage.getItem("vinakey2-visited");
@@ -190,6 +194,40 @@ export default function Editor({
     }
   };
 
+  const handlePaste = async () => {
+    try {
+      const clipboardText = await navigator.clipboard.readText();
+      if (editorInstance && clipboardText) {
+        editorInstance.setValue(clipboardText);
+        setContent(clipboardText);
+        console.log("Content pasted from clipboard");
+      }
+    } catch (err) {
+      console.error("Failed to paste content:", err);
+    }
+  };
+
+  const handleDownload = () => {
+    if (content) {
+      onOpen(); // Open modal for filename input
+    }
+  };
+
+  const handleConfirmDownload = () => {
+    const finalFilename = filename.trim() || "vinakey-document";
+    const blob = new Blob([content], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${finalFilename}.md`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    console.log(`Content downloaded as ${finalFilename}.md`);
+    onOpenChange(); // Close modal
+  };
+
   return (
     <div className="w-full max-w-6xl mx-auto">
       {/* Consolidated card with controls and editor */}
@@ -230,7 +268,16 @@ export default function Editor({
             </div>
             
             {/* Second row: Action buttons (hidden on small screens when in single row, shown on mobile) */}
-            <div className="!flex !flex-row !items-center !justify-start sm:!justify-end !gap-2 sm:!flex-grow">
+            <div className="!flex !flex-row !items-center !justify-start sm:!justify-end !gap-2 sm:!flex-grow !flex-wrap">
+              <Button
+                color="warning"
+                size="sm"
+                variant="bordered"
+                onClick={handleClear}
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+              >
+                Clear
+              </Button>
               <Button
                 color="primary"
                 disabled={!content}
@@ -242,13 +289,23 @@ export default function Editor({
                 Copy
               </Button>
               <Button
-                color="warning"
+                color="secondary"
                 size="sm"
                 variant="bordered"
-                onClick={handleClear}
+                onClick={handlePaste}
                 className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
               >
-                Clear
+                Paste
+              </Button>
+              <Button
+                color="success"
+                disabled={!content}
+                size="sm"
+                variant="bordered"
+                onClick={handleDownload}
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+              >
+                Download
               </Button>
             </div>
           </CardBody>
@@ -262,6 +319,49 @@ export default function Editor({
           />
         </Card>
       </div>
+
+      {/* Download filename modal */}
+      <Modal 
+        isOpen={isOpen} 
+        onOpenChange={onOpenChange}
+        placement="top-center"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Download File</ModalHeader>
+              <ModalBody>
+                <p className="text-sm text-default-500 mb-3">
+                  Enter a filename for your markdown document:
+                </p>
+                <Input
+                  autoFocus
+                  label="Filename"
+                  placeholder="vinakey-document"
+                  value={filename}
+                  onValueChange={setFilename}
+                  variant="bordered"
+                  description="The file will be saved as .md format"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      handleConfirmDownload();
+                    }
+                  }}
+                />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Cancel
+                </Button>
+                <Button color="primary" onPress={handleConfirmDownload}>
+                  Download
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }
