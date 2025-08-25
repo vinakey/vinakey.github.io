@@ -6,18 +6,7 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 export default function IndexPage() {
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center gap-6 py-8">
-        {/* Simplified minimal title */}
-        <div className="text-center mb-2">
-          <h1 className="text-4xl font-bold text-foreground">
-            <span className="text-primary">Vin</span>
-            <span className="text-secondary">Key</span>
-          </h1>
-          <p className="text-sm text-default-500 mt-1">
-            Vietnamese markdown editor
-          </p>
-        </div>
-
+      <section className="flex flex-col items-center gap-6 py-8 pt-20">
         {/* Main editor component */}
         <div className="w-full">
           <Editor

@@ -85,7 +85,7 @@ export default function Editor({
             fontSize: "16px",
             padding: "24px",
             autoResize: true,
-            minHeight: "500px",
+            minHeight: "600px",
             onChange: (value: string) => {
               setContent(value);
               onContentChange?.(value);
@@ -191,69 +191,72 @@ export default function Editor({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
+    <div className="w-full max-w-6xl mx-auto">
       {/* Consolidated card with controls and editor */}
       <div className="mb-8">
         <Card>
           {/* Control bar at the top */}
-          <CardBody className="!flex !flex-row !flex-nowrap !items-center !justify-start !gap-2 !overflow-x-auto !p-3 !border-b !border-divider">
-            <Button
-              color={!isVietnameseEnabled ? "danger" : "default"}
-              size="sm"
-              variant={!isVietnameseEnabled ? "solid" : "bordered"}
-              onClick={handleOffClick}
-              className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
-            >
-              OFF
-            </Button>
-            {(["AUTO", "TELEX", "VNI", "VIQR"] as InputMethod[]).map(
-              (method) => (
-                <Button
-                  key={method}
-                  color={inputMethod === method && isVietnameseEnabled ? "primary" : "default"}
-                  size="sm"
-                  variant={inputMethod === method && isVietnameseEnabled ? "solid" : "bordered"}
-                  onClick={() => {
-                    handleMethodChange(method);
-                    if (!isVietnameseEnabled) {
-                      setIsVietnameseEnabled(true);
-                    }
-                  }}
-                  className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
-                >
-                  {method}
-                </Button>
-              ),
-            )}
+          <CardBody className="!flex !flex-col sm:!flex-row !items-stretch sm:!items-center !gap-2 !p-3 !border-b !border-divider">
+            {/* First row: Vietnamese input controls */}
+            <div className="!flex !flex-row !flex-nowrap !items-center !justify-start !gap-2 !overflow-x-auto">
+              <Button
+                color={!isVietnameseEnabled ? "danger" : "default"}
+                size="sm"
+                variant={!isVietnameseEnabled ? "solid" : "bordered"}
+                onClick={handleOffClick}
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+              >
+                OFF
+              </Button>
+              {(["AUTO", "TELEX", "VNI", "VIQR"] as InputMethod[]).map(
+                (method) => (
+                  <Button
+                    key={method}
+                    color={inputMethod === method && isVietnameseEnabled ? "primary" : "default"}
+                    size="sm"
+                    variant={inputMethod === method && isVietnameseEnabled ? "solid" : "bordered"}
+                    onClick={() => {
+                      handleMethodChange(method);
+                      if (!isVietnameseEnabled) {
+                        setIsVietnameseEnabled(true);
+                      }
+                    }}
+                    className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+                  >
+                    {method}
+                  </Button>
+                ),
+              )}
+            </div>
             
-            {/* Spacer to push action buttons to the right */}
-            <div className="!flex-grow"></div>
-            
-            <Button
-              color="primary"
-              disabled={!content}
-              size="sm"
-              variant="bordered"
-              onClick={handleCopy}
-              className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
-            >
-              Copy
-            </Button>
-            <Button
-              color="warning"
-              size="sm"
-              variant="bordered"
-              onClick={handleClear}
-              className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
-            >
-              Clear
-            </Button>
+            {/* Second row: Action buttons (hidden on small screens when in single row, shown on mobile) */}
+            <div className="!flex !flex-row !items-center !justify-start sm:!justify-end !gap-2 sm:!flex-grow">
+              <Button
+                color="primary"
+                disabled={!content}
+                size="sm"
+                variant="bordered"
+                onClick={handleCopy}
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+              >
+                Copy
+              </Button>
+              <Button
+                color="warning"
+                size="sm"
+                variant="bordered"
+                onClick={handleClear}
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+              >
+                Clear
+              </Button>
+            </div>
           </CardBody>
           
           {/* Editor container */}
           <div
             ref={editorRef}
-            className="min-h-[500px] w-full"
+            className="min-h-[600px] w-full"
             data-testid="editor-container"
             style={{ height: "auto" }}
           />
