@@ -1,0 +1,207 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - navigation [ref=e5]:
+    - generic [ref=e6]:
+      - list [ref=e7]:
+        - link "VinaKey 2" [ref=e9] [cursor=pointer]:
+          - /url: /
+          - img [ref=e10] [cursor=pointer]
+          - paragraph [ref=e12] [cursor=pointer]: VinaKey 2
+        - generic [ref=e13]:
+          - listitem [ref=e14]:
+            - link "Editor" [ref=e15] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e16]:
+            - link "About" [ref=e17] [cursor=pointer]:
+              - /url: /about
+      - list [ref=e18]:
+        - listitem [ref=e19]:
+          - link "Discord" [ref=e20] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e21] [cursor=pointer]
+          - link "GitHub" [ref=e23] [cursor=pointer]:
+            - /url: https://github.com/vinakey/vinakey2
+            - img [ref=e24] [cursor=pointer]
+          - generic "Switch to dark mode" [ref=e26] [cursor=pointer]:
+            - switch "Switch to dark mode" [checked] [ref=e28] [cursor=pointer]
+            - img [ref=e30] [cursor=pointer]
+        - listitem
+  - main [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: VinaKey
+        - generic [ref=e36]: "2"
+        - generic [ref=e37]: Modern Vietnamese Input & Markdown Editor
+        - generic [ref=e38]: Gõ tiếng Việt và soạn thảo markdown dễ dàng, nhanh chóng - hoàn toàn miễn phí
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - heading "VinaKey 2 Editor" [level=2] [ref=e44]
+              - paragraph [ref=e45]: Vietnamese typing with markdown support
+            - generic [ref=e46]:
+              - button "Load Sample" [active] [ref=e47] [cursor=pointer]
+              - button "Copy Text" [ref=e48] [cursor=pointer]
+              - button "Clear" [ref=e49] [cursor=pointer]
+          - separator [ref=e50]
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - generic [ref=e53]: "Vietnamese Input:"
+              - button "ON" [ref=e54] [cursor=pointer]
+            - generic [ref=e55]:
+              - button "AUTO" [ref=e56] [cursor=pointer]
+              - button "TELEX" [ref=e57] [cursor=pointer]
+              - button "VNI" [ref=e58] [cursor=pointer]
+              - button "VIQR" [ref=e59] [cursor=pointer]
+        - generic [ref=e60]:
+          - generic [ref=e62]:
+            - toolbar "Text formatting" [ref=e63]:
+              - button "Bold (Ctrl+B)" [ref=e64] [cursor=pointer]:
+                - img [ref=e65] [cursor=pointer]
+              - button "Italic (Ctrl+I)" [ref=e68] [cursor=pointer]:
+                - img [ref=e69] [cursor=pointer]
+              - separator [ref=e71]
+              - button "Heading 1" [ref=e72] [cursor=pointer]:
+                - img [ref=e73] [cursor=pointer]
+              - button "Heading 2" [ref=e75] [cursor=pointer]:
+                - img [ref=e76] [cursor=pointer]
+              - button "Heading 3" [ref=e78] [cursor=pointer]:
+                - img [ref=e79] [cursor=pointer]
+              - separator [ref=e81]
+              - button "Insert Link (Ctrl+K)" [ref=e82] [cursor=pointer]:
+                - img [ref=e83] [cursor=pointer]
+              - 'button "Code (Ctrl+`)" [ref=e87] [cursor=pointer]':
+                - img [ref=e88] [cursor=pointer]
+              - separator [ref=e92]
+              - button "Quote" [ref=e93] [cursor=pointer]:
+                - img [ref=e94] [cursor=pointer]
+              - separator [ref=e97]
+              - button "Bullet List" [ref=e98] [cursor=pointer]:
+                - img [ref=e99] [cursor=pointer]
+              - button "Numbered List" [ref=e100] [cursor=pointer]:
+                - img [ref=e101] [cursor=pointer]
+              - button "Task List" [ref=e105] [cursor=pointer]:
+                - img [ref=e106] [cursor=pointer]
+              - separator [ref=e110]
+              - button "View mode" [ref=e111] [cursor=pointer]:
+                - img [ref=e112] [cursor=pointer]
+            - generic [ref=e115]:
+              - textbox "Bắt đầu viết markdown với tiếng Việt..." [ref=e116]: "# Chào mừng đến với VinaKey 2 ## Tính năng chính - **Gõ tiếng Việt**: Hỗ trợ các kiểu gõ phổ biến (AUTO, TELEX, VNI, VIQR) - **Markdown Editor**: Soạn thảo markdown với giao diện WYSIWYG - **Toolbar**: Các công cụ định dạng tiện lợi - **Responsive**: Tương thích với mobile và desktop ## Hướng dẫn sử dụng 1. Chọn kiểu gõ tiếng Việt từ các nút bên trên 2. Bắt đầu viết nội dung markdown 3. Sử dụng toolbar để định dạng nhanh 4. Bấm nút \"Copy\" để sao chép nội dung ### Ví dụ văn bản > \"Có công mài sắt có ngày nên kim\" **Danh sách công việc:** - [x] Tích hợp Vietnamese input - [x] Tích hợp Overtype editor - [ ] Thêm tính năng export - [ ] Thêm themes ```javascript // Code example const vietnameseText = \"Xin chào thế giới!\"; console.log(vietnameseText); ``` --- *Tạo bởi [VinaKey](https://github.com/vinakey/vinakey2) - công cụ gõ tiếng Việt hiện đại.*"
+              - generic:
+                - generic:
+                  - heading [level=1]:
+                    - generic: "#"
+                    - text: Chào mừng đến với VinaKey 2
+                - generic:
+                  - heading [level=2]:
+                    - generic: "##"
+                    - text: Tính năng chính
+                - list:
+                  - listitem:
+                    - generic: "-"
+                    - strong:
+                      - generic: "**"
+                      - text: Gõ tiếng Việt
+                      - generic: "**"
+                    - text: ": Hỗ trợ các kiểu gõ phổ biến (AUTO, TELEX, VNI, VIQR)"
+                  - listitem:
+                    - generic: "-"
+                    - strong:
+                      - generic: "**"
+                      - text: Markdown Editor
+                      - generic: "**"
+                    - text: ": Soạn thảo markdown với giao diện WYSIWYG"
+                  - listitem:
+                    - generic: "-"
+                    - strong:
+                      - generic: "**"
+                      - text: Toolbar
+                      - generic: "**"
+                    - text: ": Các công cụ định dạng tiện lợi"
+                  - listitem:
+                    - generic: "-"
+                    - strong:
+                      - generic: "**"
+                      - text: Responsive
+                      - generic: "**"
+                    - text: ": Tương thích với mobile và desktop"
+                - generic:
+                  - heading [level=2]:
+                    - generic: "##"
+                    - text: Hướng dẫn sử dụng
+                - list:
+                  - listitem:
+                    - generic: "1."
+                    - text: Chọn kiểu gõ tiếng Việt từ các nút bên trên
+                  - listitem:
+                    - generic: "2."
+                    - text: Bắt đầu viết nội dung markdown
+                  - listitem:
+                    - generic: "3."
+                    - text: Sử dụng toolbar để định dạng nhanh
+                  - listitem:
+                    - generic: "4."
+                    - text: Bấm nút "Copy" để sao chép nội dung
+                - generic:
+                  - heading [level=3]:
+                    - generic: "###"
+                    - text: Ví dụ văn bản
+                - generic:
+                  - generic:
+                    - generic: ">"
+                    - text: "\"Có công mài sắt có ngày nên kim\""
+                - generic:
+                  - strong:
+                    - generic: "**"
+                    - text: "Danh sách công việc:"
+                    - generic: "**"
+                - list:
+                  - listitem:
+                    - generic: "-"
+                    - text: "[x] Tích hợp Vietnamese input"
+                  - listitem:
+                    - generic: "-"
+                    - text: "[x] Tích hợp Overtype editor"
+                  - listitem:
+                    - generic: "-"
+                    - text: "[ ] Thêm tính năng export"
+                  - listitem:
+                    - generic: "-"
+                    - text: "[ ] Thêm themes"
+                - generic:
+                  - generic: "```javascript"
+                - generic:
+                  - code: // Code example const vietnameseText = "Xin chào thế giới!"; console.log(vietnameseText);
+                - generic:
+                  - generic: "```"
+                - generic:
+                  - generic: "---"
+                - generic:
+                  - emphasis:
+                    - generic: "*"
+                    - text: Tạo bởi
+                    - link:
+                      - /url: https://github.com/vinakey/vinakey2
+                      - generic: "["
+                      - text: VinaKey
+                      - generic: "](https://github.com/vinakey/vinakey2)"
+                    - text: "- công cụ gõ tiếng Việt hiện đại."
+                    - generic: "*"
+          - generic [ref=e117]:
+            - generic [ref=e118]: "Characters: 866 | Words: 160"
+            - generic [ref=e119]: "Method: AUTO ✓"
+      - generic [ref=e120]:
+        - paragraph [ref=e121]:
+          - strong [ref=e122]: "Tính năng chính:"
+          - text: Hỗ trợ các kiểu gõ phổ biến (AUTO, TELEX, VNI, VIQR), editor markdown với WYSIWYG, toolbar tiện lợi, và tương thích hoàn toàn với mobile.
+        - paragraph [ref=e123]:
+          - strong [ref=e124]: "Hướng dẫn:"
+          - text: Chọn kiểu gõ từ thanh công cụ, bắt đầu viết nội dung, sử dụng toolbar để định dạng, và sao chép kết quả khi hoàn thành.
+  - contentinfo [ref=e125]:
+    - link "Powered by HeroUI" [ref=e126] [cursor=pointer]:
+      - /url: https://heroui.com
+      - generic [ref=e127] [cursor=pointer]: Powered by
+      - paragraph [ref=e128] [cursor=pointer]: HeroUI
+```
