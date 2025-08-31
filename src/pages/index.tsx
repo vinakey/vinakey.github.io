@@ -1,7 +1,15 @@
+import { Card, CardBody, CardHeader } from "@heroui/card";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@heroui/table";
+
 import DefaultLayout from "@/layouts/default";
 import Editor from "@/components/editor";
-import { Card, CardBody, CardHeader } from "@heroui/card";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@heroui/table";
 
 export default function IndexPage() {
   return (
@@ -23,10 +31,12 @@ export default function IndexPage() {
           {/* Tone marks reference table */}
           <Card>
             <CardHeader>
-              <h3 className="text-xl font-semibold text-primary">Bảng dấu thanh</h3>
+              <h3 className="text-xl font-semibold text-primary">
+                Bảng dấu thanh
+              </h3>
             </CardHeader>
             <CardBody>
-              <Table 
+              <Table
                 aria-label="Bảng dấu thanh tiếng Việt"
                 className="min-w-full"
               >
@@ -40,7 +50,9 @@ export default function IndexPage() {
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="font-semibold text-primary">TELEX</TableCell>
+                    <TableCell className="font-semibold text-primary">
+                      TELEX
+                    </TableCell>
                     <TableCell className="font-mono text-lg">s</TableCell>
                     <TableCell className="font-mono text-lg">f</TableCell>
                     <TableCell className="font-mono text-lg">r</TableCell>
@@ -48,7 +60,9 @@ export default function IndexPage() {
                     <TableCell className="font-mono text-lg">j</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-semibold text-primary">VNI</TableCell>
+                    <TableCell className="font-semibold text-primary">
+                      VNI
+                    </TableCell>
                     <TableCell className="font-mono text-lg">1</TableCell>
                     <TableCell className="font-mono text-lg">2</TableCell>
                     <TableCell className="font-mono text-lg">3</TableCell>
@@ -56,7 +70,9 @@ export default function IndexPage() {
                     <TableCell className="font-mono text-lg">5</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-semibold text-primary">VIQR</TableCell>
+                    <TableCell className="font-semibold text-primary">
+                      VIQR
+                    </TableCell>
                     <TableCell className="font-mono text-lg">&apos;</TableCell>
                     <TableCell className="font-mono text-lg">`</TableCell>
                     <TableCell className="font-mono text-lg">?</TableCell>
@@ -71,10 +87,15 @@ export default function IndexPage() {
           {/* Sentence example table */}
           <Card>
             <CardHeader>
-              <h3 className="text-xl font-semibold text-primary">Câu ví dụ: <span className="text-foreground">Học gõ tiếng Việt thật dễ dàng</span></h3>
+              <h3 className="text-xl font-semibold text-primary">
+                Câu ví dụ:{" "}
+                <span className="text-foreground">
+                  Học gõ tiếng Việt thật dễ dàng
+                </span>
+              </h3>
             </CardHeader>
             <CardBody>
-              <Table 
+              <Table
                 aria-label="Ví dụ gõ câu tiếng Việt"
                 className="min-w-full"
               >
@@ -84,16 +105,28 @@ export default function IndexPage() {
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="font-semibold text-primary">TELEX</TableCell>
-                    <TableCell className="font-mono text-sm">Hocj gox tieesng Vieetj thaatj deer daafng</TableCell>
+                    <TableCell className="font-semibold text-primary">
+                      TELEX
+                    </TableCell>
+                    <TableCell className="font-mono text-sm">
+                      Hocj gox tieesng Vieetj thaatj deer daafng
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-semibold text-primary">VIQR</TableCell>
-                    <TableCell className="font-mono text-sm">Ho.c go~ tie^'ng Vie^.t tha^.t de^~ da~ng</TableCell>
+                    <TableCell className="font-semibold text-primary">
+                      VIQR
+                    </TableCell>
+                    <TableCell className="font-mono text-sm">
+                      Ho.c go~ tie^&apos;ng Vie^.t tha^.t de^~ da~ng
+                    </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-semibold text-primary">VNI</TableCell>
-                    <TableCell className="font-mono text-sm">Ho5c go6 tie61ng Vie65t tha65t de65 da4ng</TableCell>
+                    <TableCell className="font-semibold text-primary">
+                      VNI
+                    </TableCell>
+                    <TableCell className="font-mono text-sm">
+                      Ho5c go6 tie61ng Vie65t tha65t de65 da4ng
+                    </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

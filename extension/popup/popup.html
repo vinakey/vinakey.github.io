@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VinaKey Settings</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <header class="popup-header">
+            <img src="../icons/icon-32.png" alt="VinaKey" class="logo">
+            <h1>VinaKey</h1>
+            <span class="version">v3.0</span>
+        </header>
+
+        <main class="popup-content">
+            <!-- Enable/Disable Toggle -->
+            <div class="setting-group">
+                <div class="toggle-container">
+                    <label class="toggle">
+                        <input type="checkbox" id="enabledToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="toggle-info">
+                        <span class="toggle-label">Vietnamese Input</span>
+                        <span class="toggle-status" id="statusText">Enabled</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Method Selection -->
+            <div class="setting-group">
+                <label class="setting-label">Input Method</label>
+                <select id="inputMethodSelect" class="setting-select">
+                    <option value="TELEX">TELEX</option>
+                    <option value="VNI">VNI</option>
+                    <option value="VIQR">VIQR</option>
+                </select>
+            </div>
+
+            <!-- Quick Reference -->
+            <div class="setting-group">
+                <label class="setting-label">Quick Reference</label>
+                <div class="reference-grid">
+                    <div class="reference-item">
+                        <span class="key">aa</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ă</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">ee</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ê</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">oo</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ô</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">ow</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ơ</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">uw</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ư</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">dd</span>
+                        <span class="arrow">→</span>
+                        <span class="result">đ</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tone Marks -->
+            <div class="setting-group">
+                <label class="setting-label">Tone Marks (TELEX)</label>
+                <div class="reference-grid">
+                    <div class="reference-item">
+                        <span class="key">s</span>
+                        <span class="arrow">→</span>
+                        <span class="result">á (sắc)</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">f</span>
+                        <span class="arrow">→</span>
+                        <span class="result">à (huyền)</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">r</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ả (hỏi)</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">x</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ã (ngã)</span>
+                    </div>
+                    <div class="reference-item">
+                        <span class="key">j</span>
+                        <span class="arrow">→</span>
+                        <span class="result">ạ (nặng)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="popup-footer">
+            <button id="openOptionsBtn" class="btn btn-secondary">
+                Advanced Settings
+            </button>
+            <a href="https://github.com/vinakey/vinakey-v3" target="_blank" class="link">
+                GitHub
+            </a>
+        </footer>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

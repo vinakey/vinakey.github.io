@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "VinaKey - Vietnamese Input Method",
+  "version": "3.0.0",
+  "description": "Modern Vietnamese typing for every website - TELEX, VNI, VIQR support",
+  
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content-script.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "VinaKey Settings",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png", 
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["engine/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

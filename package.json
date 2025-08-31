@@ -6,8 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:extension": "node scripts/build-extension.js",
     "lint": "eslint --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@heroui/button": "^2.2.24",
@@ -42,12 +46,16 @@
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.25.1",
     "@playwright/test": "^1.55.0",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "20.5.7",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
     "@typescript-eslint/eslint-plugin": "8.31.1",
     "@typescript-eslint/parser": "8.31.1",
     "@vitejs/plugin-react": "4.7.0",
+    "@vitest/ui": "^3.2.4",
+    "esbuild": "^0.25.9",
     "eslint": "9.25.1",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.31.0",
@@ -58,10 +66,12 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-unused-imports": "4.1.4",
     "globals": "16.0.0",
+    "jsdom": "^26.1.0",
     "postcss": "8.5.6",
     "prettier": "3.5.3",
     "typescript": "5.6.3",
     "vite": "6.0.11",
-    "vite-tsconfig-paths": "5.1.4"
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "^3.2.4"
   }
 }

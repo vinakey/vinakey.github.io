@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/modal";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@heroui/modal";
 import { Input } from "@heroui/input";
 import { useTheme } from "@heroui/use-theme";
 
@@ -29,17 +36,17 @@ export default function Editor({
   onContentChange,
 }: EditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
-  const [inputMethod, setInputMethod] = useState<InputMethod>("AUTO");
+  const [inputMethod, setInputMethod] = useState<InputMethod>("TELEX");
   const [isVietnameseEnabled, setIsVietnameseEnabled] = useState(true);
   const [editorInstance, setEditorInstance] = useState<any>(null);
   const [content, setContent] = useState(initialContent);
   const [filename, setFilename] = useState("vinakey-document");
   const { theme } = useTheme();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  
+
   // Check if user is visiting for the first time
   const isFirstVisit = !localStorage.getItem("vinakey2-visited");
-  
+
   // Debug: Track theme state
   useEffect(() => {
     console.log(`Current HeroUI theme: ${theme}`);
@@ -47,25 +54,32 @@ export default function Editor({
 
   // Modern and elegant custom theme configuration
   const customTheme = {
-    name: 'vinakey-modern',
+    name: "vinakey-modern",
     colors: {
-      bgPrimary: theme === 'dark' ? '#0f0f23' : '#fefefe',
-      bgSecondary: theme === 'dark' ? '#1a1a2e' : '#f8fafc',
-      text: theme === 'dark' ? '#e2e8f0' : '#1e293b',
-      h1: theme === 'dark' ? '#f97316' : '#f97316', // Orange primary for both themes
-      h2: theme === 'dark' ? '#fb923c' : '#ea580c', // Orange variants
-      h3: theme === 'dark' ? '#fdba74' : '#c2410c', 
-      strong: theme === 'dark' ? '#fb923c' : '#ea580c',
-      em: theme === 'dark' ? '#f97316' : '#f97316',
-      link: theme === 'dark' ? '#60a5fa' : '#2563eb', // Modern blue
-      code: theme === 'dark' ? '#a78bfa' : '#7c3aed', // Modern purple
-      codeBg: theme === 'dark' ? 'rgba(167, 139, 250, 0.1)' : 'rgba(249, 115, 22, 0.1)',
-      blockquote: theme === 'dark' ? '#64748b' : '#475569', // Modern gray
-      hr: theme === 'dark' ? '#374151' : '#d1d5db',
-      syntaxMarker: theme === 'dark' ? 'rgba(226, 232, 240, 0.4)' : 'rgba(30, 41, 59, 0.4)',
-      cursor: '#f97316', // Orange cursor for both themes
-      selection: theme === 'dark' ? 'rgba(249, 115, 22, 0.3)' : 'rgba(249, 115, 22, 0.2)'
-    }
+      bgPrimary: theme === "dark" ? "#0f0f23" : "#fefefe",
+      bgSecondary: theme === "dark" ? "#1a1a2e" : "#f8fafc",
+      text: theme === "dark" ? "#e2e8f0" : "#1e293b",
+      h1: theme === "dark" ? "#f97316" : "#f97316", // Orange primary for both themes
+      h2: theme === "dark" ? "#fb923c" : "#ea580c", // Orange variants
+      h3: theme === "dark" ? "#fdba74" : "#c2410c",
+      strong: theme === "dark" ? "#fb923c" : "#ea580c",
+      em: theme === "dark" ? "#f97316" : "#f97316",
+      link: theme === "dark" ? "#60a5fa" : "#2563eb", // Modern blue
+      code: theme === "dark" ? "#a78bfa" : "#7c3aed", // Modern purple
+      codeBg:
+        theme === "dark"
+          ? "rgba(167, 139, 250, 0.1)"
+          : "rgba(249, 115, 22, 0.1)",
+      blockquote: theme === "dark" ? "#64748b" : "#475569", // Modern gray
+      hr: theme === "dark" ? "#374151" : "#d1d5db",
+      syntaxMarker:
+        theme === "dark" ? "rgba(226, 232, 240, 0.4)" : "rgba(30, 41, 59, 0.4)",
+      cursor: "#f97316", // Orange cursor for both themes
+      selection:
+        theme === "dark"
+          ? "rgba(249, 115, 22, 0.3)"
+          : "rgba(249, 115, 22, 0.2)",
+    },
   };
 
   useEffect(() => {
@@ -103,6 +117,7 @@ export default function Editor({
 
           if (instances && instances.length > 0) {
             const instance = instances[0];
+
             setEditorInstance(instance);
 
             // Mark user as visited and set initial content
@@ -163,23 +178,12 @@ export default function Editor({
 
   // Handle theme changes for OverType editor
   useEffect(() => {
-    if (window.OverType && editorInstance) {
-      try {
-        // Update the editor instance with new theme
-        editorInstance.setTheme(customTheme);
-        console.log(`✓ OverType theme updated to: ${theme}`);
-      } catch (error) {
-        console.error("Error updating OverType theme:", error);
-        // Fallback: try to use global theme method
-        try {
-          const OverTypeClass = (window.OverType as any).default || window.OverType;
-          OverTypeClass.setTheme(customTheme);
-        } catch (fallbackError) {
-          console.error("Error with global theme method:", fallbackError);
-        }
-      }
-    }
-  }, [theme, editorInstance, customTheme]);
+    // Note: OverType doesn't support runtime theme changes
+    // The theme is set during initialization only
+    console.log(
+      `Theme changed to: ${theme} (OverType theme set at initialization)`,
+    );
+  }, [theme]);
 
   const handleMethodChange = (method: InputMethod) => {
     setInputMethod(method);
@@ -197,7 +201,6 @@ export default function Editor({
     }
   };
 
-
   const handleCopy = async () => {
     if (content) {
       try {
@@ -213,6 +216,7 @@ export default function Editor({
   const handlePaste = async () => {
     try {
       const clipboardText = await navigator.clipboard.readText();
+
       if (editorInstance && clipboardText) {
         editorInstance.setValue(clipboardText);
         setContent(clipboardText);
@@ -231,9 +235,10 @@ export default function Editor({
 
   const handleConfirmDownload = () => {
     const finalFilename = filename.trim() || "vinakey-document";
-    const blob = new Blob([content], { type: 'text/markdown' });
+    const blob = new Blob([content], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
+
     link.href = url;
     link.download = `${finalFilename}.md`;
     document.body.appendChild(link);
@@ -254,11 +259,11 @@ export default function Editor({
             {/* First row: Vietnamese input controls */}
             <div className="!flex !flex-row !flex-nowrap !items-center !justify-start !gap-2 !overflow-x-auto">
               <Button
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 color={!isVietnameseEnabled ? "danger" : "default"}
                 size="sm"
                 variant={!isVietnameseEnabled ? "solid" : "bordered"}
                 onClick={handleOffClick}
-                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
               >
                 OFF
               </Button>
@@ -266,66 +271,74 @@ export default function Editor({
                 (method) => (
                   <Button
                     key={method}
-                    color={inputMethod === method && isVietnameseEnabled ? "primary" : "default"}
+                    className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+                    color={
+                      inputMethod === method && isVietnameseEnabled
+                        ? "primary"
+                        : "default"
+                    }
                     size="sm"
-                    variant={inputMethod === method && isVietnameseEnabled ? "solid" : "bordered"}
+                    variant={
+                      inputMethod === method && isVietnameseEnabled
+                        ? "solid"
+                        : "bordered"
+                    }
                     onClick={() => {
                       handleMethodChange(method);
                       if (!isVietnameseEnabled) {
                         setIsVietnameseEnabled(true);
                       }
                     }}
-                    className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                   >
                     {method}
                   </Button>
                 ),
               )}
             </div>
-            
+
             {/* Second row: Action buttons (hidden on small screens when in single row, shown on mobile) */}
             <div className="!flex !flex-row !items-center !justify-start sm:!justify-end !gap-2 sm:!flex-grow !flex-wrap">
               <Button
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 color="warning"
                 size="sm"
                 variant="bordered"
                 onClick={handleClear}
-                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
               >
                 Clear
               </Button>
               <Button
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 color="primary"
                 disabled={!content}
                 size="sm"
                 variant="bordered"
                 onClick={handleCopy}
-                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
               >
                 Copy
               </Button>
               <Button
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 color="secondary"
                 size="sm"
                 variant="bordered"
                 onClick={handlePaste}
-                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
               >
                 Paste
               </Button>
               <Button
+                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 color="success"
                 disabled={!content}
                 size="sm"
                 variant="bordered"
                 onClick={handleDownload}
-                className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
               >
                 Download
               </Button>
             </div>
           </CardBody>
-          
+
           {/* Editor container */}
           <div
             ref={editorRef}
@@ -337,33 +350,31 @@ export default function Editor({
       </div>
 
       {/* Download filename modal */}
-      <Modal 
-        isOpen={isOpen} 
-        onOpenChange={onOpenChange}
-        placement="top-center"
-      >
+      <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Download File</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">
+                Download File
+              </ModalHeader>
               <ModalBody>
                 <p className="text-sm text-default-500 mb-3">
                   Enter a filename for your markdown document:
                 </p>
                 <Input
-                  autoFocus
+                  // autoFocus - disabled for accessibility
+                  description="The file will be saved as .md format"
                   label="Filename"
                   placeholder="vinakey-document"
                   value={filename}
-                  onValueChange={setFilename}
                   variant="bordered"
-                  description="The file will be saved as .md format"
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === "Enter") {
                       e.preventDefault();
                       handleConfirmDownload();
                     }
                   }}
+                  onValueChange={setFilename}
                 />
               </ModalBody>
               <ModalFooter>

@@ -33,8 +33,15 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal href="https://github.com/vinakey/vinakey.github.io" title="GitHub">
-            <GithubIcon className="text-default-500 hover:text-primary transition-colors" size={20} />
+          <Link
+            isExternal
+            href="https://github.com/vinakey/vinakey.github.io"
+            title="GitHub"
+          >
+            <GithubIcon
+              className="text-default-500 hover:text-primary transition-colors"
+              size={20}
+            />
           </Link>
           <ThemeSwitch />
         </NavbarItem>
@@ -42,7 +49,11 @@ export const Navbar = () => {
 
       {/* Mobile - Right side */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href="https://github.com/vinakey/vinakey.github.io" title="GitHub">
+        <Link
+          isExternal
+          href="https://github.com/vinakey/vinakey.github.io"
+          title="GitHub"
+        >
           <GithubIcon className="text-default-500" size={20} />
         </Link>
         <ThemeSwitch />

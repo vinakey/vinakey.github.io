@@ -11,11 +11,12 @@ declare module "@react-types/shared" {
 
 // Simulate pressing theme toggle to light before components load
 // This ensures both HeroUI and OverType default to light theme instead of system
-if (typeof window !== 'undefined') {
-  const currentTheme = localStorage.getItem('heroui-theme');
+if (typeof window !== "undefined") {
+  const currentTheme = localStorage.getItem("heroui-theme");
+
   if (!currentTheme) {
-    console.log('Setting default theme to light in localStorage');
-    localStorage.setItem('heroui-theme', 'light');
+    console.log("Setting default theme to light in localStorage");
+    localStorage.setItem("heroui-theme", "light");
   }
 }
 
@@ -24,9 +25,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
   return (
     <HeroUIProvider navigate={navigate} useHref={useHref}>
-      <div className="text-foreground bg-background">
-        {children}
-      </div>
+      <div className="text-foreground bg-background">{children}</div>
     </HeroUIProvider>
   );
 }
