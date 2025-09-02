@@ -11,7 +11,11 @@ import {
 } from "@heroui/modal";
 import { Input } from "@heroui/input";
 import { useTheme } from "@heroui/use-theme";
-import EmojiPicker, { Theme as EmojiTheme, EmojiStyle, type EmojiClickData } from "emoji-picker-react";
+import EmojiPicker, {
+  Theme as EmojiTheme,
+  EmojiStyle,
+  type EmojiClickData,
+} from "emoji-picker-react";
 
 import { vietnameseInput, InputMethod } from "@/utils/vietnamese-input";
 
@@ -47,16 +51,23 @@ export default function Editor({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [showEmoji, setShowEmoji] = useState(false);
   const emojiBtnRef = useRef<HTMLButtonElement>(null);
-  const [emojiAnchor, setEmojiAnchor] = useState<{ left: number; top: number; bottom: number } | null>(null);
+  const [emojiAnchor, setEmojiAnchor] = useState<{
+    left: number;
+    top: number;
+    bottom: number;
+  } | null>(null);
 
   // Responsive breakpoint detection for compact emoji modal
   const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     const mq = window.matchMedia("(max-width: 640px)");
     const update = () => setIsMobile(mq.matches);
+
     update();
     mq.addEventListener("change", update);
+
     return () => mq.removeEventListener("change", update);
   }, []);
 
@@ -104,6 +115,7 @@ export default function Editor({
           // Sync OverType theme with site theme (instance API)
           try {
             const inst = Array.isArray(instances) ? instances[0] : instances;
+
             if (inst && typeof inst.setTheme === "function") {
               inst.setTheme(theme === "dark" ? "cave" : "solar");
             }
@@ -115,21 +127,28 @@ export default function Editor({
             setEditorInstance(instance);
 
             // Ensure React state mirrors editor initial value
-            const initialValue = initialContent || (isFirstVisit ? sampleContent : "");
+            const initialValue =
+              initialContent || (isFirstVisit ? sampleContent : "");
+
             setContent(initialValue);
 
             // Helper to attach listeners to the textarea when present
             const tryAttachTextarea = () => {
-              const textarea = editorRef.current?.querySelector("textarea") as HTMLTextAreaElement | null;
+              const textarea = editorRef.current?.querySelector(
+                "textarea",
+              ) as HTMLTextAreaElement | null;
+
               if (!textarea) return false;
 
               // Mirror textarea input → React state
               const handleInput = () => {
                 try {
                   const currentValue = textarea.value;
+
                   setContent(currentValue);
                 } catch {}
               };
+
               (textarea as any)._vinakeyHandleInput = handleInput;
               textarea.addEventListener("input", handleInput);
 
@@ -139,6 +158,7 @@ export default function Editor({
 
               // Initialization complete
               isInitializingRef.current = false;
+
               return true;
             };
 
@@ -149,8 +169,12 @@ export default function Editor({
                   observer.disconnect();
                 }
               });
+
               if (editorRef.current) {
-                observer.observe(editorRef.current, { childList: true, subtree: true });
+                observer.observe(editorRef.current, {
+                  childList: true,
+                  subtree: true,
+                });
               }
               // Safety cutoff in case of never attaching
               setTimeout(() => observer.disconnect(), 3000);
@@ -163,6 +187,7 @@ export default function Editor({
                 vietnameseInput.detach(textarea as HTMLTextAreaElement);
                 try {
                   const handler = (textarea as any)._vinakeyHandleInput;
+
                   if (handler) textarea.removeEventListener("input", handler);
                 } catch {}
               }
@@ -225,18 +250,23 @@ export default function Editor({
   };
 
   const insertAtCaret = (text: string) => {
-    const textarea = editorRef.current?.querySelector("textarea") as HTMLTextAreaElement | null;
+    const textarea = editorRef.current?.querySelector(
+      "textarea",
+    ) as HTMLTextAreaElement | null;
+
     if (!textarea) return;
     const start = textarea.selectionStart ?? 0;
     const end = textarea.selectionEnd ?? start;
     const value = textarea.value;
     const newValue = value.slice(0, start) + text + value.slice(end);
     const newPos = start + text.length;
+
     textarea.value = newValue;
     textarea.setSelectionRange(newPos, newPos);
     setContent(newValue);
     onContentChange?.(newValue);
     const inputEvent = new Event("input", { bubbles: true });
+
     (inputEvent as any)._vietnameseProcessed = true;
     textarea.dispatchEvent(inputEvent);
   };
@@ -353,29 +383,66 @@ export default function Editor({
                   variant="bordered"
                   onClick={() => {
                     const rect = emojiBtnRef.current?.getBoundingClientRect();
-                    if (rect) setEmojiAnchor({ left: rect.left, top: rect.top, bottom: rect.bottom });
+
+                    if (rect)
+                      setEmojiAnchor({
+                        left: rect.left,
+                        top: rect.top,
+                        bottom: rect.bottom,
+                      });
                     setShowEmoji((v) => !v);
                   }}
                 >
                   😀
                 </Button>
-                {(showEmoji && emojiAnchor) ? (
+                {showEmoji && emojiAnchor ? (
                   <>
-                    <div className="fixed inset-0 z-[2147483000]" onClick={() => setShowEmoji(false)} />
+                    <button
+                      aria-label="Close emoji picker overlay"
+                      className="fixed inset-0 z-[2147483000]"
+                      type="button"
+                      onClick={() => setShowEmoji(false)}
+                      onKeyDown={(e) => {
+                        if (
+                          e.key === "Escape" ||
+                          e.key === "Enter" ||
+                          e.key === " "
+                        ) {
+                          e.preventDefault();
+                          setShowEmoji(false);
+                        }
+                      }}
+                    />
                     <div
                       className="fixed z-[2147483001]"
-                      style={{ left: Math.max(8, Math.min(emojiAnchor.left, window.innerWidth - 360 - 8)), top: emojiAnchor.bottom + 8 }}
+                      style={{
+                        left: Math.max(
+                          8,
+                          Math.min(
+                            emojiAnchor.left,
+                            window.innerWidth - 360 - 8,
+                          ),
+                        ),
+                        top: emojiAnchor.bottom + 8,
+                      }}
                     >
-                      <div className="shadow-medium rounded-medium border border-divider bg-content1 p-1" style={{ maxWidth: 360 }}>
+                      <div
+                        className="shadow-medium rounded-medium border border-divider bg-content1 p-1"
+                        style={{ maxWidth: 360 }}
+                      >
                         <EmojiPicker
-                          onEmojiClick={handleEmojiClick}
-                          theme={theme === "dark" ? EmojiTheme.DARK : EmojiTheme.LIGHT}
-                          emojiStyle={EmojiStyle.GOOGLE}
                           autoFocusSearch={false}
-                          lazyLoadEmojis={true}
-                          width={isMobile ? 280 : 320}
+                          emojiStyle={EmojiStyle.GOOGLE}
                           height={isMobile ? 320 : 420}
+                          lazyLoadEmojis={true}
                           previewConfig={{ showPreview: false }}
+                          theme={
+                            theme === "dark"
+                              ? EmojiTheme.DARK
+                              : EmojiTheme.LIGHT
+                          }
+                          width={isMobile ? 280 : 320}
+                          onEmojiClick={handleEmojiClick}
                         />
                       </div>
                     </div>

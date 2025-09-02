@@ -3,13 +3,13 @@
  *
  * Based on Vietnamese phonology from Wikipedia:
  * https://en.wikipedia.org/wiki/Vietnamese_phonology
- * 
+ *
  * Diphthongs and triphthongs are categorized as:
  * A) Falling/centering diphthongs: ia/iê, ua/uô, ưa/ươ
  * B) Closing diphthongs ending in -i/-y: ai, ay, ây, oi, ôi, ơi, ui, ưi
  * C) Closing diphthongs ending in -u/-o: ao, au, âu, eo, êu, iu, ưu
  * D) Medial "w"-type vowel clusters: oa, oă, oe, uê, uy, uâ, uă
- * 
+ *
  * Triphthongs:
  * - Core: iêu/yêu, uôi, ươi, ươu
  * - With initial onglide: oai/uai, oay/uay, uya, uyê
@@ -25,11 +25,11 @@ export const VIETNAMESE_DIPHTHONGS = {
   // Group A: Falling/centering diphthongs
   ia: 0, // mía → tone on 'i'
   iê: 1, // tiền → tone on 'ê'
-  ua: 0, // múa → tone on 'u' 
+  ua: 0, // múa → tone on 'u'
   uô: 1, // buồn → tone on 'ô'
   ưa: 0, // mứa → tone on 'ư'
   ươ: 1, // dược → tone on 'ơ'
-  
+
   // Group B: Closing diphthongs ending in -i/-y
   ai: 0, // mái → tone on 'a'
   ay: 0, // cây → tone on 'a'
@@ -39,7 +39,7 @@ export const VIETNAMESE_DIPHTHONGS = {
   ơi: 0, // mới → tone on 'ơ'
   ui: 0, // túi → tone on 'u'
   ưi: 0, // cửi → tone on 'ư'
-  
+
   // Group C: Closing diphthongs ending in -u/-o
   ao: 0, // nào → tone on 'a'
   au: 0, // tàu → tone on 'a'
@@ -48,7 +48,7 @@ export const VIETNAMESE_DIPHTHONGS = {
   êu: 0, // yêu → tone on 'ê'
   iu: 0, // tíu → tone on 'i'
   ưu: 0, // cứu → tone on 'ư'
-  
+
   // Group D: Medial "w"-type vowel clusters
   oa: 0, // hóa → tone on 'o'
   oă: 1, // hoẳn → tone on 'ă'
@@ -72,7 +72,7 @@ export const VIETNAMESE_TRIPHTHONGS = {
   uoi: 1, // Alternative form of uôi before transformation
   ươi: 1, // tười → tone on 'ơ'
   ươu: 1, // hướu → tone on 'ơ'
-  
+
   // With initial onglide
   oai: 1, // hoài → tone on 'a'
   uai: 1, // quái → tone on 'a' (after qu-)
@@ -92,13 +92,16 @@ export function findToneVowelIndex(text: string): number {
   if (!vowels) return -1;
 
   const { sequence, startIndex } = vowels;
-  const normalizedSequence = sequence.normalize('NFC');
+  const normalizedSequence = sequence.normalize("NFC");
   const lowerSequence = normalizedSequence.toLowerCase();
 
   // Check for triphthongs first (longest matches)
-  for (const [triphthong, toneIndex] of Object.entries(VIETNAMESE_TRIPHTHONGS)) {
+  for (const [triphthong, toneIndex] of Object.entries(
+    VIETNAMESE_TRIPHTHONGS,
+  )) {
     if (lowerSequence.includes(triphthong)) {
       const triphthongStart = lowerSequence.indexOf(triphthong);
+
       return startIndex + triphthongStart + toneIndex;
     }
   }
@@ -110,13 +113,28 @@ export function findToneVowelIndex(text: string): number {
 
   for (const [diphthong, toneIndex] of diphthongs) {
     const index = lowerSequence.indexOf(diphthong);
+
     if (index !== -1) {
       return startIndex + index + toneIndex;
     }
   }
 
   // Quality diacritic priority: if sequence contains diacritic vowels, place tone there
-  const diacriticPriority = ["ă", "â", "ê", "ô", "ơ", "ư", "Ă", "Â", "Ê", "Ô", "Ơ", "Ư"];
+  const diacriticPriority = [
+    "ă",
+    "â",
+    "ê",
+    "ô",
+    "ơ",
+    "ư",
+    "Ă",
+    "Â",
+    "Ê",
+    "Ô",
+    "Ơ",
+    "Ư",
+  ];
+
   for (let i = 0; i < normalizedSequence.length; i++) {
     if (diacriticPriority.includes(normalizedSequence[i])) {
       return startIndex + i;
@@ -141,7 +159,8 @@ function extractVowelSequenceSkippingQu(
     const prev = i > 0 ? text[i - 1] : "";
 
     // Treat 'u' after 'q' as consonant (part of consonant cluster 'qu')
-    const isQuU = (char === "u" || char === "U") && (prev === "q" || prev === "Q");
+    const isQuU =
+      (char === "u" || char === "U") && (prev === "q" || prev === "Q");
 
     if (isVietnameseVowel(char) && !isQuU) {
       if (startIndex === -1) startIndex = i;

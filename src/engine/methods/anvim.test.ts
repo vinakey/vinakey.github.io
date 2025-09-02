@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
+
 import anvim, { AnvimEngine } from "./anvim";
 
 describe("ANVIM - AVIM.js Compatible TELEX", () => {
@@ -151,7 +152,7 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
       // việt can be typed as vieet + j or viee + jt
       expect(anvim("vieetj")).toBe("việt");
       expect(anvim("vieejt")).toBe("việt");
-      
+
       // được can be typed multiple ways
       expect(anvim("dduowcj")).toBe("được");
       expect(anvim("duowjc")).toBe("được");
@@ -225,25 +226,28 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
 
     it("should handle incremental processing", () => {
       const result1 = engine.process("Tôi học ", "t");
+
       expect(result1.text).toBe("Tôi học t");
-      
+
       const result2 = engine.process("Tôi học tiees", "n");
+
       expect(result2.text).toBe("Tôi học tiến");
     });
 
     it("should respect enabled/disabled state", () => {
       engine.setEnabled(false);
       expect(engine.processWord("aa")).toBe("aa");
-      
+
       engine.setEnabled(true);
       expect(engine.processWord("aa")).toBe("â");
     });
 
     it("should get and set configuration", () => {
       const config = engine.getConfig();
+
       expect(config.method).toBe("TELEX");
       expect(config.enabled).toBe(true);
-      
+
       engine.setConfig({ enabled: false });
       expect(engine.isEnabled()).toBe(false);
     });

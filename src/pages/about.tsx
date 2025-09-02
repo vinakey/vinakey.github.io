@@ -20,8 +20,8 @@ export default function AboutPage() {
             <p className="text-lg leading-relaxed">
               VinaKey là phiên bản hiện đại của công cụ gõ tiếng Việt trực
               tuyến, kết hợp với markdown editor mạnh mẽ. Được xây dựng với công
-              nghệ web hiện đại, VinaKey cung cấp trải nghiệm gõ tiếng Việt
-              mượt mà và các tính năng soạn thảo văn bản tiên tiến.
+              nghệ web hiện đại, VinaKey cung cấp trải nghiệm gõ tiếng Việt mượt
+              mà và các tính năng soạn thảo văn bản tiên tiến.
             </p>
           </div>
 
