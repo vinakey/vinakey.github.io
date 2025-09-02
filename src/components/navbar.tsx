@@ -18,6 +18,7 @@ export const Navbar = () => {
           <div className="flex flex-col">
             <h1 className="text-2xl font-bold text-foreground leading-tight">
               <span className="text-primary">Vin</span>
+              <span className="mx-0.5">⭐</span>
               <span className="text-secondary">Key</span>
             </h1>
             <p className="text-sm text-default-500 italic">

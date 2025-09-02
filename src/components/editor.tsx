@@ -11,6 +11,7 @@ import {
 } from "@heroui/modal";
 import { Input } from "@heroui/input";
 import { useTheme } from "@heroui/use-theme";
+import EmojiPicker, { Theme as EmojiTheme, EmojiStyle, type EmojiClickData } from "emoji-picker-react";
 
 import { vietnameseInput, InputMethod } from "@/utils/vietnamese-input";
 
@@ -36,51 +37,36 @@ export default function Editor({
   onContentChange,
 }: EditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
-  const [inputMethod, setInputMethod] = useState<InputMethod>("TELEX");
+  const isInitializingRef = useRef<boolean>(true);
+  const [inputMethod, setInputMethod] = useState<InputMethod>("AUTO");
   const [isVietnameseEnabled, setIsVietnameseEnabled] = useState(true);
   const [editorInstance, setEditorInstance] = useState<any>(null);
   const [content, setContent] = useState(initialContent);
   const [filename, setFilename] = useState("vinakey-document");
   const { theme } = useTheme();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [showEmoji, setShowEmoji] = useState(false);
+  const emojiBtnRef = useRef<HTMLButtonElement>(null);
+  const [emojiAnchor, setEmojiAnchor] = useState<{ left: number; top: number; bottom: number } | null>(null);
+
+  // Responsive breakpoint detection for compact emoji modal
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   // Check if user is visiting for the first time
-  const isFirstVisit = !localStorage.getItem("vinakey2-visited");
+  const isFirstVisit = false;
 
   // Debug: Track theme state
   useEffect(() => {
     console.log(`Current HeroUI theme: ${theme}`);
   }, [theme]);
-
-  // Modern and elegant custom theme configuration
-  const customTheme = {
-    name: "vinakey-modern",
-    colors: {
-      bgPrimary: theme === "dark" ? "#0f0f23" : "#fefefe",
-      bgSecondary: theme === "dark" ? "#1a1a2e" : "#f8fafc",
-      text: theme === "dark" ? "#e2e8f0" : "#1e293b",
-      h1: theme === "dark" ? "#f97316" : "#f97316", // Orange primary for both themes
-      h2: theme === "dark" ? "#fb923c" : "#ea580c", // Orange variants
-      h3: theme === "dark" ? "#fdba74" : "#c2410c",
-      strong: theme === "dark" ? "#fb923c" : "#ea580c",
-      em: theme === "dark" ? "#f97316" : "#f97316",
-      link: theme === "dark" ? "#60a5fa" : "#2563eb", // Modern blue
-      code: theme === "dark" ? "#a78bfa" : "#7c3aed", // Modern purple
-      codeBg:
-        theme === "dark"
-          ? "rgba(167, 139, 250, 0.1)"
-          : "rgba(249, 115, 22, 0.1)",
-      blockquote: theme === "dark" ? "#64748b" : "#475569", // Modern gray
-      hr: theme === "dark" ? "#374151" : "#d1d5db",
-      syntaxMarker:
-        theme === "dark" ? "rgba(226, 232, 240, 0.4)" : "rgba(30, 41, 59, 0.4)",
-      cursor: "#f97316", // Orange cursor for both themes
-      selection:
-        theme === "dark"
-          ? "rgba(249, 115, 22, 0.3)"
-          : "rgba(249, 115, 22, 0.2)",
-    },
-  };
 
   useEffect(() => {
     const initializeEditor = () => {
@@ -89,7 +75,7 @@ export default function Editor({
           // Initialize OverType editor using the default export
           const OverTypeClass =
             (window.OverType as any).default || window.OverType;
-          const sampleContent = `# Chào mừng đến với VinKey!
+          const sampleContent = `# Chào mừng đến với Vin⭐Key!
 
 ## Hướng dẫn sử dụng
 
@@ -101,10 +87,10 @@ export default function Editor({
 > **Ví dụ**: Hãy thử gõ "Toi yeu Viet Nam" với TELEX!`;
 
           const instances = new OverTypeClass(editorRef.current, {
-            value: isFirstVisit ? sampleContent : initialContent,
+            value: initialContent || (isFirstVisit ? sampleContent : ""),
             placeholder: "Bắt đầu viết markdown với tiếng Việt...",
             toolbar: true,
-            theme: customTheme,
+            theme: theme === "dark" ? "cave" : "solar",
             fontSize: "16px",
             padding: "24px",
             autoResize: true,
@@ -115,36 +101,70 @@ export default function Editor({
             },
           });
 
+          // Sync OverType theme with site theme (instance API)
+          try {
+            const inst = Array.isArray(instances) ? instances[0] : instances;
+            if (inst && typeof inst.setTheme === "function") {
+              inst.setTheme(theme === "dark" ? "cave" : "solar");
+            }
+          } catch {}
+
           if (instances && instances.length > 0) {
             const instance = instances[0];
 
             setEditorInstance(instance);
 
-            // Mark user as visited and set initial content
-            if (isFirstVisit) {
-              localStorage.setItem("vinakey2-visited", "true");
-              setContent(sampleContent);
-            }
+            // Ensure React state mirrors editor initial value
+            const initialValue = initialContent || (isFirstVisit ? sampleContent : "");
+            setContent(initialValue);
 
-            // Get the textarea element from OverType and attach Vietnamese input
-            setTimeout(() => {
-              const textarea = editorRef.current?.querySelector("textarea");
+            // Helper to attach listeners to the textarea when present
+            const tryAttachTextarea = () => {
+              const textarea = editorRef.current?.querySelector("textarea") as HTMLTextAreaElement | null;
+              if (!textarea) return false;
 
-              if (textarea) {
-                vietnameseInput.attach(textarea as HTMLTextAreaElement);
-                console.log("✓ Vietnamese input attached to textarea");
-              } else {
-                console.log(
-                  "❌ No textarea found after OverType initialization",
-                );
+              // Mirror textarea input → React state
+              const handleInput = () => {
+                try {
+                  const currentValue = textarea.value;
+                  setContent(currentValue);
+                } catch {}
+              };
+              (textarea as any)._vinakeyHandleInput = handleInput;
+              textarea.addEventListener("input", handleInput);
+
+              // Attach Vietnamese input
+              vietnameseInput.attach(textarea);
+              console.log("✓ Vietnamese input attached to textarea");
+
+              // Initialization complete
+              isInitializingRef.current = false;
+              return true;
+            };
+
+            // Attempt immediate attach, else observe for textarea insertion
+            if (!tryAttachTextarea()) {
+              const observer = new MutationObserver(() => {
+                if (tryAttachTextarea()) {
+                  observer.disconnect();
+                }
+              });
+              if (editorRef.current) {
+                observer.observe(editorRef.current, { childList: true, subtree: true });
               }
-            }, 500);
+              // Safety cutoff in case of never attaching
+              setTimeout(() => observer.disconnect(), 3000);
+            }
 
             return () => {
               const textarea = editorRef.current?.querySelector("textarea");
 
               if (textarea) {
                 vietnameseInput.detach(textarea as HTMLTextAreaElement);
+                try {
+                  const handler = (textarea as any)._vinakeyHandleInput;
+                  if (handler) textarea.removeEventListener("input", handler);
+                } catch {}
               }
               instance?.destroy();
             };
@@ -171,6 +191,8 @@ export default function Editor({
     }
   }, [initialContent, onContentChange]);
 
+  // Removed offline persistence logic
+
   useEffect(() => {
     vietnameseInput.setMethod(inputMethod);
     vietnameseInput.setEnabled(isVietnameseEnabled);
@@ -178,12 +200,12 @@ export default function Editor({
 
   // Handle theme changes for OverType editor
   useEffect(() => {
-    // Note: OverType doesn't support runtime theme changes
-    // The theme is set during initialization only
-    console.log(
-      `Theme changed to: ${theme} (OverType theme set at initialization)`,
-    );
-  }, [theme]);
+    try {
+      if (editorInstance && typeof editorInstance.setTheme === "function") {
+        editorInstance.setTheme(theme === "dark" ? "cave" : "solar");
+      }
+    } catch {}
+  }, [theme, editorInstance]);
 
   const handleMethodChange = (method: InputMethod) => {
     setInputMethod(method);
@@ -199,6 +221,29 @@ export default function Editor({
       editorInstance.setValue("");
       setContent("");
     }
+    // No offline persistence to clear
+  };
+
+  const insertAtCaret = (text: string) => {
+    const textarea = editorRef.current?.querySelector("textarea") as HTMLTextAreaElement | null;
+    if (!textarea) return;
+    const start = textarea.selectionStart ?? 0;
+    const end = textarea.selectionEnd ?? start;
+    const value = textarea.value;
+    const newValue = value.slice(0, start) + text + value.slice(end);
+    const newPos = start + text.length;
+    textarea.value = newValue;
+    textarea.setSelectionRange(newPos, newPos);
+    setContent(newValue);
+    onContentChange?.(newValue);
+    const inputEvent = new Event("input", { bubbles: true });
+    (inputEvent as any)._vietnameseProcessed = true;
+    textarea.dispatchEvent(inputEvent);
+  };
+
+  const handleEmojiClick = (emojiData: EmojiClickData) => {
+    insertAtCaret(emojiData.emoji);
+    setShowEmoji(false);
   };
 
   const handleCopy = async () => {
@@ -221,6 +266,7 @@ export default function Editor({
         editorInstance.setValue(clipboardText);
         setContent(clipboardText);
         console.log("Content pasted from clipboard");
+        // No offline persistence
       }
     } catch (err) {
       console.error("Failed to paste content:", err);
@@ -298,6 +344,44 @@ export default function Editor({
 
             {/* Second row: Action buttons (hidden on small screens when in single row, shown on mobile) */}
             <div className="!flex !flex-row !items-center !justify-start sm:!justify-end !gap-2 sm:!flex-grow !flex-wrap">
+              <div>
+                <Button
+                  ref={emojiBtnRef}
+                  className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
+                  color="default"
+                  size="sm"
+                  variant="bordered"
+                  onClick={() => {
+                    const rect = emojiBtnRef.current?.getBoundingClientRect();
+                    if (rect) setEmojiAnchor({ left: rect.left, top: rect.top, bottom: rect.bottom });
+                    setShowEmoji((v) => !v);
+                  }}
+                >
+                  😀
+                </Button>
+                {(showEmoji && emojiAnchor) ? (
+                  <>
+                    <div className="fixed inset-0 z-[2147483000]" onClick={() => setShowEmoji(false)} />
+                    <div
+                      className="fixed z-[2147483001]"
+                      style={{ left: Math.max(8, Math.min(emojiAnchor.left, window.innerWidth - 360 - 8)), top: emojiAnchor.bottom + 8 }}
+                    >
+                      <div className="shadow-medium rounded-medium border border-divider bg-content1 p-1" style={{ maxWidth: 360 }}>
+                        <EmojiPicker
+                          onEmojiClick={handleEmojiClick}
+                          theme={theme === "dark" ? EmojiTheme.DARK : EmojiTheme.LIGHT}
+                          emojiStyle={EmojiStyle.GOOGLE}
+                          autoFocusSearch={false}
+                          lazyLoadEmojis={true}
+                          width={isMobile ? 280 : 320}
+                          height={isMobile ? 320 : 420}
+                          previewConfig={{ showPreview: false }}
+                        />
+                      </div>
+                    </div>
+                  </>
+                ) : null}
+              </div>
               <Button
                 className="!px-2 !py-1 !min-w-0 !text-xs !font-medium !whitespace-nowrap !flex-shrink-0"
                 color="warning"

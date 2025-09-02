@@ -1,76 +1,104 @@
 /**
  * Vietnamese Syllable Rules and Tone Placement Logic
  *
- * References Vietnamese phonology and orthography rules:
- * - Main vowel identification
- * - Tone placement on correct vowel in diphthongs/triphthongs
- * - Syllable boundary detection
+ * Based on Vietnamese phonology from Wikipedia:
+ * https://en.wikipedia.org/wiki/Vietnamese_phonology
+ * 
+ * Diphthongs and triphthongs are categorized as:
+ * A) Falling/centering diphthongs: ia/iê, ua/uô, ưa/ươ
+ * B) Closing diphthongs ending in -i/-y: ai, ay, ây, oi, ôi, ơi, ui, ưi
+ * C) Closing diphthongs ending in -u/-o: ao, au, âu, eo, êu, iu, ưu
+ * D) Medial "w"-type vowel clusters: oa, oă, oe, uê, uy, uâ, uă
+ * 
+ * Triphthongs:
+ * - Core: iêu/yêu, uôi, ươi, ươu
+ * - With initial onglide: oai/uai, oay/uay, uya, uyê
  */
 
 import { isVietnameseVowel } from "./vietnamese-chars";
 
 /**
- * Vietnamese vowel combinations that form diphthongs/triphthongs
- * The SECOND vowel typically receives the tone mark
+ * Vietnamese diphthongs with tone placement index
+ * Based on actual Vietnamese orthography rules
  */
 export const VIETNAMESE_DIPHTHONGS = {
-  // Two-vowel combinations where 2nd vowel gets tone
-  ai: 1, // ái, ải, etc. - tone on 'i'
-  ao: 1, // áo, ào, etc. - tone on 'o'
-  au: 1, // áu, àu, etc. - tone on 'u'
-  ay: 1, // áy, ày, etc. - tone on 'y'
-  eo: 1, // éo, èo, etc. - tone on 'o'
-  eu: 1, // éu, èu, etc. - tone on 'u'
-  ie: 0, // íe, ìe, etc. - tone on 'i'
-  oa: 1, // óa, òa, etc. - tone on 'a'
-  oe: 1, // óe, òe, etc. - tone on 'e'
-  oo: 1, // óo, òo, etc. - tone on second 'o'
-  ou: 1, // óu, òu, etc. - tone on 'u'
-  ua: 1, // úa, ùa, etc. - tone on 'a'
-  ue: 1, // úe, ùe, etc. - tone on 'e'
-  ui: 1, // úi, ùi, etc. - tone on 'i'
-  uy: 1, // úy, ùy, etc. - tone on 'y'
-  ya: 1, // ýa, ỳa, etc. - tone on 'a'
-  ye: 1, // ýe, ỳe, etc. - tone on 'e'
-  yo: 1, // ýo, ỳo, etc. - tone on 'o'
-  yu: 1, // ýu, ỳu, etc. - tone on 'u'
-
-  // Special Vietnamese combinations
-  iê: 1, // iế, iề, etc. - tone on 'ê'
-  uô: 1, // uố, uồ, etc. - tone on 'ô'
-  ươ: 1, // ướ, ường, etc. - tone on 'ơ'
+  // Group A: Falling/centering diphthongs
+  ia: 0, // mía → tone on 'i'
+  iê: 1, // tiền → tone on 'ê'
+  ua: 0, // múa → tone on 'u' 
+  uô: 1, // buồn → tone on 'ô'
+  ưa: 0, // mứa → tone on 'ư'
+  ươ: 1, // dược → tone on 'ơ'
+  
+  // Group B: Closing diphthongs ending in -i/-y
+  ai: 0, // mái → tone on 'a'
+  ay: 0, // cây → tone on 'a'
+  ây: 0, // cấy → tone on 'â'
+  oi: 0, // tôi → tone on 'o'
+  ôi: 0, // nổi → tone on 'ô'
+  ơi: 0, // mới → tone on 'ơ'
+  ui: 0, // túi → tone on 'u'
+  ưi: 0, // cửi → tone on 'ư'
+  
+  // Group C: Closing diphthongs ending in -u/-o
+  ao: 0, // nào → tone on 'a'
+  au: 0, // tàu → tone on 'a'
+  âu: 0, // cầu → tone on 'â'
+  eo: 0, // kéo → tone on 'e'
+  êu: 0, // yêu → tone on 'ê'
+  iu: 0, // tíu → tone on 'i'
+  ưu: 0, // cứu → tone on 'ư'
+  
+  // Group D: Medial "w"-type vowel clusters
+  oa: 0, // hóa → tone on 'o'
+  oă: 1, // hoẳn → tone on 'ă'
+  oe: 0, // khóe → tone on 'o'
+  uê: 1, // quên → tone on 'ê'
+  uy: 0, // thúy → tone on 'u'
+  uâ: 1, // quân → tone on 'â'
+  uă: 1, // quặn → tone on 'ă'
 } as const;
 
 /**
- * Triphthongs - three vowel combinations
- * Index indicates which vowel gets the tone (0-based)
+ * Vietnamese triphthongs with tone placement index
  */
 export const VIETNAMESE_TRIPHTHONGS = {
-  iêu: 1, // iếu, iều, etc. - tone on 'ê'
-  ươi: 1, // ưới, ười, etc. - tone on 'ơ'
-  uôi: 1, // uối, uồi, etc. - tone on 'ô'
-  oai: 1, // oái, oài, etc. - tone on 'a'
-  uay: 1, // uáy, uày, etc. - tone on 'a'
+  // Core triphthongs
+  iêu: 1, // chiều → tone on 'ê'
+  ieu: 1, // Alternative form of iêu before transformation
+  yêu: 1, // yếu → tone on 'ê'
+  yeu: 1, // Alternative form of yêu before transformation
+  uôi: 1, // cười → tone on 'ô'
+  uoi: 1, // Alternative form of uôi before transformation
+  ươi: 1, // tười → tone on 'ơ'
+  ươu: 1, // hướu → tone on 'ơ'
+  
+  // With initial onglide
+  oai: 1, // hoài → tone on 'a'
+  uai: 1, // quái → tone on 'a' (after qu-)
+  oay: 1, // xoáy → tone on 'a'
+  uay: 1, // quây → tone on 'a' (after qu-)
+  uya: 1, // khuya → tone on 'a'
+  uyê: 2, // tuyết → tone on 'ê'
+  uye: 2, // Alternative form of uyê before transformation
 } as const;
 
 /**
  * Find the correct vowel to place tone mark in a Vietnamese syllable
  */
 export function findToneVowelIndex(text: string): number {
-  const vowels = extractVowelSequence(text);
+  const vowels = extractVowelSequenceSkippingQu(text);
 
   if (!vowels) return -1;
 
   const { sequence, startIndex } = vowels;
-  const lowerSequence = sequence.toLowerCase();
+  const normalizedSequence = sequence.normalize('NFC');
+  const lowerSequence = normalizedSequence.toLowerCase();
 
   // Check for triphthongs first (longest matches)
-  for (const [triphthong, toneIndex] of Object.entries(
-    VIETNAMESE_TRIPHTHONGS,
-  )) {
+  for (const [triphthong, toneIndex] of Object.entries(VIETNAMESE_TRIPHTHONGS)) {
     if (lowerSequence.includes(triphthong)) {
       const triphthongStart = lowerSequence.indexOf(triphthong);
-
       return startIndex + triphthongStart + toneIndex;
     }
   }
@@ -78,13 +106,20 @@ export function findToneVowelIndex(text: string): number {
   // Check for diphthongs (find the longest match first)
   const diphthongs = Object.entries(VIETNAMESE_DIPHTHONGS).sort(
     ([a], [b]) => b.length - a.length,
-  ); // Sort by length, longest first
+  );
 
   for (const [diphthong, toneIndex] of diphthongs) {
     const index = lowerSequence.indexOf(diphthong);
-
     if (index !== -1) {
       return startIndex + index + toneIndex;
+    }
+  }
+
+  // Quality diacritic priority: if sequence contains diacritic vowels, place tone there
+  const diacriticPriority = ["ă", "â", "ê", "ô", "ơ", "ư", "Ă", "Â", "Ê", "Ô", "Ơ", "Ư"];
+  for (let i = 0; i < normalizedSequence.length; i++) {
+    if (diacriticPriority.includes(normalizedSequence[i])) {
+      return startIndex + i;
     }
   }
 
@@ -95,16 +130,22 @@ export function findToneVowelIndex(text: string): number {
 /**
  * Extract the vowel sequence from text and its position
  */
-function extractVowelSequence(
+function extractVowelSequenceSkippingQu(
   text: string,
 ): { sequence: string; startIndex: number } | null {
   let startIndex = -1;
   let sequence = "";
 
   for (let i = 0; i < text.length; i++) {
-    if (isVietnameseVowel(text[i])) {
+    const char = text[i];
+    const prev = i > 0 ? text[i - 1] : "";
+
+    // Treat 'u' after 'q' as consonant (part of consonant cluster 'qu')
+    const isQuU = (char === "u" || char === "U") && (prev === "q" || prev === "Q");
+
+    if (isVietnameseVowel(char) && !isQuU) {
       if (startIndex === -1) startIndex = i;
-      sequence += text[i];
+      sequence += char;
     } else if (sequence) {
       // Found end of vowel sequence
       break;

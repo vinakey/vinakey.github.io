@@ -3,7 +3,7 @@
 @config "../../tailwind.config.js";
 
 /* OverType border radius styling */
-.ot-container {
+/* .ot-container {
   border-radius: 0.75rem !important; /* rounded-xl */
   overflow: hidden !important;
 }
@@ -11,4 +11,6 @@
 .ot-textarea,
 .ot-preview {
   border-radius: 0.75rem !important;
-}
+} */
+
+/* Use OverType's built-in themes (solar/cave); no extra overrides here */

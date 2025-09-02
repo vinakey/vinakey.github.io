@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "VinaKey 2",
+  name: "VinaKey",
   description:
     "Modern Vietnamese typing tool with markdown editor support - online, fast, and free.",
   navItems: [

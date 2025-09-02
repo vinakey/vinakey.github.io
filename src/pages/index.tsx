@@ -17,13 +17,7 @@ export default function IndexPage() {
       <section className="flex flex-col items-center gap-6 py-8">
         {/* Main editor component */}
         <div className="w-full">
-          <Editor
-            initialContent=""
-            onContentChange={(content) => {
-              // Save to localStorage or handle content changes
-              localStorage.setItem("vinakey2-content", content);
-            }}
-          />
+          <Editor initialContent="" />
         </div>
 
         {/* Input method reference tables */}
@@ -47,6 +41,10 @@ export default function IndexPage() {
                   <TableColumn>Hỏi</TableColumn>
                   <TableColumn>Ngã</TableColumn>
                   <TableColumn>Nặng</TableColumn>
+                  <TableColumn>Mũ</TableColumn>
+                  <TableColumn>Móc</TableColumn>
+                  <TableColumn>Trăng</TableColumn>
+                  <TableColumn>Đ</TableColumn>
                 </TableHeader>
                 <TableBody>
                   <TableRow>
@@ -58,6 +56,10 @@ export default function IndexPage() {
                     <TableCell className="font-mono text-lg">r</TableCell>
                     <TableCell className="font-mono text-lg">x</TableCell>
                     <TableCell className="font-mono text-lg">j</TableCell>
+                    <TableCell className="font-mono text-lg">aa</TableCell>
+                    <TableCell className="font-mono text-lg">ow</TableCell>
+                    <TableCell className="font-mono text-lg">aw</TableCell>
+                    <TableCell className="font-mono text-lg">dd</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-semibold text-primary">
@@ -68,6 +70,10 @@ export default function IndexPage() {
                     <TableCell className="font-mono text-lg">3</TableCell>
                     <TableCell className="font-mono text-lg">4</TableCell>
                     <TableCell className="font-mono text-lg">5</TableCell>
+                    <TableCell className="font-mono text-lg">6</TableCell>
+                    <TableCell className="font-mono text-lg">7</TableCell>
+                    <TableCell className="font-mono text-lg">8</TableCell>
+                    <TableCell className="font-mono text-lg">9</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-semibold text-primary">
@@ -78,6 +84,10 @@ export default function IndexPage() {
                     <TableCell className="font-mono text-lg">?</TableCell>
                     <TableCell className="font-mono text-lg">~</TableCell>
                     <TableCell className="font-mono text-lg">.</TableCell>
+                    <TableCell className="font-mono text-lg">^</TableCell>
+                    <TableCell className="font-mono text-lg">+</TableCell>
+                    <TableCell className="font-mono text-lg">(</TableCell>
+                    <TableCell className="font-mono text-lg">dd</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

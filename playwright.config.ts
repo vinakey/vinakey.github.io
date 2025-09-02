@@ -24,6 +24,7 @@ export default defineConfig({
   webServer: {
     command: "yarn dev",
     port: 5173,
-    reuseExistingServer: !process.env.CI,
+    // Reuse existing server if one is already running (avoids port conflicts during local dev)
+    reuseExistingServer: true,
   },
 });

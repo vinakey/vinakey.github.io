@@ -8,7 +8,7 @@ export default function AboutPage() {
     <DefaultLayout>
       <section className="flex flex-col items-center gap-8 py-8 md:py-10">
         <div className="inline-block max-w-4xl text-center">
-          <h1 className={title()}>About VinaKey 2</h1>
+          <h1 className={title()}>About VinaKey</h1>
           <div className={subtitle({ class: "mt-4" })}>
             Công cụ gõ tiếng Việt hiện đại với hỗ trợ markdown editor
           </div>
@@ -18,9 +18,9 @@ export default function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold mb-4">Giới thiệu</h2>
             <p className="text-lg leading-relaxed">
-              VinaKey 2 là phiên bản hiện đại của công cụ gõ tiếng Việt trực
+              VinaKey là phiên bản hiện đại của công cụ gõ tiếng Việt trực
               tuyến, kết hợp với markdown editor mạnh mẽ. Được xây dựng với công
-              nghệ web hiện đại, VinaKey 2 cung cấp trải nghiệm gõ tiếng Việt
+              nghệ web hiện đại, VinaKey cung cấp trải nghiệm gõ tiếng Việt
               mượt mà và các tính năng soạn thảo văn bản tiên tiến.
             </p>
           </div>
