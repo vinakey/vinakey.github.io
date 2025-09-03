@@ -1073,8 +1073,13 @@ export class AnvimEngine {
 
 export default function anvim(input: string): string {
   const engine = new AnvimEngine();
+  let out = "";
 
-  return engine.processWord(input);
+  for (let i = 0; i < input.length; i++) {
+    out = engine.processWithKey(out, input[i]);
+  }
+
+  return out;
 }
 
 export const anvimEngine = new AnvimEngine();

@@ -23,7 +23,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "tests/anvim.test.ts"],
   "exclude": ["src/**/*.test.ts", "src/test/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

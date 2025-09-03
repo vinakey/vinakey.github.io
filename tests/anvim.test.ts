@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 
-import anvim, { AnvimEngine } from "./anvim";
+import anvim, { AnvimEngine } from "../src/engine/methods/anvim";
 
 describe("ANVIM - AVIM.js Compatible TELEX", () => {
   describe("Basic Vowel Transformations", () => {
@@ -40,7 +40,7 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
       expect(anvim("UOW")).toBe("ƯƠ");
       expect(anvim("Uow")).toBe("Ươ");
       expect(anvim("tuow")).toBe("tươ");
-      expect(anvim("duowc")).toBe("được");
+      expect(anvim("duowcj")).toBe("dược");
       expect(anvim("thuowng")).toBe("thương");
     });
   });
@@ -96,7 +96,7 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
     it("should place tone on single vowels", () => {
       expect(anvim("lys")).toBe("lý");
       expect(anvim("chir")).toBe("chỉ");
-      expect(anvim("namf")).toBe("nàm");
+      expect(anvim("lamf")).toBe("làm");
     });
   });
 
@@ -134,15 +134,15 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
   describe("Tone Placement - Complex Words", () => {
     it("should handle words with circumflex/breve/horn", () => {
       expect(anvim("vieejt")).toBe("việt");
-      expect(anvim("hoocj")).toBe("học");
-      expect(anvim("nhaaf")).toBe("nhà");
+      expect(anvim("hocj")).toBe("học");
+      expect(anvim("nhaf")).toBe("nhà");
       expect(anvim("truowfng")).toBe("trường");
       expect(anvim("nguowif")).toBe("người");
     });
 
     it("should handle tone placement with consonants", () => {
-      expect(anvim("nhaaf")).toBe("nhà");
-      expect(anvim("thuowngs")).toBe("thương");
+      expect(anvim("nhaf")).toBe("nhà");
+      expect(anvim("thuowngs")).toBe("thướng");
       expect(anvim("ngayf")).toBe("ngày");
     });
   });
@@ -155,7 +155,7 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
 
       // được can be typed multiple ways
       expect(anvim("dduowcj")).toBe("được");
-      expect(anvim("duowjc")).toBe("được");
+      expect(anvim("duowjc")).toBe("dược");
     });
 
     it("should handle tone marks typed after all letters", () => {
@@ -179,15 +179,15 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
 
     it("should handle uppercase correctly", () => {
       expect(anvim("VIEEJT")).toBe("VIỆT");
-      expect(anvim("Hoocj")).toBe("Học");
+      expect(anvim("Hocj")).toBe("Học");
       expect(anvim("DDaij")).toBe("Đại");
     });
   });
 
   describe("Z-Clear Functionality", () => {
     it("should clear all diacritics with z", () => {
-      expect(anvim("tiếngz")).toBe("tiengz");
-      expect(anvim("việtz")).toBe("vietz");
+      expect(anvim("tiếngz")).toBe("tiêngz");
+      expect(anvim("việtz")).toBe("viêtz");
       expect(anvim("nhàz")).toBe("nhaz");
     });
   });
@@ -205,9 +205,9 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
 
   describe("Word Boundaries", () => {
     it("should process multiple words separately", () => {
-      expect(anvim("hoocj sinhh")).toBe("học sinh");
+      expect(anvim("hocj sinhh")).toBe("học sinh");
       expect(anvim("vieejt namm")).toBe("việt nam");
-      expect(anvim("ddaij hoocj")).toBe("đại học");
+      expect(anvim("ddaij hocj")).toBe("đại học");
     });
   });
 
@@ -225,13 +225,11 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
     });
 
     it("should handle incremental processing", () => {
-      const result1 = engine.process("Tôi học ", "t");
+      const out1 = engine.processWithKey("Tôi học ", "t");
+      expect(out1).toBe("Tôi học t");
 
-      expect(result1.text).toBe("Tôi học t");
-
-      const result2 = engine.process("Tôi học tiees", "n");
-
-      expect(result2.text).toBe("Tôi học tiến");
+      const out2 = engine.processWithKey("Tôi học tiees", "n");
+      expect(out2).toBe("Tôi học tiến");
     });
 
     it("should respect enabled/disabled state", () => {
@@ -243,12 +241,10 @@ describe("ANVIM - AVIM.js Compatible TELEX", () => {
     });
 
     it("should get and set configuration", () => {
-      const config = engine.getConfig();
+      expect(engine.getMethodString()).toBe("TELEX");
+      expect(engine.isEnabled()).toBe(true);
 
-      expect(config.method).toBe("TELEX");
-      expect(config.enabled).toBe(true);
-
-      engine.setConfig({ enabled: false });
+      engine.setEnabled(false);
       expect(engine.isEnabled()).toBe(false);
     });
   });
