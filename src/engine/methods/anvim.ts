@@ -867,19 +867,19 @@ export class AnvimEngine {
     if (out !== before) {
       const keyUpper = key.toUpperCase();
 
-      // Tone toggle-off: previously had tone, now removed -> append key
+      // Tone toggle-off: previously had tone, now removed -> append key (preserve case)
       if ("SFJRX".indexOf(keyUpper) >= 0) {
         if (this.hasTone(before) && !this.hasTone(out))
-          return out + key.toLowerCase();
+          return out + key;
 
         return out;
       }
-      // Diacritic toggle-off: previously had respective diacritic, now removed -> append key
+      // Diacritic toggle-off: previously had respective diacritic, now removed -> append key (preserve case)
       const set = this.diacriticSetForKey(keyUpper);
 
       if (set) {
         if (this.hasCharFromSet(before, set) && !this.hasCharFromSet(out, set))
-          return out + key.toLowerCase();
+          return out + key;
 
         return out;
       }
@@ -894,7 +894,7 @@ export class AnvimEngine {
 
           if ("SFJRX".indexOf(keyUpper) >= 0) {
             if (this.hasTone(before) && !this.hasTone(out))
-              return out + key.toLowerCase();
+              return out + key;
 
             return out;
           }
@@ -905,7 +905,7 @@ export class AnvimEngine {
               this.hasCharFromSet(before, set) &&
               !this.hasCharFromSet(out, set)
             )
-              return out + key.toLowerCase();
+              return out + key;
 
             return out;
           }
@@ -920,7 +920,7 @@ export class AnvimEngine {
 
           if ("SFJRX".indexOf(keyUpper) >= 0) {
             if (this.hasTone(before) && !this.hasTone(out))
-              return out + key.toLowerCase();
+              return out + key;
 
             return out;
           }
@@ -931,7 +931,7 @@ export class AnvimEngine {
               this.hasCharFromSet(before, set) &&
               !this.hasCharFromSet(out, set)
             )
-              return out + key.toLowerCase();
+              return out + key;
 
             return out;
           }
@@ -946,7 +946,7 @@ export class AnvimEngine {
 
           if ("SFJRX".indexOf(keyUpper) >= 0) {
             if (this.hasTone(before) && !this.hasTone(out))
-              return out + key.toLowerCase();
+              return out + key;
 
             return out;
           }
@@ -957,7 +957,7 @@ export class AnvimEngine {
               this.hasCharFromSet(before, set) &&
               !this.hasCharFromSet(out, set)
             )
-              return out + key.toLowerCase();
+              return out + key;
 
             return out;
           }
@@ -971,11 +971,11 @@ export class AnvimEngine {
     const diacriticSet = this.diacriticSetForKey(keyUpper);
 
     if (diacriticSet) {
-      // appending diacritic when no transformation should just add the literal letter
-      return prefix + key.toLowerCase();
+      // appending diacritic when no transformation should just add the literal letter (preserve case)
+      return prefix + key;
     }
-    // tone markers that didn't transform should append literally
-    if ("SFJRX".indexOf(keyUpper) >= 0) return prefix + key.toLowerCase();
+    // tone markers that didn't transform should append literally (preserve case)
+    if ("SFJRX".indexOf(keyUpper) >= 0) return prefix + key;
 
     return prefix + key;
   }
