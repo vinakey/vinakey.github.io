@@ -7,7 +7,6 @@ declare module "@react-types/shared" {
   interface RouterConfig {
     routerOptions: NavigateOptions;
   }
-}
 
 // Simulate pressing theme toggle to light before components load
 // This ensures both HeroUI and OverType default to light theme instead of system
