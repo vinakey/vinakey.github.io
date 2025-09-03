@@ -17,6 +17,7 @@ import EmojiPicker, {
   type EmojiClickData,
 } from "emoji-picker-react";
 
+import { logger } from "@/utils/logger";
 import { vietnameseInput, InputMethod } from "@/utils/vietnamese-input";
 
 // Extend window object to include OverType
@@ -76,7 +77,7 @@ export default function Editor({
 
   // Debug: Track theme state
   useEffect(() => {
-    console.log(`Current HeroUI theme: ${theme}`);
+    logger.debug(`Current HeroUI theme: ${theme}`);
   }, [theme]);
 
   useEffect(() => {
@@ -154,7 +155,7 @@ export default function Editor({
 
               // Attach Vietnamese input
               vietnameseInput.attach(textarea);
-              console.log("✓ Vietnamese input attached to textarea");
+              logger.debug("✓ Vietnamese input attached to textarea");
 
               // Initialization complete
               isInitializingRef.current = false;
@@ -195,7 +196,7 @@ export default function Editor({
             };
           }
         } catch (error) {
-          console.error("Error initializing OverType:", error);
+          logger.error("Error initializing OverType:", error);
         }
       }
     };
@@ -281,9 +282,9 @@ export default function Editor({
       try {
         await navigator.clipboard.writeText(content);
         // Could add a toast notification here
-        console.log("Content copied to clipboard");
+        logger.info("Content copied to clipboard");
       } catch (err) {
-        console.error("Failed to copy content:", err);
+        logger.error("Failed to copy content:", err);
       }
     }
   };
@@ -295,11 +296,11 @@ export default function Editor({
       if (editorInstance && clipboardText) {
         editorInstance.setValue(clipboardText);
         setContent(clipboardText);
-        console.log("Content pasted from clipboard");
+        logger.info("Content pasted from clipboard");
         // No offline persistence
       }
     } catch (err) {
-      console.error("Failed to paste content:", err);
+      logger.error("Failed to paste content:", err);
     }
   };
 
@@ -321,7 +322,7 @@ export default function Editor({
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-    console.log(`Content downloaded as ${finalFilename}.md`);
+    logger.info(`Content downloaded as ${finalFilename}.md`);
     onOpenChange(); // Close modal
   };
 

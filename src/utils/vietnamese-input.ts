@@ -11,6 +11,7 @@ import {
   AnvimEngine,
   type VietnameseInputMethod,
 } from "@/engine/methods/anvim";
+import { logger } from "@/utils/logger";
 
 class VietnameseInput {
   private anvimEngine = new AnvimEngine();
@@ -22,7 +23,7 @@ class VietnameseInput {
   private lastCursorPositions = new Map<HTMLElement, number>(); // Track cursor position
 
   constructor() {
-    console.log(
+    logger.info(
       "🚀 Vietnamese ANVIM engine initialized - supporting AUTO/TELEX/VNI/VIQR methods!",
     );
     if (typeof window !== "undefined") {
@@ -39,7 +40,7 @@ class VietnameseInput {
 
     // Attach event listeners for Vietnamese input processing
     this.setupEventListeners(element);
-    console.log("✓ Vietnamese ANVIM engine attached to editor textarea!");
+    logger.debug("✓ Vietnamese ANVIM engine attached to editor textarea!");
   }
 
   public detach(element: HTMLTextAreaElement | HTMLInputElement): void {
@@ -52,7 +53,7 @@ class VietnameseInput {
 
     // Remove event listeners
     this.removeEventListeners(element);
-    console.log("✓ Vietnamese TELEX engine detached from element");
+    logger.debug("✓ Vietnamese TELEX engine detached from element");
   }
 
   private setupEventListeners(element: HTMLElement): void {
@@ -154,12 +155,12 @@ class VietnameseInput {
     this.originalWords.clear();
     this.lastCursorPositions.clear();
 
-    console.log(`🔄 Input method changed: ${oldMethod} → ${method}`);
+    logger.info(`🔄 Input method changed: ${oldMethod} → ${method}`);
 
     if (method === "OFF") {
-      console.log("❌ Vietnamese input disabled");
+      logger.info("❌ Vietnamese input disabled");
     } else {
-      console.log(`✅ ${method} mode active - Vietnamese typing enabled!`);
+      logger.info(`✅ ${method} mode active - Vietnamese typing enabled!`);
     }
   }
 
@@ -171,7 +172,7 @@ class VietnameseInput {
     this.originalWords.clear();
     this.lastCursorPositions.clear();
 
-    console.log(
+    logger.info(
       enabled ? "✅ Vietnamese input enabled" : "❌ Vietnamese input disabled",
     );
   }
@@ -195,5 +196,5 @@ export const vietnameseInput = new VietnameseInput();
 // Make it available globally for console testing
 if (typeof window !== "undefined") {
   (window as any).vietnameseInput = vietnameseInput;
-  console.log("🌐 vietnameseInput is now available in console!");
+  logger.info("🌐 vietnameseInput is now available in console!");
 }

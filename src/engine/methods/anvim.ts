@@ -73,7 +73,7 @@ export class AnvimEngine {
   private skey2: string[] =
     "a,a,a,e,e,i,o,o,o,u,u,y,A,A,A,E,E,I,O,O,O,U,U,Y".split(",");
 
-  // Method specific keys
+  // Method specific keys (configured per input method in setupForMethod)
   private DAWEO: string = "";
   private SFJRX: string = "";
   private S: string = "";
@@ -102,7 +102,9 @@ export class AnvimEngine {
     };
   }
 
-  // Helpers
+  // =====================
+  // Low-level helpers
+  // =====================
   private fcc(x: number): string {
     return String.fromCharCode(x);
   }
@@ -122,6 +124,10 @@ export class AnvimEngine {
     return sf;
   }
 
+  /**
+   * Return Unicode code points for tone-mark substitutions given a tone key.
+   * Mirrors AVIM tables for S/F/J/R/X.
+   */
   private retKC(k: string): number[] {
     if (k == this.S)
       return [
@@ -152,6 +158,10 @@ export class AnvimEngine {
     return [];
   }
 
+  /**
+   * Build the set of all code points that represent any tone marks excluding
+   * the current one (when provided). Used for stripping tones.
+   */
   private repSign(k: string | null): number[] {
     const u: number[] = [];
 
@@ -166,6 +176,9 @@ export class AnvimEngine {
     return u;
   }
 
+  /**
+   * Remove tone marks from a word, mapping marked characters back to base.
+   */
   private unV(w: string): string {
     const u = this.repSign(null);
 
@@ -183,6 +196,9 @@ export class AnvimEngine {
     return w;
   }
 
+  /**
+   * Convert Vietnamese base characters to ASCII-like placeholders per AVIM.
+   */
   private unV2(w: string): string {
     for (let a = 1; a <= w.length; a++) {
       for (let b = 0; b < this.skey.length; b++) {
@@ -198,6 +214,9 @@ export class AnvimEngine {
     return w;
   }
 
+  /**
+   * Map DAWEO (A/E/O + horn/mark) combinations for VIQR/VNI paths.
+   */
   private DAWEOF(cc: string, k: string, g: number): number[] | false {
     const ret: any[] = [g];
     const kA = [this.A, this.moc, this.trang, this.E, this.O];
@@ -216,10 +235,17 @@ export class AnvimEngine {
     return false;
   }
 
+  /**
+   * Spell checker hook (disabled, preserved for compatibility).
+   */
   private ckspell(_w: string, _k: string): boolean {
     return false;
   }
 
+  /**
+   * Core locator: determine position in word to apply transformation for key k
+   * given the method-specific vowel set sf.
+   */
   private findC(
     w: string,
     k: string,
@@ -435,6 +461,9 @@ export class AnvimEngine {
     else return false;
   }
 
+  /**
+   * Transform character at located position according to mapping tables.
+   */
   private tr(k: string, w: string, by: any[], sf: any[]): string {
     const pos = this.findC(w, k, sf);
 
@@ -478,6 +507,9 @@ export class AnvimEngine {
     return w;
   }
 
+  /**
+   * Return Unicode code point to replace character at pos with tone k.
+   */
   private retUni(w: string, k: string, pos: number): number {
     const u = this.retKC(this.up(k));
     let uC = 0,
@@ -503,6 +535,9 @@ export class AnvimEngine {
     return c;
   }
 
+  /**
+   * Single replacement: apply tone or diacritic for one letter.
+   */
   private sr(w: string, k: string): string {
     const sf = this.getSF();
     const pos = this.findC(w, k, sf);
@@ -530,6 +565,9 @@ export class AnvimEngine {
     return w;
   }
 
+  /**
+   * Configure method-specific keys and markers for TELEX/VNI/VIQR variants.
+   */
   private setupForMethod(a: string[]): void {
     const method = this.config.method;
 
@@ -596,6 +634,9 @@ export class AnvimEngine {
     }
   }
 
+  /**
+   * Main AVIM transformation for a prefix w and typed key k under mapping a.
+   */
   private main(w: string, k: string, a: string[]): string {
     const uk = this.up(k);
     const bya = [
@@ -658,6 +699,7 @@ export class AnvimEngine {
     return w;
   }
 
+  /** Utility: does word contain any character from set? */
   private hasCharFromSet(word: string, set: string[]): boolean {
     for (const ch of set) {
       if (word.indexOf(ch) >= 0) return true;
@@ -666,6 +708,7 @@ export class AnvimEngine {
     return false;
   }
 
+  /** Utility: does word contain any tone mark? */
   private hasTone(word: string): boolean {
     const all = [
       ...this.retKC("S"),
@@ -682,6 +725,7 @@ export class AnvimEngine {
     return false;
   }
 
+  /** Map an A/E/O/W/D key to its diacritic character set for toggle detection. */
   private diacriticSetForKey(keyUpper: string): string[] | null {
     if (keyUpper === "E") return this.eb1;
     if (keyUpper === "A") return this.ab1;
@@ -692,7 +736,10 @@ export class AnvimEngine {
     return null;
   }
 
-  // Process a full word by simulating keystrokes
+  // =====================
+  // Public API - word/keystroke processing
+  // =====================
+  /** Process a full word by simulating keystrokes for each character. */
   processWord(word: string): string {
     if (!word || word.length === 0) return word;
     if (this.config.onOff === 0) return word;
@@ -772,7 +819,15 @@ export class AnvimEngine {
     return currentWord;
   }
 
-  // Process a single keystroke on a given prefix (closer to AVIM behavior)
+  /**
+   * Process a single keystroke applied to the current prefix (closer to AVIM's
+   * real-time behavior). This method also implements two ergonomic
+   * improvements:
+   * - Incremental uo + w => ươ composition preserving case.
+   * - Long-distance horn composition when uo is followed by consonants.
+   *
+   * These improvements are designed to be backward compatible with AVIM.
+   */
   processWithKey(prefix: string, key: string): string {
     if (this.config.onOff === 0) return prefix + key;
     const telex = "D,A,E,O,W,W".split(",");
@@ -869,8 +924,7 @@ export class AnvimEngine {
 
       // Tone toggle-off: previously had tone, now removed -> append key (preserve case)
       if ("SFJRX".indexOf(keyUpper) >= 0) {
-        if (this.hasTone(before) && !this.hasTone(out))
-          return out + key;
+        if (this.hasTone(before) && !this.hasTone(out)) return out + key;
 
         return out;
       }
@@ -893,8 +947,7 @@ export class AnvimEngine {
           const keyUpper = key.toUpperCase();
 
           if ("SFJRX".indexOf(keyUpper) >= 0) {
-            if (this.hasTone(before) && !this.hasTone(out))
-              return out + key;
+            if (this.hasTone(before) && !this.hasTone(out)) return out + key;
 
             return out;
           }
@@ -919,8 +972,7 @@ export class AnvimEngine {
           const keyUpper = key.toUpperCase();
 
           if ("SFJRX".indexOf(keyUpper) >= 0) {
-            if (this.hasTone(before) && !this.hasTone(out))
-              return out + key;
+            if (this.hasTone(before) && !this.hasTone(out)) return out + key;
 
             return out;
           }
@@ -945,8 +997,7 @@ export class AnvimEngine {
           const keyUpper = key.toUpperCase();
 
           if ("SFJRX".indexOf(keyUpper) >= 0) {
-            if (this.hasTone(before) && !this.hasTone(out))
-              return out + key;
+            if (this.hasTone(before) && !this.hasTone(out)) return out + key;
 
             return out;
           }
