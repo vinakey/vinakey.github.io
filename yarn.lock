@@ -2444,6 +2444,11 @@ ansi-styles@^6.0.0, ansi-styles@^6.2.1:
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-6.2.1.tgz#0e62320cf99c21afff3b3012192546aacbfb05c5"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
+anvim@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/anvim/-/anvim-0.1.2.tgz#d81dda311116287444fc8f6cdfb250d738741cfe"
+  integrity sha512-PAtWBDzW6s27gCNWFmXdW1ZTh7+DvFAQ59G3EoP/hkK0jBPkvD+qu3s6YUyUEUbzWYd/PUYfRHlEYw3yaGd2iQ==
+
 argparse@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"

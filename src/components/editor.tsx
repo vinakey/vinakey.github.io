@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Button } from "@heroui/button";
 import { Card, CardBody } from "@heroui/card";
 import {
@@ -19,6 +19,10 @@ import EmojiPicker, {
 
 import { logger } from "@/utils/logger";
 import { vietnameseInput, InputMethod } from "@/utils/vietnamese-input";
+
+// Auto-save configuration
+const AUTOSAVE_KEY = "vinakey-editor-content";
+const AUTOSAVE_DELAY_MS = 1000; // 1 second debounce
 
 // Extend window object to include OverType
 declare global {
@@ -43,6 +47,7 @@ export default function Editor({
 }: EditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const isInitializingRef = useRef<boolean>(true);
+  const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [inputMethod, setInputMethod] = useState<InputMethod>("AUTO");
   const [isVietnameseEnabled, setIsVietnameseEnabled] = useState(true);
   const [editorInstance, setEditorInstance] = useState<any>(null);
@@ -60,6 +65,58 @@ export default function Editor({
 
   // Responsive breakpoint detection for compact emoji modal
   const [isMobile, setIsMobile] = useState(false);
+
+  // Auto-save utilities
+  const saveToLocalStorage = useCallback((contentToSave: string) => {
+    try {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(AUTOSAVE_KEY, contentToSave);
+        logger.debug("✓ Content auto-saved to localStorage");
+      }
+    } catch (error) {
+      logger.error("Failed to save content to localStorage:", error);
+    }
+  }, []);
+
+  const loadFromLocalStorage = useCallback((): string | null => {
+    try {
+      if (typeof window !== "undefined") {
+        return localStorage.getItem(AUTOSAVE_KEY);
+      }
+    } catch (error) {
+      logger.error("Failed to load content from localStorage:", error);
+    }
+
+    return null;
+  }, []);
+
+  const debouncedAutoSave = useCallback(
+    (contentToSave: string) => {
+      // Clear existing timeout
+      if (autoSaveTimeoutRef.current) {
+        clearTimeout(autoSaveTimeoutRef.current);
+      }
+
+      // Set new timeout for debounced save
+      autoSaveTimeoutRef.current = setTimeout(() => {
+        saveToLocalStorage(contentToSave);
+      }, AUTOSAVE_DELAY_MS);
+    },
+    [saveToLocalStorage],
+  );
+
+  // Content restoration on mount
+  useEffect(() => {
+    // Only restore if no initialContent was provided
+    if (!initialContent) {
+      const savedContent = loadFromLocalStorage();
+
+      if (savedContent) {
+        setContent(savedContent);
+        logger.info("✓ Restored content from localStorage");
+      }
+    }
+  }, [initialContent, loadFromLocalStorage]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -98,8 +155,15 @@ export default function Editor({
 
 > **Ví dụ**: Hãy thử gõ "Toi yeu Viet Nam" với TELEX!`;
 
+          // Determine initial content: saved content > initial prop > sample content
+          const savedContent = loadFromLocalStorage();
+          const effectiveInitialContent =
+            savedContent ||
+            initialContent ||
+            (isFirstVisit ? sampleContent : "");
+
           const instances = new OverTypeClass(editorRef.current, {
-            value: initialContent || (isFirstVisit ? sampleContent : ""),
+            value: effectiveInitialContent,
             placeholder: "Bắt đầu viết markdown với tiếng Việt...",
             toolbar: true,
             theme: theme === "dark" ? "cave" : "solar",
@@ -110,6 +174,7 @@ export default function Editor({
             onChange: (value: string) => {
               setContent(value);
               onContentChange?.(value);
+              debouncedAutoSave(value);
             },
           });
 
@@ -128,10 +193,7 @@ export default function Editor({
             setEditorInstance(instance);
 
             // Ensure React state mirrors editor initial value
-            const initialValue =
-              initialContent || (isFirstVisit ? sampleContent : "");
-
-            setContent(initialValue);
+            setContent(effectiveInitialContent);
 
             // Helper to attach listeners to the textarea when present
             const tryAttachTextarea = () => {
@@ -147,6 +209,7 @@ export default function Editor({
                   const currentValue = textarea.value;
 
                   setContent(currentValue);
+                  debouncedAutoSave(currentValue);
                 } catch {}
               };
 
@@ -215,9 +278,21 @@ export default function Editor({
 
       return () => clearInterval(checkOverType);
     }
-  }, [initialContent, onContentChange]);
+  }, [
+    initialContent,
+    onContentChange,
+    loadFromLocalStorage,
+    debouncedAutoSave,
+  ]);
 
-  // Removed offline persistence logic
+  // Cleanup auto-save timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (autoSaveTimeoutRef.current) {
+        clearTimeout(autoSaveTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     vietnameseInput.setMethod(inputMethod);
@@ -246,8 +321,8 @@ export default function Editor({
     if (editorInstance) {
       editorInstance.setValue("");
       setContent("");
+      debouncedAutoSave(""); // Clear saved content too
     }
-    // No offline persistence to clear
   };
 
   const insertAtCaret = (text: string) => {
@@ -266,6 +341,7 @@ export default function Editor({
     textarea.setSelectionRange(newPos, newPos);
     setContent(newValue);
     onContentChange?.(newValue);
+    debouncedAutoSave(newValue);
     const inputEvent = new Event("input", { bubbles: true });
 
     (inputEvent as any)._vietnameseProcessed = true;
@@ -296,8 +372,8 @@ export default function Editor({
       if (editorInstance && clipboardText) {
         editorInstance.setValue(clipboardText);
         setContent(clipboardText);
+        debouncedAutoSave(clipboardText);
         logger.info("Content pasted from clipboard");
-        // No offline persistence
       }
     } catch (err) {
       logger.error("Failed to paste content:", err);

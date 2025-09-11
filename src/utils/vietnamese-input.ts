@@ -7,10 +7,8 @@
  */
 export type InputMethod = "OFF" | "AUTO" | "TELEX" | "VNI" | "VIQR";
 
-import {
-  AnvimEngine,
-  type VietnameseInputMethod,
-} from "@/engine/methods/anvim";
+import { AnvimEngine } from "anvim";
+
 import { logger } from "@/utils/logger";
 
 class VietnameseInput {
@@ -118,9 +116,7 @@ class VietnameseInput {
       return;
     }
 
-    this.anvimEngine.setMethodByString(
-      this.currentMethod as VietnameseInputMethod,
-    );
+    this.anvimEngine.setMethodByString(this.currentMethod);
     const processedWord = this.anvimEngine
       .processWithKey(prefix.normalize("NFC"), lastKey)
       .normalize("NFC");

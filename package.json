@@ -34,6 +34,7 @@
     "@react-types/shared": "3.31.0",
     "@tailwindcss/postcss": "4.1.11",
     "@tailwindcss/vite": "4.1.11",
+    "anvim": "0.1.2",
     "clsx": "2.1.1",
     "framer-motion": "11.18.2",
     "react": "18.3.1",
